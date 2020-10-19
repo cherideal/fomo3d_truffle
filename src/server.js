@@ -63,5 +63,7 @@ router.get('/api/price', async (ctx, next) => {
 // add router middleware:
 app.use(router.routes());
 
-app.listen(80);
-console.log('app started at port 80...');
+var serverPort = 8080;
+var port = process.env.PORT || serverPort;
+app.listen(port);
+console.log('app started at port ' + port + '...');

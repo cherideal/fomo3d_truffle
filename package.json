@@ -7,10 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "lite-server",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "flat": "sh ./flattener.sh"
+    "start": "node src/server.js"
   },
   "author": "",
   "license": "ISC",

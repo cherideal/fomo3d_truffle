@@ -27,5 +27,8 @@
   "dependencies": {
     "truffle-hdwallet-provider": "0.0.6",
     "zeppelin-solidity": "^1.4.0"
+  },
+  "engines": {
+    "node": "v10.19.0"
   }
 }

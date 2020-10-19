@@ -4718,19 +4718,19 @@ function fromByteArray (uint8) {
 (function (process,global){
 /* @preserve
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2013-2017 Petka Antonov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
@@ -4738,7 +4738,7 @@ function fromByteArray (uint8) {
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  */
 /**
  * bluebird build version 3.5.1
@@ -8233,28 +8233,28 @@ _dereq_('./some.js')(Promise, PromiseArray, apiRejection);
 _dereq_('./filter.js')(Promise, INTERNAL);
 _dereq_('./each.js')(Promise, INTERNAL);
 _dereq_('./any.js')(Promise);
-                                                         
-    util.toFastProperties(Promise);                                          
-    util.toFastProperties(Promise.prototype);                                
-    function fillTypes(value) {                                              
-        var p = new Promise(INTERNAL);                                       
-        p._fulfillmentHandler0 = value;                                      
-        p._rejectionHandler0 = value;                                        
-        p._promise0 = value;                                                 
-        p._receiver0 = value;                                                
-    }                                                                        
-    // Complete slack tracking, opt out of field-type tracking and           
-    // stabilize map                                                         
-    fillTypes({a: 1});                                                       
-    fillTypes({b: 2});                                                       
-    fillTypes({c: 3});                                                       
-    fillTypes(1);                                                            
-    fillTypes(function(){});                                                 
-    fillTypes(undefined);                                                    
-    fillTypes(false);                                                        
-    fillTypes(new Promise(INTERNAL));                                        
-    debug.setBounds(Async.firstLineError, util.lastLineError);               
-    return Promise;                                                          
+
+    util.toFastProperties(Promise);
+    util.toFastProperties(Promise.prototype);
+    function fillTypes(value) {
+        var p = new Promise(INTERNAL);
+        p._fulfillmentHandler0 = value;
+        p._rejectionHandler0 = value;
+        p._promise0 = value;
+        p._receiver0 = value;
+    }
+    // Complete slack tracking, opt out of field-type tracking and
+    // stabilize map
+    fillTypes({a: 1});
+    fillTypes({b: 2});
+    fillTypes({c: 3});
+    fillTypes(1);
+    fillTypes(function(){});
+    fillTypes(undefined);
+    fillTypes(false);
+    fillTypes(new Promise(INTERNAL));
+    debug.setBounds(Async.firstLineError, util.lastLineError);
+    return Promise;
 
 };
 
@@ -9042,8 +9042,8 @@ function ReductionPromiseArray(promises, fn, initialValue, _each) {
 util.inherits(ReductionPromiseArray, PromiseArray);
 
 ReductionPromiseArray.prototype._gotAccum = function(accum) {
-    if (this._eachValues !== undefined && 
-        this._eachValues !== null && 
+    if (this._eachValues !== undefined &&
+        this._eachValues !== null &&
         accum !== INTERNAL) {
         this._eachValues.push(accum);
     }
@@ -23320,7 +23320,7 @@ module.exports = {
 // modifications and pruning. It is licensed under MIT:
 //
 // Copyright 2015-2016 Chen, Yi-Cyuan
-//  
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -23328,10 +23328,10 @@ module.exports = {
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28101,7 +28101,7 @@ function forEach(list, iterator, context) {
     if (arguments.length < 3) {
         context = this
     }
-    
+
     if (toString.call(list) === '[object Array]')
         forEachArray(list, iterator, context)
     else if (typeof list === 'string')
@@ -47364,59 +47364,59 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-/** 
+/**
  * Partially complete a function.
- * 
+ *
  *  var add3 = partialComplete( function add(a,b){return a+b}, 3 );
- *  
+ *
  *  add3(4) // gives 7
- *  
+ *
  *  function wrap(left, right, cen){return left + " " + cen + " " + right;}
- *  
+ *
  *  var pirateGreeting = partialComplete( wrap , "I'm", ", a mighty pirate!" );
- *  
- *  pirateGreeting("Guybrush Threepwood"); 
+ *
+ *  pirateGreeting("Guybrush Threepwood");
  *  // gives "I'm Guybrush Threepwood, a mighty pirate!"
  */
 var partialComplete = varArgs(function( fn, args ) {
 
       // this isn't the shortest way to write this but it does
       // avoid creating a new array each time to pass to fn.apply,
-      // otherwise could just call boundArgs.concat(callArgs)       
+      // otherwise could just call boundArgs.concat(callArgs)
 
       var numBoundArgs = args.length;
 
       return varArgs(function( callArgs ) {
-         
+
          for (var i = 0; i < callArgs.length; i++) {
             args[numBoundArgs + i] = callArgs[i];
          }
-         
-         args.length = numBoundArgs + callArgs.length;         
-                     
+
+         args.length = numBoundArgs + callArgs.length;
+
          return fn.apply(this, args);
-      }); 
+      });
    }),
 
 /**
  * Compose zero or more functions:
- * 
+ *
  *    compose(f1, f2, f3)(x) = f1(f2(f3(x))))
- * 
+ *
  * The last (inner-most) function may take more than one parameter:
- * 
+ *
  *    compose(f1, f2, f3)(x,y) = f1(f2(f3(x,y))))
  */
    compose = varArgs(function(fns) {
 
       var fnsList = arrayAsList(fns);
-   
-      function next(params, curFn) {  
-         return [apply(params, curFn)];   
+
+      function next(params, curFn) {
+         return [apply(params, curFn)];
       }
-            
+
       return varArgs(function(startParams){
-        
+
          return foldR(next, startParams, fnsList)[0];
       });
    });
@@ -47434,55 +47434,55 @@ function compose2(f1, f2){
 
 /**
  * Generic form for a function to get a property from an object
- * 
+ *
  *    var o = {
  *       foo:'bar'
  *    }
- *    
+ *
  *    var getFoo = attr('foo')
- *    
+ *
  *    fetFoo(o) // returns 'bar'
- * 
+ *
  * @param {String} key the property name
  */
 function attr(key) {
    return function(o) { return o[key]; };
 }
-        
+
 /**
- * Call a list of functions with the same args until one returns a 
+ * Call a list of functions with the same args until one returns a
  * truthy result. Similar to the || operator.
- * 
+ *
  * So:
  *      lazyUnion([f1,f2,f3 ... fn])( p1, p2 ... pn )
- *      
- * Is equivalent to: 
- *      apply([p1, p2 ... pn], f1) || 
- *      apply([p1, p2 ... pn], f2) || 
- *      apply([p1, p2 ... pn], f3) ... apply(fn, [p1, p2 ... pn])  
- *  
+ *
+ * Is equivalent to:
+ *      apply([p1, p2 ... pn], f1) ||
+ *      apply([p1, p2 ... pn], f2) ||
+ *      apply([p1, p2 ... pn], f3) ... apply(fn, [p1, p2 ... pn])
+ *
  * @returns the first return value that is given that is truthy.
  */
    var lazyUnion = varArgs(function(fns) {
 
       return varArgs(function(params){
-   
+
          var maybeValue;
-   
+
          for (var i = 0; i < len(fns); i++) {
-   
+
             maybeValue = apply(params, fns[i]);
-   
+
             if( maybeValue ) {
                return maybeValue;
             }
          }
       });
-   });   
+   });
 
 /**
  * This file declares various pieces of functional programming.
- * 
+ *
  * This isn't a general purpose functional library, to keep things small it
  * has just the parts useful for Oboe.js.
  */
@@ -47490,9 +47490,9 @@ function attr(key) {
 
 /**
  * Call a single function with the given arguments array.
- * Basically, a functional-style version of the OO-style Function#apply for 
+ * Basically, a functional-style version of the OO-style Function#apply for
  * when we don't care about the context ('this') of the call.
- * 
+ *
  * The order of arguments allows partial completion of the arguments array
  */
 function apply(args, fn) {
@@ -47500,72 +47500,72 @@ function apply(args, fn) {
 }
 
 /**
- * Define variable argument functions but cut out all that tedious messing about 
+ * Define variable argument functions but cut out all that tedious messing about
  * with the arguments object. Delivers the variable-length part of the arguments
  * list as an array.
- * 
+ *
  * Eg:
- * 
+ *
  * var myFunction = varArgs(
  *    function( fixedArgument, otherFixedArgument, variableNumberOfArguments ){
  *       console.log( variableNumberOfArguments );
  *    }
  * )
- * 
+ *
  * myFunction('a', 'b', 1, 2, 3); // logs [1,2,3]
- * 
+ *
  * var myOtherFunction = varArgs(function( variableNumberOfArguments ){
  *    console.log( variableNumberOfArguments );
  * })
- * 
+ *
  * myFunction(1, 2, 3); // logs [1,2,3]
- * 
+ *
  */
 function varArgs(fn){
 
    var numberOfFixedArguments = fn.length -1,
-       slice = Array.prototype.slice;          
-         
-                   
+       slice = Array.prototype.slice;
+
+
    if( numberOfFixedArguments == 0 ) {
-      // an optimised case for when there are no fixed args:   
-   
+      // an optimised case for when there are no fixed args:
+
       return function(){
          return fn.call(this, slice.call(arguments));
       }
-      
+
    } else if( numberOfFixedArguments == 1 ) {
       // an optimised case for when there are is one fixed args:
-   
+
       return function(){
          return fn.call(this, arguments[0], slice.call(arguments, 1));
       }
    }
-   
-   // general case   
+
+   // general case
 
    // we know how many arguments fn will always take. Create a
    // fixed-size array to hold that many, to be re-used on
    // every call to the returned function
-   var argsHolder = Array(fn.length);   
-                             
+   var argsHolder = Array(fn.length);
+
    return function(){
-                            
+
       for (var i = 0; i < numberOfFixedArguments; i++) {
-         argsHolder[i] = arguments[i];         
+         argsHolder[i] = arguments[i];
       }
 
-      argsHolder[numberOfFixedArguments] = 
+      argsHolder[numberOfFixedArguments] =
          slice.call(arguments, numberOfFixedArguments);
-                                
-      return fn.apply( this, argsHolder);      
-   }       
+
+      return fn.apply( this, argsHolder);
+   }
 }
 
 
 /**
  * Swap the order of parameters to a binary function
- * 
+ *
  * A bit like this flip: http://zvon.org/other/haskell/Outputprelude/flip_f.html
  */
 function flip(fn){
@@ -47577,16 +47577,16 @@ function flip(fn){
 
 /**
  * Create a function which is the intersection of two other functions.
- * 
+ *
  * Like the && operator, if the first is truthy, the second is never called,
  * otherwise the return value from the second is returned.
  */
 function lazyIntersection(fn1, fn2) {
 
    return function (param) {
-                                                              
+
       return fn1(param) && fn2(param);
-   };   
+   };
 }
 
 /**
@@ -47602,9 +47602,9 @@ function always(){return true}
 /**
  * Create a function which always returns the same
  * value
- * 
+ *
  * var return3 = functor(3);
- * 
+ *
  * return3() // gives 3
  * return3() // still gives 3
  * return3() // will always give 3
@@ -47616,8 +47616,8 @@ function functor(val){
 }
 
 /**
- * This file defines some loosely associated syntactic sugar for 
- * Javascript programming 
+ * This file defines some loosely associated syntactic sugar for
+ * Javascript programming
  */
 
 
@@ -47628,44 +47628,44 @@ function isOfType(T, maybeSomething){
    return maybeSomething && maybeSomething.constructor === T;
 }
 
-var len = attr('length'),    
+var len = attr('length'),
     isString = partialComplete(isOfType, String);
 
-/** 
+/**
  * I don't like saying this:
- * 
+ *
  *    foo !=== undefined
- *    
+ *
  * because of the double-negative. I find this:
- * 
+ *
  *    defined(foo)
- *    
+ *
  * easier to read.
- */ 
+ */
 function defined( value ) {
    return value !== undefined;
 }
 
 /**
- * Returns true if object o has a key named like every property in 
- * the properties array. Will give false if any are missing, or if o 
+ * Returns true if object o has a key named like every property in
+ * the properties array. Will give false if any are missing, or if o
  * is not an object.
  */
 function hasAllProperties(fieldList, o) {
 
-   return      (o instanceof Object) 
+   return      (o instanceof Object)
             &&
-               all(function (field) {         
-                  return (field in o);         
+               all(function (field) {
+                  return (field in o);
                }, fieldList);
 }
 /**
  * Like cons in Lisp
  */
 function cons(x, xs) {
-   
+
    /* Internally lists are linked 2-element Javascript arrays.
-          
+
       Ideally the return here would be Object.freeze([x,xs])
       so that bugs related to mutation are found fast.
       However, cons is right on the critical path for
@@ -47675,7 +47675,7 @@ function cons(x, xs) {
       run faster) this should be considered for
       restoration.
    */
-   
+
    return [x,xs];
 }
 
@@ -47686,34 +47686,34 @@ var emptyList = null,
 
 /**
  * Get the head of a list.
- * 
+ *
  * Ie, head(cons(a,b)) = a
  */
     head = attr(0),
 
 /**
  * Get the tail of a list.
- * 
+ *
  * Ie, tail(cons(a,b)) = b
  */
     tail = attr(1);
 
 
-/** 
- * Converts an array to a list 
- * 
+/**
+ * Converts an array to a list
+ *
  *    asList([a,b,c])
- * 
+ *
  * is equivalent to:
- *    
- *    cons(a, cons(b, cons(c, emptyList))) 
+ *
+ *    cons(a, cons(b, cons(c, emptyList)))
  **/
 function arrayAsList(inputArray){
 
-   return reverseList( 
+   return reverseList(
       inputArray.reduce(
          flip(cons),
-         emptyList 
+         emptyList
       )
    );
 }
@@ -47721,11 +47721,11 @@ function arrayAsList(inputArray){
 /**
  * A varargs version of arrayAsList. Works a bit like list
  * in LISP.
- * 
- *    list(a,b,c) 
- *    
+ *
+ *    list(a,b,c)
+ *
  * is equivalent to:
- * 
+ *
  *    cons(a, cons(b, cons(c, emptyList)))
  */
 var list = varArgs(arrayAsList);
@@ -47736,16 +47736,16 @@ var list = varArgs(arrayAsList);
 function listAsArray(list){
 
    return foldR( function(arraySoFar, listItem){
-      
+
       arraySoFar.unshift(listItem);
       return arraySoFar;
-           
+
    }, [], list );
-   
+
 }
 
 /**
- * Map a function over a list 
+ * Map a function over a list
  */
 function map(fn, list) {
 
@@ -47757,12 +47757,12 @@ function map(fn, list) {
 
 /**
  * foldR implementation. Reduce a list down to a single value.
- * 
- * @pram {Function} fn     (rightEval, curVal) -> result 
+ *
+ * @pram {Function} fn     (rightEval, curVal) -> result
  */
 function foldR(fn, startValue, list) {
-      
-   return list 
+
+   return list
             ? fn(foldR(fn, startValue, tail(list)), head(list))
             : startValue
             ;
@@ -47770,12 +47770,12 @@ function foldR(fn, startValue, list) {
 
 /**
  * foldR implementation. Reduce a list down to a single value.
- * 
- * @pram {Function} fn     (rightEval, curVal) -> result 
+ *
+ * @pram {Function} fn     (rightEval, curVal) -> result
  */
 function foldR1(fn, list) {
-      
-   return tail(list) 
+
+   return tail(list)
             ? fn(foldR1(fn, tail(list)), head(list))
             : head(list)
             ;
@@ -47783,46 +47783,46 @@ function foldR1(fn, list) {
 
 
 /**
- * Return a list like the one given but with the first instance equal 
- * to item removed 
+ * Return a list like the one given but with the first instance equal
+ * to item removed
  */
 function without(list, test, removedFn) {
- 
+
    return withoutInner(list, removedFn || noop);
- 
+
    function withoutInner(subList, removedFn) {
-      return subList  
-         ?  ( test(head(subList)) 
-                  ? (removedFn(head(subList)), tail(subList)) 
+      return subList
+         ?  ( test(head(subList))
+                  ? (removedFn(head(subList)), tail(subList))
                   : cons(head(subList), withoutInner(tail(subList), removedFn))
             )
          : emptyList
          ;
-   }               
+   }
 }
 
-/** 
- * Returns true if the given function holds for every item in 
- * the list, false otherwise 
+/**
+ * Returns true if the given function holds for every item in
+ * the list, false otherwise
  */
 function all(fn, list) {
-   
-   return !list || 
+
+   return !list ||
           ( fn(head(list)) && all(fn, tail(list)) );
 }
 
 /**
  * Call every function in a list of functions with the same arguments
- * 
- * This doesn't make any sense if we're doing pure functional because 
+ *
+ * This doesn't make any sense if we're doing pure functional because
  * it doesn't return anything. Hence, this is only really useful if the
- * functions being called have side-effects. 
+ * functions being called have side-effects.
  */
 function applyEach(fnList, args) {
 
-   if( fnList ) {  
+   if( fnList ) {
       head(fnList).apply(null, args);
-      
+
       applyEach(tail(fnList), args);
    }
 }
@@ -47830,7 +47830,7 @@ function applyEach(fnList, args) {
 /**
  * Reverse the order of a list
  */
-function reverseList(list){ 
+function reverseList(list){
 
    // js re-implementation of 3rd solution from:
    //    http://www.haskell.org/haskellwiki/99_questions/Solutions/5
@@ -47838,7 +47838,7 @@ function reverseList(list){
       if( !list ) {
          return reversedAlready;
       }
-      
+
       return reverseInner(tail(list), cons(head(list), reversedAlready))
    }
 
@@ -47847,46 +47847,46 @@ function reverseList(list){
 
 function first(test, list) {
    return   list &&
-               (test(head(list)) 
-                  ? head(list) 
-                  : first(test,tail(list))); 
+               (test(head(list))
+                  ? head(list)
+                  : first(test,tail(list)));
 }
 
-/* 
-   This is a slightly hacked-up browser only version of clarinet 
-   
-      *  some features removed to help keep browser Oboe under 
+/*
+   This is a slightly hacked-up browser only version of clarinet
+
+      *  some features removed to help keep browser Oboe under
          the 5k micro-library limit
       *  plug directly into event bus
-   
+
    For the original go here:
       https://github.com/dscape/clarinet
 
    We receive the events:
       STREAM_DATA
       STREAM_END
-      
+
    We emit the events:
       SAX_KEY
       SAX_VALUE_OPEN
-      SAX_VALUE_CLOSE      
-      FAIL_EVENT      
+      SAX_VALUE_CLOSE
+      FAIL_EVENT
  */
 
 function clarinet(eventBus) {
   "use strict";
-   
-  var 
+
+  var
       // shortcut some events on the bus
       emitSaxKey           = eventBus(SAX_KEY).emit,
       emitValueOpen        = eventBus(SAX_VALUE_OPEN).emit,
       emitValueClose       = eventBus(SAX_VALUE_CLOSE).emit,
       emitFail             = eventBus(FAIL_EVENT).emit,
-              
+
       MAX_BUFFER_LENGTH = 64 * 1024
   ,   stringTokenPattern = /[\\"\n]/g
   ,   _n = 0
-  
+
       // states
   ,   BEGIN                = _n++
   ,   VALUE                = _n++ // general stuff
@@ -47912,11 +47912,11 @@ function clarinet(eventBus) {
 
       // setup initial parser values
   ,   bufferCheckPosition  = MAX_BUFFER_LENGTH
-  ,   latestError                
-  ,   c                    
-  ,   p                    
+  ,   latestError
+  ,   c
+  ,   p
   ,   textNode             = undefined
-  ,   numberNode           = ""     
+  ,   numberNode           = ""
   ,   slashed              = false
   ,   closed               = false
   ,   state                = BEGIN
@@ -47930,9 +47930,9 @@ function clarinet(eventBus) {
   ;
 
   function checkBufferLength () {
-     
+
     var maxActual = 0;
-     
+
     if (textNode !== undefined && textNode.length > MAX_BUFFER_LENGTH) {
       emitError("Max buffer length exceeded: textNode");
       maxActual = Math.max(maxActual, textNode.length);
@@ -47941,17 +47941,17 @@ function clarinet(eventBus) {
       emitError("Max buffer length exceeded: numberNode");
       maxActual = Math.max(maxActual, numberNode.length);
     }
-     
+
     bufferCheckPosition = (MAX_BUFFER_LENGTH - maxActual)
                                + position;
   }
 
   eventBus(STREAM_DATA).on(handleData);
 
-   /* At the end of the http content close the clarinet 
-    This will provide an error if the total content provided was not 
+   /* At the end of the http content close the clarinet
+    This will provide an error if the total content provided was not
     valid json, ie if not all arrays, objects and Strings closed properly */
-  eventBus(STREAM_END).on(handleStreamEnd);   
+  eventBus(STREAM_END).on(handleStreamEnd);
 
   function emitError (errorString) {
      if (textNode !== undefined) {
@@ -47963,7 +47963,7 @@ function clarinet(eventBus) {
      latestError = Error(errorString + "\nLn: "+line+
                                        "\nCol: "+column+
                                        "\nChr: "+c);
-     
+
      emitFail(errorReport(undefined, undefined, latestError));
   }
 
@@ -47972,12 +47972,12 @@ function clarinet(eventBus) {
       // Handle the case where the stream closes without ever receiving
       // any input. This isn't an error - response bodies can be blank,
       // particularly for 204 http responses
-      
+
       // Because of how Oboe is currently implemented, we parse a
       // completely empty stream as containing an empty object.
       // This is because Oboe's done event is only fired when the
       // root object of the JSON stream closes.
-      
+
       // This should be decoupled and attached instead to the input stream
       // from the http (or whatever) resource ending.
       // If this decoupling could happen the SAX parser could simply emit
@@ -47988,37 +47988,37 @@ function clarinet(eventBus) {
       closed = true;
       return;
     }
-  
+
     if (state !== VALUE || depth !== 0)
       emitError("Unexpected end");
- 
+
     if (textNode !== undefined) {
       emitValueOpen(textNode);
       emitValueClose();
       textNode = undefined;
     }
-     
+
     closed = true;
   }
 
   function whitespace(c){
      return c == '\r' || c == '\n' || c == ' ' || c == '\t';
   }
-   
+
   function handleData (chunk) {
-         
+
     // this used to throw the error but inside Oboe we will have already
     // gotten the error when it was emitted. The important thing is to
     // not continue with the parse.
     if (latestError)
       return;
-      
+
     if (closed) {
        return emitError("Cannot write after close");
     }
 
     var i = 0;
-    c = chunk[0]; 
+    c = chunk[0];
 
     while (c) {
       p = c;
@@ -48098,7 +48098,7 @@ function clarinet(eventBus) {
                 textNode = undefined;
              }
              state  = OPEN_KEY;
-          } else 
+          } else
              return emitError('Bad object');
         continue;
 
@@ -48107,7 +48107,7 @@ function clarinet(eventBus) {
           if (whitespace(c)) continue;
           if(state===OPEN_ARRAY) {
             emitValueOpen([]);
-            depth++;             
+            depth++;
             state = VALUE;
             if(c === ']') {
               emitValueClose();
@@ -48132,7 +48132,7 @@ function clarinet(eventBus) {
           } else if('123456789'.indexOf(c) !== -1) {
             numberNode += c;
             state = NUMBER_DIGIT;
-          } else               
+          } else
             return emitError("Bad value");
         continue;
 
@@ -48156,7 +48156,7 @@ function clarinet(eventBus) {
             state = stack.pop() || VALUE;
           } else if (whitespace(c))
               continue;
-          else 
+          else
              return emitError('Bad array');
         continue;
 
@@ -48167,7 +48167,7 @@ function clarinet(eventBus) {
 
           // thanks thejh, this is an about 50% performance improvement.
           var starti              = i-1;
-           
+
           STRING_BIGLOOP: while (true) {
 
             // zero means "no unicode active". 1-4 mean "parse some more". end after 4.
@@ -48307,7 +48307,7 @@ function clarinet(eventBus) {
             emitValueOpen(null);
             emitValueClose();
             state = stack.pop() || VALUE;
-          } else 
+          } else
              return emitError('Invalid null started with nul'+ c);
         continue;
 
@@ -48315,7 +48315,7 @@ function clarinet(eventBus) {
           if(c==='.') {
             numberNode += c;
             state       = NUMBER_DIGIT;
-          } else 
+          } else
              return emitError('Leading zero not followed by .');
         continue;
 
@@ -48355,19 +48355,19 @@ function clarinet(eventBus) {
 }
 
 
-/** 
+/**
  * A bridge used to assign stateless functions to listen to clarinet.
- * 
+ *
  * As well as the parameter from clarinet, each callback will also be passed
  * the result of the last callback.
- * 
+ *
  * This may also be used to clear all listeners by assigning zero handlers:
- * 
+ *
  *    ascentManager( clarinet, {} )
  */
 function ascentManager(oboeBus, handlers){
    "use strict";
-   
+
    var listenerId = {},
        ascent;
 
@@ -48376,14 +48376,14 @@ function ascentManager(oboeBus, handlers){
          ascent = handler( ascent, param);
       }
    }
-   
+
    for( var eventName in handlers ) {
 
       oboeBus(eventName).on(stateAfter(handlers[eventName]), listenerId);
    }
-   
+
    oboeBus(NODE_SWAP).on(function(newNode) {
-      
+
       var oldHead = head(ascent),
           key = keyOf(oldHead),
           ancestors = tail(ascent),
@@ -48404,17 +48404,17 @@ function ascentManager(oboeBus, handlers){
 
       if( ancestors ) {
          parentNode = nodeOf(head(ancestors));
- 
+
          delete parentNode[key];
       }
    });
 
    oboeBus(ABORTING).on(function(){
-      
+
       for( var eventName in handlers ) {
          oboeBus(eventName).un(listenerId);
       }
-   });   
+   });
 }
 
 // based on gist https://gist.github.com/monsur/706839
@@ -48427,29 +48427,29 @@ function ascentManager(oboeBus, handlers){
  */
 function parseResponseHeaders(headerStr) {
    var headers = {};
-   
+
    headerStr && headerStr.split('\u000d\u000a')
       .forEach(function(headerPair){
-   
+
          // Can't use split() here because it does the wrong thing
          // if the header value has the string ": " in it.
          var index = headerPair.indexOf('\u003a\u0020');
-         
-         headers[headerPair.substring(0, index)] 
+
+         headers[headerPair.substring(0, index)]
                      = headerPair.substring(index + 2);
       });
-   
+
    return headers;
 }
 
 /**
  * Detect if a given URL is cross-origin in the scope of the
  * current page.
- * 
+ *
  * Browser only (since cross-origin has no meaning in Node.js)
  *
  * @param {Object} pageLocation - as in window.location
- * @param {Object} ajaxHost - an object like window.location describing the 
+ * @param {Object} ajaxHost - an object like window.location describing the
  *    origin of the url that we want to ajax in
  */
 function isCrossOrigin(pageLocation, ajaxHost) {
@@ -48461,18 +48461,18 @@ function isCrossOrigin(pageLocation, ajaxHost) {
    function defaultPort(protocol) {
       return {'http:':80, 'https:':443}[protocol];
    }
-   
+
    function portOf(location) {
       // pageLocation should always have a protocol. ajaxHost if no port or
       // protocol is specified, should use the port of the containing page
-      
+
       return location.port || defaultPort(location.protocol||pageLocation.protocol);
    }
 
    // if ajaxHost doesn't give a domain, port is the same as pageLocation
    // it can't give a protocol but not a domain
    // it can't give a port but not a domain
-   
+
    return !!(  (ajaxHost.protocol  && (ajaxHost.protocol  != pageLocation.protocol)) ||
                (ajaxHost.host      && (ajaxHost.host      != pageLocation.host))     ||
                (ajaxHost.host      && (portOf(ajaxHost) != portOf(pageLocation)))
@@ -48488,11 +48488,11 @@ function parseUrlOrigin(url) {
    //    same domain
    //    same port
    //    some protocol
-   // so, same everything up to the first (single) slash 
+   // so, same everything up to the first (single) slash
    // if such is given
    //
-   // can ignore everything after that   
-   
+   // can ignore everything after that
+
    var URL_HOST_PATTERN = /(\w+:)?(?:\/\/)([\w.-]+)?(?::(\d+))?\/?/,
 
          // if no match, use an empty array so that
@@ -48500,7 +48500,7 @@ function parseUrlOrigin(url) {
          // and will ultimately return all empty
          // strings as the parse result:
        urlHostMatch = URL_HOST_PATTERN.exec(url) || [];
-   
+
    return {
       protocol:   urlHostMatch[1] || '',
       host:       urlHostMatch[2] || '',
@@ -48513,13 +48513,13 @@ function httpTransport(){
 }
 
 /**
- * A wrapper around the browser XmlHttpRequest object that raises an 
+ * A wrapper around the browser XmlHttpRequest object that raises an
  * event whenever a new part of the response is available.
- * 
- * In older browsers progressive reading is impossible so all the 
+ *
+ * In older browsers progressive reading is impossible so all the
  * content is given in a single call. For newer ones several events
  * should be raised, allowing progressive interpretation of the response.
- *      
+ *
  * @param {Function} oboeBus an event bus local to this Oboe instance
  * @param {XMLHttpRequest} xhr the xhr to use as the transport. Under normal
  *          operation, will have been created using httpTransport() above
@@ -48531,61 +48531,61 @@ function httpTransport(){
  * @param {Object} [headers] the http request headers to send
  * @param {boolean} withCredentials the XHR withCredentials property will be
  *    set to this value
- */  
+ */
 function streamingHttp(oboeBus, xhr, method, url, data, headers, withCredentials) {
-           
+
    "use strict";
-   
+
    var emitStreamData = oboeBus(STREAM_DATA).emit,
        emitFail       = oboeBus(FAIL_EVENT).emit,
        numberOfCharsAlreadyGivenToCallback = 0,
        stillToSendStartEvent = true;
 
-   // When an ABORTING message is put on the event bus abort 
-   // the ajax request         
+   // When an ABORTING message is put on the event bus abort
+   // the ajax request
    oboeBus( ABORTING ).on( function(){
-  
-      // if we keep the onreadystatechange while aborting the XHR gives 
+
+      // if we keep the onreadystatechange while aborting the XHR gives
       // a callback like a successful call so first remove this listener
       // by assigning null:
       xhr.onreadystatechange = null;
-            
+
       xhr.abort();
    });
 
-   /** 
+   /**
     * Handle input from the underlying xhr: either a state change,
     * the progress event or the request being complete.
     */
    function handleProgress() {
-                        
+
       var textSoFar = xhr.responseText,
           newText = textSoFar.substr(numberOfCharsAlreadyGivenToCallback);
-      
-      
+
+
       /* Raise the event for new text.
-      
-         On older browsers, the new text is the whole response. 
-         On newer/better ones, the fragment part that we got since 
+
+         On older browsers, the new text is the whole response.
+         On newer/better ones, the fragment part that we got since
          last progress. */
-         
+
       if( newText ) {
          emitStreamData( newText );
-      } 
+      }
 
       numberOfCharsAlreadyGivenToCallback = len(textSoFar);
    }
-   
-   
+
+
    if('onprogress' in xhr){  // detect browser support for progressive delivery
       xhr.onprogress = handleProgress;
    }
-      
+
    xhr.onreadystatechange = function() {
 
       function sendStartIfNotAlready() {
          // Internet Explorer is very unreliable as to when xhr.status etc can
-         // be read so has to be protected with try/catch and tried again on 
+         // be read so has to be protected with try/catch and tried again on
          // the next readyState if it fails
          try{
             stillToSendStartEvent && oboeBus( HTTP_START ).emit(
@@ -48594,111 +48594,111 @@ function streamingHttp(oboeBus, xhr, method, url, data, headers, withCredentials
             stillToSendStartEvent = false;
          } catch(e){/* do nothing, will try again on next readyState*/}
       }
-      
+
       switch( xhr.readyState ) {
-               
+
          case 2: // HEADERS_RECEIVED
          case 3: // LOADING
             return sendStartIfNotAlready();
-            
+
          case 4: // DONE
             sendStartIfNotAlready(); // if xhr.status hasn't been available yet, it must be NOW, huh IE?
-            
+
             // is this a 2xx http code?
             var successful = String(xhr.status)[0] == 2;
-            
+
             if( successful ) {
                // In Chrome 29 (not 28) no onprogress is emitted when a response
                // is complete before the onload. We need to always do handleInput
                // in case we get the load but have not had a final progress event.
                // This looks like a bug and may change in future but let's take
-               // the safest approach and assume we might not have received a 
+               // the safest approach and assume we might not have received a
                // progress event for each part of the response
                handleProgress();
-               
+
                oboeBus(STREAM_END).emit();
             } else {
 
                emitFail( errorReport(
-                  xhr.status, 
+                  xhr.status,
                   xhr.responseText
                ));
             }
       }
    };
-   
+
    try{
-   
+
       xhr.open(method, url, true);
-   
+
       for( var headerName in headers ){
          xhr.setRequestHeader(headerName, headers[headerName]);
       }
-      
+
       if( !isCrossOrigin(window.location, parseUrlOrigin(url)) ) {
          xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
       }
 
       xhr.withCredentials = withCredentials;
-      
+
       xhr.send(data);
-      
+
    } catch( e ) {
-      
+
       // To keep a consistent interface with Node, we can't emit an event here.
       // Node's streaming http adaptor receives the error as an asynchronous
       // event rather than as an exception. If we emitted now, the Oboe user
       // has had no chance to add a .fail listener so there is no way
       // the event could be useful. For both these reasons defer the
-      // firing to the next JS frame.  
+      // firing to the next JS frame.
       window.setTimeout(
          partialComplete(emitFail, errorReport(undefined, undefined, e))
       ,  0
       );
-   }            
+   }
 }
 
 var jsonPathSyntax = (function() {
- 
+
    var
-   
-   /** 
-    * Export a regular expression as a simple function by exposing just 
-    * the Regex#exec. This allows regex tests to be used under the same 
+
+   /**
+    * Export a regular expression as a simple function by exposing just
+    * the Regex#exec. This allows regex tests to be used under the same
     * interface as differently implemented tests, or for a user of the
     * tests to not concern themselves with their implementation as regular
     * expressions.
-    * 
+    *
     * This could also be expressed point-free as:
     *   Function.prototype.bind.bind(RegExp.prototype.exec),
-    *   
-    * But that's far too confusing! (and not even smaller once minified 
+    *
+    * But that's far too confusing! (and not even smaller once minified
     * and gzipped)
     */
        regexDescriptor = function regexDescriptor(regex) {
             return regex.exec.bind(regex);
        }
-       
+
    /**
     * Join several regular expressions and express as a function.
     * This allows the token patterns to reuse component regular expressions
     * instead of being expressed in full using huge and confusing regular
     * expressions.
-    */       
+    */
    ,   jsonPathClause = varArgs(function( componentRegexes ) {
 
-            // The regular expressions all start with ^ because we 
-            // only want to find matches at the start of the 
-            // JSONPath fragment we are inspecting           
+            // The regular expressions all start with ^ because we
+            // only want to find matches at the start of the
+            // JSONPath fragment we are inspecting
             componentRegexes.unshift(/^/);
-            
+
             return   regexDescriptor(
                         RegExp(
                            componentRegexes.map(attr('source')).join('')
                         )
                      );
        })
-       
+
    ,   possiblyCapturing =           /(\$?)/
    ,   namedNode =                   /([\w-_]+|\*)/
    ,   namePlaceholder =             /()/
@@ -48706,76 +48706,76 @@ var jsonPathSyntax = (function() {
    ,   numberedNodeInArrayNotation = /\[(\d+|\*)\]/
    ,   fieldList =                      /{([\w ]*?)}/
    ,   optionalFieldList =           /(?:{([\w ]*?)})?/
-    
 
-       //   foo or *                  
-   ,   jsonPathNamedNodeInObjectNotation   = jsonPathClause( 
-                                                possiblyCapturing, 
-                                                namedNode, 
-                                                optionalFieldList
-                                             )
-                                             
-       //   ["foo"]   
-   ,   jsonPathNamedNodeInArrayNotation    = jsonPathClause( 
-                                                possiblyCapturing, 
-                                                nodeInArrayNotation, 
-                                                optionalFieldList
-                                             )  
 
-       //   [2] or [*]       
-   ,   jsonPathNumberedNodeInArrayNotation = jsonPathClause( 
-                                                possiblyCapturing, 
-                                                numberedNodeInArrayNotation, 
+       //   foo or *
+   ,   jsonPathNamedNodeInObjectNotation   = jsonPathClause(
+                                                possiblyCapturing,
+                                                namedNode,
                                                 optionalFieldList
                                              )
 
-       //   {a b c}      
-   ,   jsonPathPureDuckTyping              = jsonPathClause( 
-                                                possiblyCapturing, 
-                                                namePlaceholder, 
+       //   ["foo"]
+   ,   jsonPathNamedNodeInArrayNotation    = jsonPathClause(
+                                                possiblyCapturing,
+                                                nodeInArrayNotation,
+                                                optionalFieldList
+                                             )
+
+       //   [2] or [*]
+   ,   jsonPathNumberedNodeInArrayNotation = jsonPathClause(
+                                                possiblyCapturing,
+                                                numberedNodeInArrayNotation,
+                                                optionalFieldList
+                                             )
+
+       //   {a b c}
+   ,   jsonPathPureDuckTyping              = jsonPathClause(
+                                                possiblyCapturing,
+                                                namePlaceholder,
                                                 fieldList
                                              )
-   
+
        //   ..
-   ,   jsonPathDoubleDot                   = jsonPathClause(/\.\./)                  
-   
+   ,   jsonPathDoubleDot                   = jsonPathClause(/\.\./)
+
        //   .
-   ,   jsonPathDot                         = jsonPathClause(/\./)                    
-   
+   ,   jsonPathDot                         = jsonPathClause(/\./)
+
        //   !
    ,   jsonPathBang                        = jsonPathClause(
-                                                possiblyCapturing, 
+                                                possiblyCapturing,
                                                 /!/
-                                             )  
-   
+                                             )
+
        //   nada!
-   ,   emptyString                         = jsonPathClause(/$/)                     
-   
+   ,   emptyString                         = jsonPathClause(/$/)
+
    ;
-   
-  
-   /* We export only a single function. When called, this function injects 
-      into another function the descriptors from above.             
+
+
+   /* We export only a single function. When called, this function injects
+      into another function the descriptors from above.
     */
-   return function (fn){      
-      return fn(      
+   return function (fn){
+      return fn(
          lazyUnion(
             jsonPathNamedNodeInObjectNotation
          ,  jsonPathNamedNodeInArrayNotation
          ,  jsonPathNumberedNodeInArrayNotation
-         ,  jsonPathPureDuckTyping 
+         ,  jsonPathPureDuckTyping
          )
       ,  jsonPathDoubleDot
       ,  jsonPathDot
       ,  jsonPathBang
-      ,  emptyString 
+      ,  emptyString
       );
-   }; 
+   };
 
 }());
 /**
  * Get a new key->node mapping
- * 
+ *
  * @param {String|Number} key
  * @param {Object|Array|String|Number|null} node a value found in the json
  */
@@ -48788,11 +48788,11 @@ var keyOf = attr('key');
 
 /** get the node from a namedNode */
 var nodeOf = attr('node');
-/** 
+/**
  * This file provides various listeners which can be used to build up
  * a changing ascent based on the callbacks provided by Clarinet. It listens
  * to the low-level events from Clarinet and emits higher-level ones.
- *  
+ *
  * The building up is stateless so to track a JSON file
  * ascentManager.js is required to store the ascent state
  * between calls.
@@ -48800,26 +48800,26 @@ var nodeOf = attr('node');
 
 
 
-/** 
- * A special value to use in the path list to represent the path 'to' a root 
- * object (which doesn't really have any path). This prevents the need for 
- * special-casing detection of the root object and allows it to be treated 
- * like any other object. We might think of this as being similar to the 
- * 'unnamed root' domain ".", eg if I go to 
- * http://en.wikipedia.org./wiki/En/Main_page the dot after 'org' deliminates 
+/**
+ * A special value to use in the path list to represent the path 'to' a root
+ * object (which doesn't really have any path). This prevents the need for
+ * special-casing detection of the root object and allows it to be treated
+ * like any other object. We might think of this as being similar to the
+ * 'unnamed root' domain ".", eg if I go to
+ * http://en.wikipedia.org./wiki/En/Main_page the dot after 'org' deliminates
  * the unnamed root of the DNS.
- * 
- * This is kept as an object to take advantage that in Javascript's OO objects 
- * are guaranteed to be distinct, therefore no other object can possibly clash 
- * with this one. Strings, numbers etc provide no such guarantee. 
+ *
+ * This is kept as an object to take advantage that in Javascript's OO objects
+ * are guaranteed to be distinct, therefore no other object can possibly clash
+ * with this one. Strings, numbers etc provide no such guarantee.
  **/
 var ROOT_PATH = {};
 
 
 /**
- * Create a new set of handlers for clarinet's events, bound to the emit 
- * function given.  
- */ 
+ * Create a new set of handlers for clarinet's events, bound to the emit
+ * function given.
+ */
 function incrementalContentBuilder( oboeBus ) {
 
    var emitNodeOpened = oboeBus(NODE_OPENED).emit,
@@ -48828,52 +48828,52 @@ function incrementalContentBuilder( oboeBus ) {
        emitRootClosed = oboeBus(ROOT_NODE_FOUND).emit;
 
    function arrayIndicesAreKeys( possiblyInconsistentAscent, newDeepestNode) {
-   
-      /* for values in arrays we aren't pre-warned of the coming paths 
-         (Clarinet gives no call to onkey like it does for values in objects) 
-         so if we are in an array we need to create this path ourselves. The 
-         key will be len(parentNode) because array keys are always sequential 
+
+      /* for values in arrays we aren't pre-warned of the coming paths
+         (Clarinet gives no call to onkey like it does for values in objects)
+         so if we are in an array we need to create this path ourselves. The
+         key will be len(parentNode) because array keys are always sequential
          numbers. */
 
       var parentNode = nodeOf( head( possiblyInconsistentAscent));
-      
+
       return      isOfType( Array, parentNode)
                ?
-                  keyFound(  possiblyInconsistentAscent, 
-                              len(parentNode), 
+                  keyFound(  possiblyInconsistentAscent,
+                              len(parentNode),
                               newDeepestNode
                   )
-               :  
+               :
                   // nothing needed, return unchanged
-                  possiblyInconsistentAscent 
+                  possiblyInconsistentAscent
                ;
    }
-                 
+
    function nodeOpened( ascent, newDeepestNode ) {
-      
+
       if( !ascent ) {
-         // we discovered the root node,         
+         // we discovered the root node,
          emitRootOpened( newDeepestNode);
-                    
-         return keyFound( ascent, ROOT_PATH, newDeepestNode);         
+
+         return keyFound( ascent, ROOT_PATH, newDeepestNode);
       }
 
       // we discovered a non-root node
-                 
-      var arrayConsistentAscent  = arrayIndicesAreKeys( ascent, newDeepestNode),      
+
+      var arrayConsistentAscent  = arrayIndicesAreKeys( ascent, newDeepestNode),
           ancestorBranches       = tail( arrayConsistentAscent),
           previouslyUnmappedName = keyOf( head( arrayConsistentAscent));
-          
-      appendBuiltContent( 
-         ancestorBranches, 
-         previouslyUnmappedName, 
-         newDeepestNode 
+
+      appendBuiltContent(
+         ancestorBranches,
+         previouslyUnmappedName,
+         newDeepestNode
       );
-                                                                                                         
-      return cons( 
-               namedNode( previouslyUnmappedName, newDeepestNode ), 
+
+      return cons(
+               namedNode( previouslyUnmappedName, newDeepestNode ),
                ancestorBranches
-      );                                                                          
+      );
    }
 
 
@@ -48882,39 +48882,39 @@ function incrementalContentBuilder( oboeBus ) {
     * parsed JSON
     */
    function appendBuiltContent( ancestorBranches, key, node ){
-     
+
       nodeOf( head( ancestorBranches))[key] = node;
    }
 
-     
+
    /**
     * For when we find a new key in the json.
-    * 
-    * @param {String|Number|Object} newDeepestName the key. If we are in an 
-    *    array will be a number, otherwise a string. May take the special 
+    *
+    * @param {String|Number|Object} newDeepestName the key. If we are in an
+    *    array will be a number, otherwise a string. May take the special
     *    value ROOT_PATH if the root node has just been found
-    *    
-    * @param {String|Number|Object|Array|Null|undefined} [maybeNewDeepestNode] 
-    *    usually this won't be known so can be undefined. Can't use null 
+    *
+    * @param {String|Number|Object|Array|Null|undefined} [maybeNewDeepestNode]
+    *    usually this won't be known so can be undefined. Can't use null
     *    to represent unknown because null is a valid value in JSON
-    **/  
+    **/
    function keyFound(ascent, newDeepestName, maybeNewDeepestNode) {
 
       if( ascent ) { // if not root
-      
+
          // If we have the key but (unless adding to an array) no known value
-         // yet. Put that key in the output but against no defined value:      
+         // yet. Put that key in the output but against no defined value:
          appendBuiltContent( ascent, newDeepestName, maybeNewDeepestNode );
       }
-   
-      var ascentWithNewPath = cons( 
-                                 namedNode( newDeepestName, 
-                                            maybeNewDeepestNode), 
+
+      var ascentWithNewPath = cons(
+                                 namedNode( newDeepestName,
+                                            maybeNewDeepestNode),
                                  ascent
                               );
 
       emitNodeOpened( ascentWithNewPath);
- 
+
       return ascentWithNewPath;
    }
 
@@ -48925,12 +48925,12 @@ function incrementalContentBuilder( oboeBus ) {
    function nodeClosed( ascent ) {
 
       emitNodeClosed( ascent);
-       
+
       return tail( ascent) ||
              // If there are no nodes left in the ascent the root node
-             // just closed. Emit a special event for this: 
+             // just closed. Emit a special event for this:
              emitRootClosed(nodeOf(head(ascent)));
-   }      
+   }
 
    var contentBuilderHandlers = {};
    contentBuilderHandlers[SAX_VALUE_OPEN] = nodeOpened;
@@ -48940,21 +48940,21 @@ function incrementalContentBuilder( oboeBus ) {
 }
 
 /**
- * The jsonPath evaluator compiler used for Oboe.js. 
- * 
- * One function is exposed. This function takes a String JSONPath spec and 
+ * The jsonPath evaluator compiler used for Oboe.js.
+ *
+ * One function is exposed. This function takes a String JSONPath spec and
  * returns a function to test candidate ascents for matches.
- * 
+ *
  *  String jsonPath -> (List ascent) -> Boolean|Object
  *
- * This file is coded in a pure functional style. That is, no function has 
- * side effects, every function evaluates to the same value for the same 
+ * This file is coded in a pure functional style. That is, no function has
+ * side effects, every function evaluates to the same value for the same
  * arguments and no variables are reassigned.
- */  
-// the call to jsonPathSyntax injects the token syntaxes that are needed 
+ */
+// the call to jsonPathSyntax injects the token syntaxes that are needed
 // inside the compiler
-var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax, 
-                                                doubleDotSyntax, 
+var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax,
+                                                doubleDotSyntax,
                                                 dotSyntax,
                                                 bangSyntax,
                                                 emptySyntax ) {
@@ -48965,29 +48965,29 @@ var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax,
 
    var headKey  = compose2(keyOf, head),
        headNode = compose2(nodeOf, head);
-                   
+
    /**
     * Create an evaluator function for a named path node, expressed in the
     * JSONPath like:
     *    foo
     *    ["bar"]
-    *    [2]   
+    *    [2]
     */
    function nameClause(previousExpr, detection ) {
-     
+
       var name = detection[NAME_INDEX],
-            
-          matchesName = ( !name || name == '*' ) 
+
+          matchesName = ( !name || name == '*' )
                            ?  always
                            :  function(ascent){return headKey(ascent) == name};
-     
+
 
       return lazyIntersection(matchesName, previousExpr);
    }
 
    /**
     * Create an evaluator function for a a duck-typed node, expressed like:
-    * 
+    *
     *    {spin, taste, colour}
     *    .particle{spin, taste, colour}
     *    *{spin, taste, colour}
@@ -48996,16 +48996,16 @@ var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax,
 
       var fieldListStr = detection[FIELD_LIST_INDEX];
 
-      if (!fieldListStr) 
-         return previousExpr; // don't wrap at all, return given expr as-is      
+      if (!fieldListStr)
+         return previousExpr; // don't wrap at all, return given expr as-is
 
       var hasAllrequiredFields = partialComplete(
-                                    hasAllProperties, 
+                                    hasAllProperties,
                                     arrayAsList(fieldListStr.split(/\W+/))
                                  ),
-                                 
-          isMatch =  compose2( 
-                        hasAllrequiredFields, 
+
+          isMatch =  compose2(
+                        hasAllrequiredFields,
                         headNode
                      );
 
@@ -49017,30 +49017,30 @@ var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax,
     */
    function capture( previousExpr, detection ) {
 
-      // extract meaning from the detection      
+      // extract meaning from the detection
       var capturing = !!detection[CAPTURING_INDEX];
 
-      if (!capturing)          
-         return previousExpr; // don't wrap at all, return given expr as-is      
-      
+      if (!capturing)
+         return previousExpr; // don't wrap at all, return given expr as-is
+
       return lazyIntersection(previousExpr, head);
-            
-   }            
-      
+
+   }
+
    /**
-    * Create an evaluator function that moves onto the next item on the 
-    * lists. This function is the place where the logic to move up a 
-    * level in the ascent exists. 
-    * 
+    * Create an evaluator function that moves onto the next item on the
+    * lists. This function is the place where the logic to move up a
+    * level in the ascent exists.
+    *
     * Eg, for JSONPath ".foo" we need skip1(nameClause(always, [,'foo']))
     */
    function skip1(previousExpr) {
-   
-   
+
+
       if( previousExpr == always ) {
-         /* If there is no previous expression this consume command 
+         /* If there is no previous expression this consume command
             is at the start of the jsonPath.
-            Since JSONPath specifies what we'd like to find but not 
+            Since JSONPath specifies what we'd like to find but not
             necessarily everything leading down to it, when running
             out of JSONPath to check against we default to true */
          return always;
@@ -49052,42 +49052,42 @@ var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax,
       function notAtRoot(ascent){
          return headKey(ascent) != ROOT_PATH;
       }
-      
+
       return lazyIntersection(
-               /* If we're already at the root but there are more 
+               /* If we're already at the root but there are more
                   expressions to satisfy, can't consume any more. No match.
 
-                  This check is why none of the other exprs have to be able 
-                  to handle empty lists; skip1 is the only evaluator that 
-                  moves onto the next token and it refuses to do so once it 
+                  This check is why none of the other exprs have to be able
+                  to handle empty lists; skip1 is the only evaluator that
+                  moves onto the next token and it refuses to do so once it
                   reaches the last item in the list. */
                notAtRoot,
-               
+
                /* We are not at the root of the ascent yet.
-                  Move to the next level of the ascent by handing only 
-                  the tail to the previous expression */ 
-               compose2(previousExpr, tail) 
+                  Move to the next level of the ascent by handing only
+                  the tail to the previous expression */
+               compose2(previousExpr, tail)
       );
-                                                                                                               
-   }   
-   
+
+   }
+
    /**
     * Create an evaluator function for the .. (double dot) token. Consumes
     * zero or more levels of the ascent, the fewest that are required to find
     * a match when given to previousExpr.
-    */   
+    */
    function skipMany(previousExpr) {
 
       if( previousExpr == always ) {
-         /* If there is no previous expression this consume command 
+         /* If there is no previous expression this consume command
             is at the start of the jsonPath.
-            Since JSONPath specifies what we'd like to find but not 
+            Since JSONPath specifies what we'd like to find but not
             necessarily everything leading down to it, when running
-            out of JSONPath to check against we default to true */            
+            out of JSONPath to check against we default to true */
          return always;
       }
-          
-      var 
+
+      var
           // In JSONPath .. is equivalent to !.. so if .. reaches the root
           // the match has succeeded. Ie, we might write ..foo or !..foo
           // and both should match identically.
@@ -49100,203 +49100,203 @@ var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax,
           cases = lazyUnion(
                      terminalCaseWhenArrivingAtRoot
                   ,  terminalCaseWhenPreviousExpressionIsSatisfied
-                  ,  recursiveCase  
+                  ,  recursiveCase
                   );
-      
+
       return cases;
-   }      
-   
+   }
+
    /**
     * Generate an evaluator for ! - matches only the root element of the json
-    * and ignores any previous expressions since nothing may precede !. 
-    */   
+    * and ignores any previous expressions since nothing may precede !.
+    */
    function rootExpr() {
-      
+
       return function(ascent){
          return headKey(ascent) == ROOT_PATH;
       };
-   }   
-         
+   }
+
    /**
-    * Generate a statement wrapper to sit around the outermost 
+    * Generate a statement wrapper to sit around the outermost
     * clause evaluator.
-    * 
+    *
     * Handles the case where the capturing is implicit because the JSONPath
     * did not contain a '$' by returning the last node.
-    */   
+    */
    function statementExpr(lastClause) {
-      
+
       return function(ascent) {
-   
+
          // kick off the evaluation by passing through to the last clause
          var exprMatch = lastClause(ascent);
-                                                     
+
          return exprMatch === true ? head(ascent) : exprMatch;
       };
-   }      
-                          
+   }
+
    /**
     * For when a token has been found in the JSONPath input.
     * Compiles the parser for that token and returns in combination with the
     * parser already generated.
-    * 
+    *
     * @param {Function} exprs  a list of the clause evaluator generators for
     *                          the token that was found
     * @param {Function} parserGeneratedSoFar the parser already found
-    * @param {Array} detection the match given by the regex engine when 
+    * @param {Array} detection the match given by the regex engine when
     *                          the feature was found
     */
    function expressionsReader( exprs, parserGeneratedSoFar, detection ) {
-                     
-      // if exprs is zero-length foldR will pass back the 
-      // parserGeneratedSoFar as-is so we don't need to treat 
+
+      // if exprs is zero-length foldR will pass back the
+      // parserGeneratedSoFar as-is so we don't need to treat
       // this as a special case
-      
-      return   foldR( 
+
+      return   foldR(
                   function( parserGeneratedSoFar, expr ){
-         
+
                      return expr(parserGeneratedSoFar, detection);
-                  }, 
-                  parserGeneratedSoFar, 
+                  },
+                  parserGeneratedSoFar,
                   exprs
-               );                     
+               );
 
    }
 
-   /** 
+   /**
     *  If jsonPath matches the given detector function, creates a function which
     *  evaluates against every clause in the clauseEvaluatorGenerators. The
     *  created function is propagated to the onSuccess function, along with
     *  the remaining unparsed JSONPath substring.
-    *  
+    *
     *  The intended use is to create a clauseMatcher by filling in
     *  the first two arguments, thus providing a function that knows
     *  some syntax to match and what kind of generator to create if it
     *  finds it. The parameter list once completed is:
-    *  
+    *
     *    (jsonPath, parserGeneratedSoFar, onSuccess)
-    *  
-    *  onSuccess may be compileJsonPathToFunction, to recursively continue 
+    *
+    *  onSuccess may be compileJsonPathToFunction, to recursively continue
     *  parsing after finding a match or returnFoundParser to stop here.
     */
    function generateClauseReaderIfTokenFound (
-     
+
                         tokenDetector, clauseEvaluatorGenerators,
-                         
+
                         jsonPath, parserGeneratedSoFar, onSuccess) {
-                        
+
       var detected = tokenDetector(jsonPath);
 
       if(detected) {
          var compiledParser = expressionsReader(
-                                 clauseEvaluatorGenerators, 
-                                 parserGeneratedSoFar, 
+                                 clauseEvaluatorGenerators,
+                                 parserGeneratedSoFar,
                                  detected
                               ),
-         
-             remainingUnparsedJsonPath = jsonPath.substr(len(detected[0]));                
-                               
+
+             remainingUnparsedJsonPath = jsonPath.substr(len(detected[0]));
+
          return onSuccess(remainingUnparsedJsonPath, compiledParser);
-      }         
+      }
    }
-                 
+
    /**
-    * Partially completes generateClauseReaderIfTokenFound above. 
+    * Partially completes generateClauseReaderIfTokenFound above.
     */
    function clauseMatcher(tokenDetector, exprs) {
-        
-      return   partialComplete( 
-                  generateClauseReaderIfTokenFound, 
-                  tokenDetector, 
-                  exprs 
+
+      return   partialComplete(
+                  generateClauseReaderIfTokenFound,
+                  tokenDetector,
+                  exprs
                );
    }
 
    /**
-    * clauseForJsonPath is a function which attempts to match against 
+    * clauseForJsonPath is a function which attempts to match against
     * several clause matchers in order until one matches. If non match the
     * jsonPath expression is invalid and an error is thrown.
-    * 
+    *
     * The parameter list is the same as a single clauseMatcher:
-    * 
+    *
     *    (jsonPath, parserGeneratedSoFar, onSuccess)
-    */     
+    */
    var clauseForJsonPath = lazyUnion(
 
-      clauseMatcher(pathNodeSyntax   , list( capture, 
-                                             duckTypeClause, 
-                                             nameClause, 
+      clauseMatcher(pathNodeSyntax   , list( capture,
+                                             duckTypeClause,
+                                             nameClause,
                                              skip1 ))
-                                                     
+
    ,  clauseMatcher(doubleDotSyntax  , list( skipMany))
-       
-       // dot is a separator only (like whitespace in other languages) but 
-       // rather than make it a special case, use an empty list of 
+
+       // dot is a separator only (like whitespace in other languages) but
+       // rather than make it a special case, use an empty list of
        // expressions when this token is found
-   ,  clauseMatcher(dotSyntax        , list() )  
-                                                                                      
+   ,  clauseMatcher(dotSyntax        , list() )
+
    ,  clauseMatcher(bangSyntax       , list( capture,
                                              rootExpr))
-                                                          
+
    ,  clauseMatcher(emptySyntax      , list( statementExpr))
-   
+
    ,  function (jsonPath) {
-         throw Error('"' + jsonPath + '" could not be tokenised')      
+         throw Error('"' + jsonPath + '" could not be tokenised')
       }
    );
 
 
    /**
-    * One of two possible values for the onSuccess argument of 
+    * One of two possible values for the onSuccess argument of
     * generateClauseReaderIfTokenFound.
-    * 
-    * When this function is used, generateClauseReaderIfTokenFound simply 
-    * returns the compiledParser that it made, regardless of if there is 
+    *
+    * When this function is used, generateClauseReaderIfTokenFound simply
+    * returns the compiledParser that it made, regardless of if there is
     * any remaining jsonPath to be compiled.
     */
-   function returnFoundParser(_remainingJsonPath, compiledParser){ 
-      return compiledParser 
-   }     
-              
+   function returnFoundParser(_remainingJsonPath, compiledParser){
+      return compiledParser
+   }
+
    /**
     * Recursively compile a JSONPath expression.
-    * 
-    * This function serves as one of two possible values for the onSuccess 
+    *
+    * This function serves as one of two possible values for the onSuccess
     * argument of generateClauseReaderIfTokenFound, meaning continue to
     * recursively compile. Otherwise, returnFoundParser is given and
     * compilation terminates.
     */
-   function compileJsonPathToFunction( uncompiledJsonPath, 
+   function compileJsonPathToFunction( uncompiledJsonPath,
                                        parserGeneratedSoFar ) {
 
       /**
        * On finding a match, if there is remaining text to be compiled
-       * we want to either continue parsing using a recursive call to 
-       * compileJsonPathToFunction. Otherwise, we want to stop and return 
+       * we want to either continue parsing using a recursive call to
+       * compileJsonPathToFunction. Otherwise, we want to stop and return
        * the parser that we have found so far.
        */
       var onFind =      uncompiledJsonPath
-                     ?  compileJsonPathToFunction 
+                     ?  compileJsonPathToFunction
                      :  returnFoundParser;
-                   
-      return   clauseForJsonPath( 
-                  uncompiledJsonPath, 
-                  parserGeneratedSoFar, 
+
+      return   clauseForJsonPath(
+                  uncompiledJsonPath,
+                  parserGeneratedSoFar,
                   onFind
-               );                              
+               );
    }
 
    /**
     * This is the function that we expose to the rest of the library.
     */
    return function(jsonPath){
-        
+
       try {
-         // Kick off the recursive parsing of the jsonPath 
+         // Kick off the recursive parsing of the jsonPath
          return compileJsonPathToFunction(jsonPath, always);
-         
+
       } catch( e ) {
-         throw Error( 'Could not compile "' + jsonPath + 
+         throw Error( 'Could not compile "' + jsonPath +
                       '" because ' + e.message
          );
       }
@@ -49304,23 +49304,23 @@ var jsonPathCompiler = jsonPathSyntax(function (pathNodeSyntax,
 
 });
 
-/** 
- * A pub/sub which is responsible for a single event type. A 
+/**
+ * A pub/sub which is responsible for a single event type. A
  * multi-event type event bus is created by pubSub by collecting
  * several of these.
- * 
- * @param {String} eventType                   
+ *
+ * @param {String} eventType
  *    the name of the events managed by this singleEventPubSub
- * @param {singleEventPubSub} [newListener]    
+ * @param {singleEventPubSub} [newListener]
  *    place to notify of new listeners
- * @param {singleEventPubSub} [removeListener] 
+ * @param {singleEventPubSub} [removeListener]
  *    place to notify of when listeners are removed
  */
 function singleEventPubSub(eventType, newListener, removeListener){
 
    /** we are optimised for emitting events over firing them.
     *  As well as the tuple list which stores event ids and
-    *  listeners there is a list with just the listeners which 
+    *  listeners there is a list with just the listeners which
     *  can be iterated more quickly when we are emitting
     */
    var listenerTupleList,
@@ -49328,20 +49328,20 @@ function singleEventPubSub(eventType, newListener, removeListener){
 
    function hasId(id){
       return function(tuple) {
-         return tuple.id == id;      
-      };  
+         return tuple.id == id;
+      };
    }
-              
+
    return {
 
       /**
        * @param {Function} listener
-       * @param {*} listenerId 
-       *    an id that this listener can later by removed by. 
+       * @param {*} listenerId
+       *    an id that this listener can later by removed by.
        *    Can be of any type, to be compared to other ids using ==
        */
       on:function( listener, listenerId ) {
-         
+
          var tuple = {
             listener: listener
          ,  id:       listenerId || listener // when no id is given use the
@@ -49351,48 +49351,48 @@ function singleEventPubSub(eventType, newListener, removeListener){
          if( newListener ) {
             newListener.emit(eventType, listener, tuple.id);
          }
-         
+
          listenerTupleList = cons( tuple,    listenerTupleList );
          listenerList      = cons( listener, listenerList      );
 
          return this; // chaining
       },
-     
-      emit:function () {                                                                                           
+
+      emit:function () {
          applyEach( listenerList, arguments );
       },
-      
+
       un: function( listenerId ) {
-             
-         var removed;             
-              
+
+         var removed;
+
          listenerTupleList = without(
             listenerTupleList,
             hasId(listenerId),
             function(tuple){
                removed = tuple;
             }
-         );    
-         
+         );
+
          if( removed ) {
             listenerList = without( listenerList, function(listener){
                return listener == removed.listener;
             });
-         
+
             if( removeListener ) {
                removeListener.emit(eventType, removed.listener, removed.id);
             }
          }
       },
-      
+
       listeners: function(){
          // differs from Node EventEmitter: returns list, not array
          return listenerList;
       },
-      
+
       hasListener: function(listenerId){
          var test = listenerId? hasId(listenerId) : always;
-      
+
          return defined(first( test, listenerTupleList));
       }
    };
@@ -49400,65 +49400,65 @@ function singleEventPubSub(eventType, newListener, removeListener){
 /**
  * pubSub is a curried interface for listening to and emitting
  * events.
- * 
+ *
  * If we get a bus:
- *    
+ *
  *    var bus = pubSub();
- * 
+ *
  * We can listen to event 'foo' like:
- * 
+ *
  *    bus('foo').on(myCallback)
- *    
+ *
  * And emit event foo like:
- * 
+ *
  *    bus('foo').emit()
- *    
+ *
  * or, with a parameter:
- * 
+ *
  *    bus('foo').emit('bar')
- *     
- * All functions can be cached and don't need to be 
+ *
+ * All functions can be cached and don't need to be
  * bound. Ie:
- * 
+ *
  *    var fooEmitter = bus('foo').emit
  *    fooEmitter('bar');  // emit an event
  *    fooEmitter('baz');  // emit another
- *    
+ *
  * There's also an uncurried[1] shortcut for .emit and .on:
- * 
+ *
  *    bus.on('foo', callback)
  *    bus.emit('foo', 'bar')
- * 
+ *
  * [1]: http://zvon.org/other/haskell/Outputprelude/uncurry_f.html
  */
 function pubSub(){
 
    var singles = {},
        newListener = newSingle('newListener'),
-       removeListener = newSingle('removeListener'); 
-      
+       removeListener = newSingle('removeListener');
+
    function newSingle(eventName) {
       return singles[eventName] = singleEventPubSub(
-         eventName, 
-         newListener, 
+         eventName,
+         newListener,
          removeListener
-      );   
-   }      
+      );
+   }
 
    /** pubSub instances are functions */
-   function pubSubInstance( eventName ){   
-      
-      return singles[eventName] || newSingle( eventName );   
+   function pubSubInstance( eventName ){
+
+      return singles[eventName] || newSingle( eventName );
    }
 
    // add convenience EventEmitter-style uncurried form of 'emit' and 'on'
    ['emit', 'on', 'un'].forEach(function(methodName){
-   
+
       pubSubInstance[methodName] = varArgs(function(eventName, parameters){
          apply( parameters, pubSubInstance( eventName )[methodName]);
-      });   
+      });
    });
-         
+
    return pubSubInstance;
 }
 
@@ -49466,7 +49466,7 @@ function pubSub(){
  * This file declares some constants to use as names for event types.
  */
 
-var // the events which are never exported are kept as 
+var // the events which are never exported are kept as
     // the smallest possible representation, in numbers:
     _S = 1,
 
@@ -49476,15 +49476,15 @@ var // the events which are never exported are kept as
     // fired whenever a node closes in the JSON stream:
     NODE_CLOSED     = _S++,
 
-    // called if a .node callback returns a value - 
+    // called if a .node callback returns a value -
     NODE_SWAP       = _S++,
     NODE_DROP       = _S++,
 
     FAIL_EVENT      = 'fail',
-   
+
     ROOT_NODE_FOUND = _S++,
     ROOT_PATH_FOUND = _S++,
-   
+
     HTTP_START      = 'start',
     STREAM_DATA     = 'data',
     STREAM_END      = 'end',
@@ -49494,7 +49494,7 @@ var // the events which are never exported are kept as
     SAX_KEY          = _S++,
     SAX_VALUE_OPEN   = _S++,
     SAX_VALUE_CLOSE  = _S++;
-    
+
 function errorReport(statusCode, body, error) {
    try{
       var jsonBody = JSON.parse(body);
@@ -49506,14 +49506,14 @@ function errorReport(statusCode, body, error) {
       jsonBody:jsonBody,
       thrown:error
    };
-}    
+}
 
-/** 
+/**
  *  The pattern adaptor listens for newListener and removeListener
  *  events. When patterns are added or removed it compiles the JSONPath
  *  and wires them up.
- *  
- *  When nodes and paths are found it emits the fully-qualified match 
+ *
+ *  When nodes and paths are found it emits the fully-qualified match
  *  events with parameters ready to ship to the outside world
  */
 
@@ -49523,100 +49523,100 @@ function patternAdapter(oboeBus, jsonPathCompiler) {
       node:oboeBus(NODE_CLOSED)
    ,  path:oboeBus(NODE_OPENED)
    };
-     
+
    function emitMatchingNode(emitMatch, node, ascent) {
-         
-      /* 
-         We're now calling to the outside world where Lisp-style 
-         lists will not be familiar. Convert to standard arrays. 
-   
-         Also, reverse the order because it is more common to 
+
+      /*
+         We're now calling to the outside world where Lisp-style
+         lists will not be familiar. Convert to standard arrays.
+
+         Also, reverse the order because it is more common to
          list paths "root to leaf" than "leaf to root"  */
       var descent     = reverseList(ascent);
-                
+
       emitMatch(
          node,
-         
+
          // To make a path, strip off the last item which is the special
-         // ROOT_PATH token for the 'path' to the root node          
+         // ROOT_PATH token for the 'path' to the root node
          listAsArray(tail(map(keyOf,descent))),  // path
-         listAsArray(map(nodeOf, descent))       // ancestors    
-      );         
+         listAsArray(map(nodeOf, descent))       // ancestors
+      );
    }
 
-   /* 
-    * Set up the catching of events such as NODE_CLOSED and NODE_OPENED and, if 
-    * matching the specified pattern, propagate to pattern-match events such as 
+   /*
+    * Set up the catching of events such as NODE_CLOSED and NODE_OPENED and, if
+    * matching the specified pattern, propagate to pattern-match events such as
     * oboeBus('node:!')
-    * 
-    * 
-    * 
-    * @param {Function} predicateEvent 
+    *
+    *
+    *
+    * @param {Function} predicateEvent
     *          either oboeBus(NODE_CLOSED) or oboeBus(NODE_OPENED).
-    * @param {Function} compiledJsonPath          
+    * @param {Function} compiledJsonPath
     */
    function addUnderlyingListener( fullEventName, predicateEvent, compiledJsonPath ){
-   
+
       var emitMatch = oboeBus(fullEventName).emit;
-   
+
       predicateEvent.on( function (ascent) {
 
          var maybeMatchingMapping = compiledJsonPath(ascent);
 
          /* Possible values for maybeMatchingMapping are now:
 
-          false: 
-          we did not match 
+          false:
+          we did not match
 
-          an object/array/string/number/null: 
+          an object/array/string/number/null:
           we matched and have the node that matched.
           Because nulls are valid json values this can be null.
 
           undefined:
           we matched but don't have the matching node yet.
-          ie, we know there is an upcoming node that matches but we 
-          can't say anything else about it. 
+          ie, we know there is an upcoming node that matches but we
+          can't say anything else about it.
           */
          if (maybeMatchingMapping !== false) {
 
             emitMatchingNode(
-               emitMatch, 
-               nodeOf(maybeMatchingMapping), 
+               emitMatch,
+               nodeOf(maybeMatchingMapping),
                ascent
             );
          }
       }, fullEventName);
-     
+
       oboeBus('removeListener').on( function(removedEventName){
 
-         // if the fully qualified match event listener is later removed, clean up 
+         // if the fully qualified match event listener is later removed, clean up
          // by removing the underlying listener if it was the last using that pattern:
-      
+
          if( removedEventName == fullEventName ) {
-         
+
             if( !oboeBus(removedEventName).listeners(  )) {
                predicateEvent.un( fullEventName );
             }
          }
-      });   
+      });
    }
 
    oboeBus('newListener').on( function(fullEventName){
 
       var match = /(node|path):(.*)/.exec(fullEventName);
-      
+
       if( match ) {
          var predicateEvent = predicateEventMap[match[1]];
-                    
-         if( !predicateEvent.hasListener( fullEventName) ) {  
-                  
+
+         if( !predicateEvent.hasListener( fullEventName) ) {
+
             addUnderlyingListener(
                fullEventName,
-               predicateEvent, 
+               predicateEvent,
                jsonPathCompiler( match[2] )
             );
          }
-      }    
+      }
    })
 
 }
@@ -49885,15 +49885,15 @@ function instanceApi(oboeBus, contentSource){
 function wire (httpMethodName, contentSource, body, headers, withCredentials){
 
    var oboeBus = pubSub();
-   
+
    // Wire the input stream in if we are given a content source.
    // This will usually be the case. If not, the instance created
    // will have to be passed content from an external source.
-  
+
    if( contentSource ) {
 
       streamingHttp( oboeBus,
-                     httpTransport(), 
+                     httpTransport(),
                      httpMethodName,
                      contentSource,
                      body,
@@ -49905,9 +49905,9 @@ function wire (httpMethodName, contentSource, body, headers, withCredentials){
    clarinet(oboeBus);
 
    ascentManager(oboeBus, incrementalContentBuilder(oboeBus));
-      
-   patternAdapter(oboeBus, jsonPathCompiler);      
-      
+
+   patternAdapter(oboeBus, jsonPathCompiler);
+
    return instanceApi(oboeBus, contentSource);
 }
 
@@ -49961,13 +49961,13 @@ function oboe(arg1) {
    // Unpipe and unshift would normally be present on a stream but this breaks
    // compatibility with Request streams.
    // See https://github.com/jimhigson/oboe.js/issues/65
-   
+
    var nodeStreamMethodNames = list('resume', 'pause', 'pipe'),
        isStream = partialComplete(
                      hasAllProperties
                   ,  nodeStreamMethodNames
                   );
-   
+
    if( arg1 ) {
       if (isStream(arg1) || isString(arg1)) {
 
@@ -49994,10 +49994,10 @@ function oboe(arg1) {
             arg1.withCredentials,
             arg1.cached
          );
-         
+
       }
    } else {
-      // wire up a no-AJAX, no-stream Oboe. Will have to have content 
+      // wire up a no-AJAX, no-stream Oboe. Will have to have content
       // fed in externally and using .emit.
       return wire();
    }
@@ -50971,7 +50971,7 @@ module.exports = function privateDecrypt(private_key, enc, reverse) {
   } else {
     padding = 4;
   }
-  
+
   var key = parseKeys(private_key);
   var k = key.modulus.byteLength();
   if (enc.length > k || new bn(enc).cmp(key.modulus) >= 0) {
@@ -52289,7 +52289,7 @@ var randomHex = function(size, callback) {
     var crypto = require('./crypto.js');
     var isCallback = (typeof callback === 'function');
 
-    
+
     if (size > 65536) {
         if(isCallback) {
             callback(new Error('Requested too many random bytes.'));
@@ -64363,13 +64363,13 @@ Script.prototype.runInContext = function (context) {
     if (!(context instanceof Context)) {
         throw new TypeError("needs a 'context' argument.");
     }
-    
+
     var iframe = document.createElement('iframe');
     if (!iframe.style) iframe.style = {};
     iframe.style.display = 'none';
-    
+
     document.body.appendChild(iframe);
-    
+
     var win = iframe.contentWindow;
     var wEval = win.eval, wExecScript = win.execScript;
 
@@ -64378,7 +64378,7 @@ Script.prototype.runInContext = function (context) {
         wExecScript.call(win, 'null');
         wEval = win.eval;
     }
-    
+
     forEach(Object_keys(context), function (key) {
         win[key] = context[key];
     });
@@ -64387,11 +64387,11 @@ Script.prototype.runInContext = function (context) {
             win[key] = context[key];
         }
     });
-    
+
     var winKeys = Object_keys(win);
 
     var res = wEval.call(win, this.code);
-    
+
     forEach(Object_keys(win), function (key) {
         // Avoid copying circular objects like `top` and `window` by only
         // updating existing context properties or new properties in the `win`
@@ -64406,9 +64406,9 @@ Script.prototype.runInContext = function (context) {
             defineProp(context, key, win[key]);
         }
     });
-    
+
     document.body.removeChild(iframe);
-    
+
     return res;
 };
 
@@ -73780,7 +73780,7 @@ var Promise = require('bluebird')
 _ = require('lodash')
 
 // Contract = function(params){
-	
+
 // 	// add riotjs compatible event listener
 // 	riot.observable(this)
 
@@ -73805,7 +73805,7 @@ class Bridge {
 			throw "MissingParam: Please provide a web3 parameter to interact with. This can either be a string pointing to the HTTP RPC, or a pre-constructed web3 instance."
 		}
 
-		if(typeof this.options.web3 === "string"){ 
+		if(typeof this.options.web3 === "string"){
 			this.web3 = new w3Constructor( new w3Constructor.providers.HttpProvider(this.options.web3) )
 		} else {
 			this.web3  = this.options.web3
@@ -73835,8 +73835,8 @@ class Bridge {
 }
 
 /**
- * Universal contract wrapper contract to interface with the blockchain. 
- * Can use a myriad of different sourced bridge providers. 
+ * Universal contract wrapper contract to interface with the blockchain.
+ * Can use a myriad of different sourced bridge providers.
  */
 class Contract {
 	constructor(params) {
@@ -73898,7 +73898,7 @@ class Contract {
 			} catch(e) {
 				console.error(`Unknown method "${fn}" in contract "${this.name}".`)
 			}
-			
+
 		} else {
 			throw "InvalidType: Unrecognized web3js version. Are you sure this is a web3js instance?"
 		}
@@ -73925,7 +73925,7 @@ class Contract {
 				} catch (e) {
 					console.error(`Unknown method "${fn}" in contract "${this.name}".`)
 				}
-					
+
 				})
 		} else if (this.bridge.web3.version.includes("1.")) {
 			if(!params || typeof params === "undefined") params = []
@@ -73936,7 +73936,7 @@ class Contract {
 			} catch (e) {
 				console.error(`Unknown method "${fn}" in contract "${this.name}".`)
 			}
-			
+
 		} else {
 			throw "InvalidType: Unrecognized web3js version. Are you sure this is a web3js instance?"
 		}
@@ -73979,7 +73979,7 @@ class P3D extends Contract {
 			name: "P3D",
 			ABI: [{"constant":true,"inputs":[{"name":"_customerAddress","type":"address"}],"name":"dividendsOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_ethereumToSpend","type":"uint256"}],"name":"calculateTokensReceived","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_tokensToSell","type":"uint256"}],"name":"calculateEthereumReceived","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"onlyAmbassadors","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"administrators","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"sellPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"stakingRequirement","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_includeReferralBonus","type":"bool"}],"name":"myDividends","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalEthereumBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_customerAddress","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_amountOfTokens","type":"uint256"}],"name":"setStakingRequirement","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"buyPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_identifier","type":"bytes32"},{"name":"_status","type":"bool"}],"name":"setAdministrator","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"myTokens","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"disableInitialStage","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_toAddress","type":"address"},{"name":"_amountOfTokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_symbol","type":"string"}],"name":"setSymbol","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"}],"name":"setName","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_amountOfTokens","type":"uint256"}],"name":"sell","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"exit","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_referredBy","type":"address"}],"name":"buy","outputs":[{"name":"","type":"uint256"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"reinvest","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"customerAddress","type":"address"},{"indexed":false,"name":"incomingEthereum","type":"uint256"},{"indexed":false,"name":"tokensMinted","type":"uint256"},{"indexed":true,"name":"referredBy","type":"address"}],"name":"onTokenPurchase","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"customerAddress","type":"address"},{"indexed":false,"name":"tokensBurned","type":"uint256"},{"indexed":false,"name":"ethereumEarned","type":"uint256"}],"name":"onTokenSell","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"customerAddress","type":"address"},{"indexed":false,"name":"ethereumReinvested","type":"uint256"},{"indexed":false,"name":"tokensMinted","type":"uint256"}],"name":"onReinvestment","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"customerAddress","type":"address"},{"indexed":false,"name":"ethereumWithdrawn","type":"uint256"}],"name":"onWithdraw","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"}]
 		}, params))
-		
+
 	}
 }
 
@@ -73989,7 +73989,7 @@ class Fomo3D extends Contract {
 			name: "Fomo3D",
 			ABI: [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"pIDxAddr_","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"airDropTracker_","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Jekyll_Island_Inc","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"round_","outputs":[{"name":"plyr","type":"uint256"},{"name":"team","type":"uint256"},{"name":"end","type":"uint256"},{"name":"ended","type":"bool"},{"name":"strt","type":"uint256"},{"name":"keys","type":"uint256"},{"name":"eth","type":"uint256"},{"name":"pot","type":"uint256"},{"name":"mask","type":"uint256"},{"name":"ico","type":"uint256"},{"name":"icoGen","type":"uint256"},{"name":"icoAvg","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"bytes32"}],"name":"plyrNames_","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"fees_","outputs":[{"name":"gen","type":"uint256"},{"name":"p3d","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"pIDxName_","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"playerBook","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"otherF3D_","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"rndTmEth_","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rID_","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"plyrRnds_","outputs":[{"name":"eth","type":"uint256"},{"name":"keys","type":"uint256"},{"name":"mask","type":"uint256"},{"name":"ico","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"potSplit_","outputs":[{"name":"gen","type":"uint256"},{"name":"p3d","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"activated_","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Divies","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"airDropPot_","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"plyr_","outputs":[{"name":"addr","type":"address"},{"name":"name","type":"bytes32"},{"name":"win","type":"uint256"},{"name":"gen","type":"uint256"},{"name":"aff","type":"uint256"},{"name":"lrnd","type":"uint256"},{"name":"laff","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"playerID","type":"uint256"},{"indexed":true,"name":"playerAddress","type":"address"},{"indexed":true,"name":"playerName","type":"bytes32"},{"indexed":false,"name":"isNewPlayer","type":"bool"},{"indexed":false,"name":"affiliateID","type":"uint256"},{"indexed":false,"name":"affiliateAddress","type":"address"},{"indexed":false,"name":"affiliateName","type":"bytes32"},{"indexed":false,"name":"amountPaid","type":"uint256"},{"indexed":false,"name":"timeStamp","type":"uint256"}],"name":"onNewName","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"compressedData","type":"uint256"},{"indexed":false,"name":"compressedIDs","type":"uint256"},{"indexed":false,"name":"playerName","type":"bytes32"},{"indexed":false,"name":"playerAddress","type":"address"},{"indexed":false,"name":"ethIn","type":"uint256"},{"indexed":false,"name":"keysBought","type":"uint256"},{"indexed":false,"name":"winnerAddr","type":"address"},{"indexed":false,"name":"winnerName","type":"bytes32"},{"indexed":false,"name":"amountWon","type":"uint256"},{"indexed":false,"name":"newPot","type":"uint256"},{"indexed":false,"name":"P3DAmount","type":"uint256"},{"indexed":false,"name":"genAmount","type":"uint256"},{"indexed":false,"name":"potAmount","type":"uint256"},{"indexed":false,"name":"airDropPot","type":"uint256"}],"name":"onEndTx","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"playerID","type":"uint256"},{"indexed":false,"name":"playerAddress","type":"address"},{"indexed":false,"name":"playerName","type":"bytes32"},{"indexed":false,"name":"ethOut","type":"uint256"},{"indexed":false,"name":"timeStamp","type":"uint256"}],"name":"onWithdraw","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"playerAddress","type":"address"},{"indexed":false,"name":"playerName","type":"bytes32"},{"indexed":false,"name":"ethOut","type":"uint256"},{"indexed":false,"name":"compressedData","type":"uint256"},{"indexed":false,"name":"compressedIDs","type":"uint256"},{"indexed":false,"name":"winnerAddr","type":"address"},{"indexed":false,"name":"winnerName","type":"bytes32"},{"indexed":false,"name":"amountWon","type":"uint256"},{"indexed":false,"name":"newPot","type":"uint256"},{"indexed":false,"name":"P3DAmount","type":"uint256"},{"indexed":false,"name":"genAmount","type":"uint256"}],"name":"onWithdrawAndDistribute","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"playerAddress","type":"address"},{"indexed":false,"name":"playerName","type":"bytes32"},{"indexed":false,"name":"ethIn","type":"uint256"},{"indexed":false,"name":"compressedData","type":"uint256"},{"indexed":false,"name":"compressedIDs","type":"uint256"},{"indexed":false,"name":"winnerAddr","type":"address"},{"indexed":false,"name":"winnerName","type":"bytes32"},{"indexed":false,"name":"amountWon","type":"uint256"},{"indexed":false,"name":"newPot","type":"uint256"},{"indexed":false,"name":"P3DAmount","type":"uint256"},{"indexed":false,"name":"genAmount","type":"uint256"}],"name":"onBuyAndDistribute","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"playerAddress","type":"address"},{"indexed":false,"name":"playerName","type":"bytes32"},{"indexed":false,"name":"compressedData","type":"uint256"},{"indexed":false,"name":"compressedIDs","type":"uint256"},{"indexed":false,"name":"winnerAddr","type":"address"},{"indexed":false,"name":"winnerName","type":"bytes32"},{"indexed":false,"name":"amountWon","type":"uint256"},{"indexed":false,"name":"newPot","type":"uint256"},{"indexed":false,"name":"P3DAmount","type":"uint256"},{"indexed":false,"name":"genAmount","type":"uint256"}],"name":"onReLoadAndDistribute","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"affiliateID","type":"uint256"},{"indexed":false,"name":"affiliateAddress","type":"address"},{"indexed":false,"name":"affiliateName","type":"bytes32"},{"indexed":true,"name":"roundID","type":"uint256"},{"indexed":true,"name":"buyerID","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"},{"indexed":false,"name":"timeStamp","type":"uint256"}],"name":"onAffiliatePayout","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"roundID","type":"uint256"},{"indexed":false,"name":"amountAddedToPot","type":"uint256"}],"name":"onPotSwapDeposit","type":"event"},{"constant":false,"inputs":[{"name":"_playerBook","type":"address"}],"name":"setPlayerBook","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_affCode","type":"uint256"},{"name":"_team","type":"uint256"}],"name":"buyXid","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_affCode","type":"address"},{"name":"_team","type":"uint256"}],"name":"buyXaddr","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_affCode","type":"bytes32"},{"name":"_team","type":"uint256"}],"name":"buyXname","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_affCode","type":"uint256"},{"name":"_team","type":"uint256"},{"name":"_eth","type":"uint256"}],"name":"reLoadXid","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_affCode","type":"address"},{"name":"_team","type":"uint256"},{"name":"_eth","type":"uint256"}],"name":"reLoadXaddr","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_affCode","type":"bytes32"},{"name":"_team","type":"uint256"},{"name":"_eth","type":"uint256"}],"name":"reLoadXname","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_nameString","type":"string"},{"name":"_affCode","type":"uint256"},{"name":"_all","type":"bool"}],"name":"registerNameXID","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_nameString","type":"string"},{"name":"_affCode","type":"address"},{"name":"_all","type":"bool"}],"name":"registerNameXaddr","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_nameString","type":"string"},{"name":"_affCode","type":"bytes32"},{"name":"_all","type":"bool"}],"name":"registerNameXname","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"getBuyPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTimeLeft","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_pID","type":"uint256"}],"name":"getPlayerVaults","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getCurrentRoundInfo","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"address"},{"name":"","type":"bytes32"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"getPlayerInfoByAddress","outputs":[{"name":"","type":"uint256"},{"name":"","type":"bytes32"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_rID","type":"uint256"},{"name":"_eth","type":"uint256"}],"name":"calcKeysReceived","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_keys","type":"uint256"}],"name":"iWantXKeys","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_pID","type":"uint256"},{"name":"_addr","type":"address"},{"name":"_name","type":"bytes32"},{"name":"_laff","type":"uint256"}],"name":"receivePlayerInfo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_pID","type":"uint256"},{"name":"_name","type":"bytes32"}],"name":"receivePlayerNameList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"potSwap","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"activate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
 		}, params))
-		
+
 		this.lastBlock = 0
 	}
 
@@ -73998,7 +73998,7 @@ class Fomo3D extends Contract {
 
 		// fetch player ID
 		let PID = await this.read("pIDxAddr_", this.bridge.wallet())
-		
+
 		// fetch round information
 		let roundInformation = await this.read("getPlayerInfoByAddress", this.bridge.wallet())
 
@@ -74027,7 +74027,7 @@ class Fomo3D extends Contract {
 				case "name":
 					return reinvest ? this.write(`${prefix}Xname`, [web3.fromAscii(JSON.parse(localStorage.getItem("masternode")).value), team, amount]) : this.write(`${prefix}Xname`, [web3.fromAscii(JSON.parse(localStorage.getItem("masternode")).value), team], {value: amount})
 				break;
-			}	
+			}
 		} else {
 			return reinvest ? this.write(`${prefix}Xid`, [0, team, amount]) : this.write(`${prefix}Xaddr`, ["0", team], {value: amount})
 		}
@@ -74049,7 +74049,7 @@ class Fomo3D extends Contract {
 
 		}, 5000)
 	}
-} 
+}
 
 
 
@@ -74081,7 +74081,7 @@ class Fomo3D extends Contract {
 // 				console.log('no sign in')
 // 				console.log(web3)
 // 				Bridge.props.signedIn = false
-// 			} else {		
+// 			} else {
 // 				Bridge.props.Web3 = web3
 // 				Bridge.props.signedIn = true
 // 				Bridge.props.PersonalContract = Bridge.props.Web3.eth.contract(Bridge.props.ABI).at(Bridge.props.Address)
@@ -74150,7 +74150,7 @@ const w3Constructor = require('web3'),
 /**
  * JUST.js, propietary dapp framework.
  * NSA level protection on the dreaded ctrl c + ctrl v key combo
- * We are watching you. 
+ * We are watching you.
  * Always
  */
 
@@ -74163,7 +74163,7 @@ const Public = {
 	/**
 	 * RiotJS route() register wrapper. Emits an event when a transition is starting. This is lacking from the base route() of riotJS, hence the need for this wrapper.
 	 * You can call this with exactly the same parameters as the normal route, it's nothing fancy.
-	 * Why? So we can have fancy state transitions. 
+	 * Why? So we can have fancy state transitions.
 	 */
 	route: function(a, b, c){
 		try {
@@ -74197,7 +74197,7 @@ const Public = {
 					})
 					await Promise.map(params.contracts, async contract => {
 
-						Public.Bridges[instance.name].contracts[contract.name] = 
+						Public.Bridges[instance.name].contracts[contract.name] =
 							new contract.model({
 								address: contract.address,
 								ABI: contract.ABI,
@@ -74207,7 +74207,7 @@ const Public = {
 				}
 			})
 		} catch(e) {
-			throw e 
+			throw e
 		}
 	},
 
@@ -74280,7 +74280,7 @@ const Public = {
 			return new Date(new Date().getTime() - parseInt(Public.TimeDifference.slice(1)))
 		}
 	}
-	
+
 	/**
 	* Copyright 2018 TEAM JUST
 	* This product is protected under license. Any unauthorized copy, modification, or use without express written consent from the creators is prohibited.
@@ -74312,7 +74312,7 @@ jQuery(fn => { ( async function(){
 	* Copyright 2018 TEAM JUST
 	* This product is protected under license. Any unauthorized copy, modification, or use without express written consent from the creators is prohibited.
 	*/
-	
+
 
 
 	// wlad pretty transitions
@@ -74354,27 +74354,24 @@ jQuery(fn => { ( async function(){
 					API: (typeof web3 !== "undefined" ? web3 : false)
 				}, {
 					name: "Browser",
-					API: "https://ropsten.infura.io/v3/09c30ad18ed145c3997b0621e1816909"
-				}, {
-					name: "Websocket",
-					API: new w3Constructor( new w3Constructor.providers.WebsocketProvider("wss://mainnet.infura.io/_ws"))
+					API: "https://rpc.oasiseth.org:8545"
 				}
 			],
 			contracts: [
 				{
 					name: "Fomo3D",
 					model: Ethereum.Fomo3D,
-					address: "0xe9c302779a7541f9cd42217eb3c4287cdaf7ef96"
+					address: "0x24955d0a001872f97093AEB60E9488e6849b4dfC"
 				},
 					{
 					name: "Quick",
 					model: Ethereum.Fomo3D,
-					address: "0xe9c302779a7541f9cd42217eb3c4287cdaf7ef96"
+					address: "0x24955d0a001872f97093AEB60E9488e6849b4dfC"
 				},
 				{
 					name: "P3D",
 					model: Ethereum.P3D,
-					address: "0x25Fd48EDc8da168089F5C6e13EB49087cCd36645"
+					address: "0x24955d0a001872f97093AEB60E9488e6849b4dfC"
 				}
 			]
 		})
@@ -74400,8 +74397,8 @@ jQuery(fn => { ( async function(){
 	})
 
 	// create websocket listener
-	JUST.Bridges.Websocket.contracts.Fomo3D.listen()
-	JUST.Bridges.Websocket.contracts.Fomo3D.enableRefresher()
+	//JUST.Bridges.Websocket.contracts.Fomo3D.listen()
+	//JUST.Bridges.Websocket.contracts.Fomo3D.enableRefresher()
 	/*JUST.Bridges.Websocket.contracts.Quick.on('transaction', async e => {
 		console.log("tx received", e)
 		var isOurs = false
@@ -74473,7 +74470,7 @@ jQuery(fn => { ( async function(){
 		try {
 			let name = jQuery("#nameInput").val()
 			jQuery('#loading').modal({backdrop: 'static', keyboard: false})
-			var masternode = window.localStorage.getItem("masternode") && window.localStorage.getItem("masternode") != "" ? JSON.parse(window.localStorage.getItem("masternode")).value : "" 
+			var masternode = window.localStorage.getItem("masternode") && window.localStorage.getItem("masternode") != "" ? JSON.parse(window.localStorage.getItem("masternode")).value : ""
 
 			let receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.write("registerNameXname", [name,  masternode, true], {value: parseInt(BN(1e16))})
 			jQuery('#loading').modal('hide')
@@ -74491,8 +74488,8 @@ jQuery(fn => { ( async function(){
 	=            States            =
 	==============================*/
 
-	
-	
+
+
 	// play slow
 	JUST.route('/play', async masternode => {
 		JUST.Cache.Mode = "Slow"
@@ -74519,9 +74516,9 @@ jQuery(fn => { ( async function(){
 		riot.mount('module-bash', 'state-bash')
 		riot.mount('module-template', 'state-play')
 	})
-	
-	
-	
+
+
+
 		//play2 quick
 	JUST.route('/quick', async masternode => {
 		JUST.Cache.Mode = "Quick"
@@ -74542,9 +74539,9 @@ jQuery(fn => { ( async function(){
 				JUST.Cache.airdropTracker = 0
 				JUST.Cache.airdropPot =0
 		}
-		
 
-		
+
+
 
 		// get fiat info
 		JUST.Cache.fiatRatios = await jQuery.get("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR")
@@ -74562,7 +74559,7 @@ jQuery(fn => { ( async function(){
 
 		})
 	})
-	
+
 
 	// statistics
 	JUST.route('/stats', function(){
@@ -74578,7 +74575,7 @@ jQuery(fn => { ( async function(){
 	JUST.route('/about', function(){
 		riot.mount('module-template', 'state-about')
 	})
-	
+
 		// p3d for bullrun
 	JUST.route('/p3d', async fn => {
 		// loads up a different navbar for p3d alone
@@ -74621,7 +74618,7 @@ jQuery(fn => { ( async function(){
 			window.localStorage.setItem("masternode", JSON.stringify({type: "address", value: window.location.pathname.slice(1, 43)}))
 		} else {
 			/^\+?\d+$/.test(identifier) ? window.localStorage.setItem("masternode", JSON.stringify({type: "id", value: identifier})) : window.localStorage.setItem("masternode", JSON.stringify({type: "name", value: decodeURI(identifier)}))
-			
+
 		}
 
 		route('/play')
@@ -74668,7 +74665,7 @@ jQuery(fn => { ( async function(){
 	/**
 	 * Start the framework
 	 */
-    riot.compile("\r<state-dev-page>\r\t<h1>dev</h1>\r\t<script>\r\t\tthis.on('mount', function(){\r\t\t\tconsole.log('time to develop')\r\t\t})\r\t</script>\r</state-dev-page>\r\r<state-loading>\r\t<center><h1 style=\"color: white;\">加载中...</h1></center>\r</state-loading>\r\r<state-error-notfound>\r\t<center>\r\t\t<h1>Page not found</h1>\r\t</center>\r</state-error-notfound>\r\r<state-home>\r\t<h1>Home</h1>\r</state-home>\r\r<module-navbar>\r\t<div></div>\r</module-navbar>\r\r<state-navbar>\r<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark jumboshade\">\r\t<div class=\"container\">\r\t\t<a class=\"navbar-brand\" style=\"font-size:1.5rem\" href=\"/shakedown\">\r\t\t梭哈\r\t\t</a>\r\t\t<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\t\t  <span class=\"navbar-toggler-icon\"></span>\r\t\t</button>\r\t\t<!-- NOTE: Adjust \"active\" state accordingly -->\r\t\t<div class=\"collapse navbar-collapse flex-column\" id=\"navbarNav\">\r\t\t  \t<ul class=\"nav nav-pills w-100\">\r\t\t\t\t<li class=\"nav-item\">\r\t\t \t\t\t<ul class=\"nav nav-tabs w-100 text-light no-mobile\" style=\"line-height: 42px;border-bottom: 0;\">\r\t\t\t\t\t  \t<div style=\"min-width: 7rem\" class=\"col-auto\">\r\t\t\t\t\t\t\t<i class=\"fas fa-stopwatch\"></i> <span class=\"boxtimer lead small\">00:00</span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t\t  \t<div class=\"col-auto yourkeys\">\r\t\t\t\t\t\t\t<i class=\"fas fa-key\"></i> <!-- <span class=\"lead small\" if={$this.gracePeriod}>&asymp;</span> --> <span class=\"lead small keycount\">0000</span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t\t  \t<div class=\"col-auto airdrop\">\r\t\t\t\t\t  \t\t<i class=\"fas fa-parachute-box\"></i> <span class=\"airdropcounter lead small\">{JUST.Cache.airdropTracker}% ({JUST.Cache.airdropPot} ETH)</span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t\t  \t<div class=\"col-auto mr-auto afflink\">\r\t\t\t\t\t\t\t<i class=\"fas fa-link\"></i> <span class=\"lead small\"><a href=\"javascript:void(0)\" class=\"buyceo glow\">购买推广链接</a></span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t  \t</ul>\r\t\t\t\t</li>\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t\t  \t<a class=\"nav-link nav-link-gold\" target=\"_blank\" href=\"https://t.me/suohame\"> tel </a>\r\t\t\t\t</li>\r\t\t\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t\t  \t<a class=\"nav-link nav-link-gold\" target=\"_new\" href=\"https://etherscan.io/address/0x460A5098248f4aa1A46Eec6AAc78B7819ea01C42#code\">合约 </a>\r\t\t\t\t</li>\r\t\t\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t\t  \t<a class=\"nav-link nav-link-gold\" target=\"_new\" target=\"_blank\" href=\"/help\">帮助</a>\r\t\t\t\t</li>\r\t\t\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t\t  \t<a class=\"nav-link nav-link-gold\" target=\"_new\" target=\"_blank\" href=\"https://cobo.com/\">cobo</a>\r\t\t\t\t</li>\r\t\t\t</ul>\r\t\t\t\r\r\t\t\r\t\t  \t<div class=\"d-flex only-mobile\">\r\t\t  \t\t<div class=\"p-2 afflink\">\r\t\t\t\t\t<i class=\"fas fa-link\"></i> <span class=\"lead small ceoshort\"><a href=\"javascript:void(0)\" class=\"buyceo glow\">购买推广链接</a></span>\r\t\t\t\t</div>\r\t\t  \t</div>\r\r\t\t</div>\r\t</div>\r\t<div class=\"container\">\r\t\t<div class=\"d-flex only-mobile\">\r\t\t\t<div class=\"p-2 ticktock\">\r\t\t\t\t<i class=\"fas fa-stopwatch\"></i> <span class=\"boxtimer lead small\">00:00</span>\r\t\t\t</div>\r\t\t\t<div class=\"p-2 yourkeys\">\r\t\t\t\t<i class=\"fas fa-key\"></i> <!-- <span class=\"lead small\" if={$this.gracePeriod}>&asymp;</span> --> <span class=\"lead small keycount\">0000</span>\r\t\t\t</div>\r\t\t\t<div class=\"p-2 airdrop\">\r\t\t\t\t<i class=\"fas fa-parachute-box\"></i> <span class=\"airdropcounter lead small\">{JUST.Cache.airdropTracker}% ({JUST.Cache.airdropPot} ETH)</span>\r\t\t\t </div>\r\t\t</div>\r\t</div>\r</nav>\r</state-navbar>\r\r<state-p3dnav>\r\t<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark jumboshade\">\r\t\t<div class=\"container\">\r\t\t\t<a class=\"navbar-brand nav-link nav-link-gren-shadow\" style=\"font-size:1.5rem\" href=\"/shakedown\">\r\t\t\tPoWH3D\r\t\t\t</a>\r\t\t\t<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\t\t\t  <span class=\"navbar-toggler-icon\"></span>\r\t\t\t</button>\r\t\t\t<!-- NOTE: Adjust \"active\" state accordingly -->\r\t\t\t<div class=\"collapse navbar-collapse flex-column\" id=\"navbarNav\">\r\t\t  <ul class=\"nav nav-pills w-100\">\r\r\t\t\t\t<li class=\"nav-item mr-auto\">\r\t\t\t\t  <a class=\"nav-link-gold-on nav-link nav-link-gold\" href=\"/play\">F3D: Long Con</a>\r\t\t\t\t</li>\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t\t  <a class=\"nav-link nav-link-gren\" target=\"_new\" href=\"https://discord.gg/DbapvnH\">Community</a>\r\t\t\t\t</li>\r\t\t\r\t\t\t\t<li class=\"dropdown nav-item\">\r\t\t\t\t\t<a class=\"dropdown-toggle nav-link nav-link-gren\" data-toggle=\"dropdown\" href=\"#\">Misc\r\t\t\t\t\t<span class=\"caret\"></span></a>\r\t\t\t\t\t<div class=\"dropdown-menu\">\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" target=\"_new\" href=\"https://powh3d.hostedwiki.co/\">Wiki</a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" target=\"_new\" href=\"https://etherscan.io/address/0xb3775fb83f7d12a36e0475abdd1fca35c091efbe#code\">Contract PoWH3D<br></a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" target=\"_new\" href=\"https://powh3d.eu/\">Powh3d.Eu (Lots of Fun Stats)</a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" href=\"https://p3d-bot.github.io/FomoOS/256bit\">FOMO OS (256bit) Backup </a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" href=\"https://powh.io/shill-kit.html\">Shill-kit</a>\r\t\t\t\t\t</div>\r\t\t\t\t</li>\r\t\t\r\t\t\r\t\t\r\t\t</ul>\r\r\t\t\t\t\r\t\t\t\t\r\t\t\t\t\r\t\t\t  <!-- </ul> -->\r\t\t\t  <!-- <ul class=\"nav nav-tabs tabs-border-adjust w-100 text-light no-mobile\"> -->\r\t\t\t\t  <!-- <div class=\"col-auto\"> -->\r\t\t\t\t\t<!-- <i class=\"fas fa-wallet\"></i> <span class=\"boxtimer lead small\">{$this.myTokens} P3D</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t  <!-- <div class=\"col-auto mr-auto yourkeys\"> -->\r\t\t\t\t\t<!-- <i class=\"fab fa-ethereum\"></i> <span class=\"lead small keycount\">{$this.myDivs}</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t<!-- </ul>   -->\r\t\t\t\t  \r\t\t\t\t  \r\t\t\t\t  \r\t\t\t\t  \r\t\t\t\t  <!-- <div class=\"col-auto buyprice\"> -->\r\t\t\t\t  \t<!-- <i class=\"fas fa-shopping-cart\"></i> <span class=\"buyprice lead small\">0.0100 ETH</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t  <!-- <div class=\"col-auto sellprice\"> -->\r\t\t\t\t  \t<!-- <i class=\"fas fa-hand-holding-usd\"></i> <span class=\"sellprice lead small\">0.0082 ETH</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t  \r\t\t\t\t  <!-- <div class=\"col-auto\"> -->\r\t\t\t\t\t<!-- <span class=\"small\">Fancy Mode</span> -->\r\t\t\t\t\t<!-- <label class=\"switch\"> -->\r\t\t\t\t\t  <!-- <input id=\"fancyswitch\" onclick=\"graphicslow()\" type=\"checkbox\"> -->\r\t\t\t\t\t  <!-- <span class=\"slider round\"></span> -->\r\t\t\t\t\t<!-- </label> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t\t\r\t\t\t  \r\t\t\t\t  <!--\r\t\t\t\t  <div class=\"col-auto\">\r\t\t\t\t\t<span class=\"small\">Fancy Mode</span>\r\t\t\t\t\t<label class=\"switch\">\r\t\t\t\t\t  <input id=\"fancyswitch\" onclick=\"graphicslow()\" type=\"checkbox\">\r\t\t\t\t\t  <span class=\"slider round\"></span>\r\t\t\t\t\t</label>\r\t\t\t\t  </div>\r\t\t\t\t\t-->\r\t\t\t</div>\r\t\t</div>\r\t\t<!-- <div class=\"container\"> -->\r\t\t\t<!-- <div class=\"d-flex only-mobile\"> -->\r\t\t\t\t<!-- <div class=\"p-2 ticktock\"> -->\r\t\t\t\t\t<!-- <i class=\"fas fa-wallet\"></i> <span class=\"boxtimer lead small\">2700.23 P3D</span> -->\r\t\t\t\t<!-- </div> -->\r\t\t\t\t<!-- <div class=\"p-2 yourkeys\"> -->\r\t\t\t\t\t<!-- <i class=\"fab fa-ethereum\"></i> <span class=\"lead small keycount\">22.3842</span> -->\r\t\t\t\t<!-- </div> -->\r\t\t\t<!-- </div> -->\r\t\t<!-- </div> -->\r\t</nav>\r</state-p3dnav>\r\r<!-- <state-shakedownnav> -->\r\t<!-- <nav style=\"background-color:#220622;height:60px;\" class=\"\"> -->\r\t\t\t\t\r\t<!-- </nav> -->\r<!-- </state-shakedownnav> -->\r\r\r<state-modal>\r  <div if={this.playerWon}>\r    <!-- modal popup -->\r      <div class=\"modal fade\" id=\"winner\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gameoverTitle\" aria-hidden=\"true\">\r        <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r          <div class=\"modal-content bg-dark text-light\">\r            <div class=\"modal-header\">\r              <h5 class=\"modal-title\" id=\"gameoverTitle\">A Winrar is you!</h5>\r              <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r                <span aria-hidden=\"true\">&times;</span>\r              </button>\r            </div>\r            <div class=\"modal-body\">\r              <div class=\"row\">\r                <div class=\"col\">\r                  <p>Congratulations! You exit scammed with <span class=\"ethAmount\">ETH</span>.</p>\r                  <p>Buy a ticket to start a new round or withdraw your winnings.</p>\r                </div>\r              </div>\r              <div class=\"row\">\r                <div class=\"col\">\r                  <button class=\"btn btn-block btn-outline-gold\" id=\"withdrawEarnings\">Withdraw Winnings</button>\r                </div>\r                <div class=\"col\">\r                  <button class=\"btn btn-block btn-gold\">Buy New Tickets</button>\r                </div>\r              </div>\r            </div>\r          </div>\r        </div>\r      </div>\r      <!-- /modal popup -->\r  </div>\r  <div if={this.playerLost}>\r    <!-- modal popup -->\r    <div class=\"modal fade\" id=\"winner\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gameoverTitle\" aria-hidden=\"true\">\r      <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r        <div class=\"modal-content bg-dark text-light\">\r          <div class=\"modal-header\">\r            <h5 class=\"modal-title\" id=\"gameoverTitle\">\r              <img src=\"/img/f3d-white.png\" alt=\"\" class=\"modal-logo\">\r            </h5>\r            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r              <span aria-hidden=\"true\">&times;</span>\r            </button>\r          </div>\r          <div class=\"modal-body\">\r            <div class=\"row\">\r              <div class=\"col\">\r                <p>You lose!</p>\r                <p>Someone managed to exit scam with <span class=\"ethAmount\">NaN</span> in total ETH.</p>\r                <p>But don't worry, you got your fair share too.</p>\r                <p><span class=\"ethLoss\">NaN</span> ETH have been accredited to your vault.</p>\r              </div>\r            </div>\r            <div class=\"row\">\r              <div class=\"col\">\r                <button class=\"btn btn-block btn-outline-gold\">Withdraw Personal Exit Scam</button>\r              </div>\r              <div class=\"col\">\r                <button class=\"btn btn-block btn-gold\">Fomo Into Next Round</button>\r              </div>\r            </div>\r          </div>\r        </div>\r      </div>\r    </div>\r    <!-- /modal popup -->\r  </div>\r</state-modal>\r\r<state-bash>\r\t<div id=\"terminal\" style=\"visibility: hidden;\">\r\t<ul id=\"commandLine\">\r\t\t<li class=\"intro\">=================================</li>\r\t\t<li class=\"intro\">Access to this machine is logged.</li>\r\t\t<li class=\"intro\">Misuse is reported.</li>\r\t\t<li class=\"intro\">=================================</li>\r\t\t<li class=\"prompt\"> \r\t\t\t<span class=\"ps1\">player@jekyllisland ~ $</span> \r\t\t\t<input type=\"text\" class=\"commandInput active\">\r\t\t</li>\r\t</ul>\r</div>\r</state-bash>")
+    riot.compile("\r<state-dev-page>\r\t<h1>dev</h1>\r\t<script>\r\t\tthis.on('mount', function(){\r\t\t\tconsole.log('time to develop')\r\t\t})\r\t</script>\r</state-dev-page>\r\r<state-loading>\r\t<center><h1 style=\"color: white;\">加载中...</h1></center>\r</state-loading>\r\r<state-error-notfound>\r\t<center>\r\t\t<h1>Page not found</h1>\r\t</center>\r</state-error-notfound>\r\r<state-home>\r\t<h1>Home</h1>\r</state-home>\r\r<module-navbar>\r\t<div></div>\r</module-navbar>\r\r<state-navbar>\r<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark jumboshade\">\r\t<div class=\"container\">\r\t\t<a class=\"navbar-brand\" style=\"font-size:1.5rem\" href=\"/shakedown\">\r\t\t梭哈\r\t\t</a>\r\t\t<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\t\t  <span class=\"navbar-toggler-icon\"></span>\r\t\t</button>\r\t\t<!-- NOTE: Adjust \"active\" state accordingly -->\r\t\t<div class=\"collapse navbar-collapse flex-column\" id=\"navbarNav\">\r\t\t  \t<ul class=\"nav nav-pills w-100\">\r\t\t\t\t<li class=\"nav-item\">\r\t\t \t\t\t<ul class=\"nav nav-tabs w-100 text-light no-mobile\" style=\"line-height: 42px;border-bottom: 0;\">\r\t\t\t\t\t  \t<div style=\"min-width: 7rem\" class=\"col-auto\">\r\t\t\t\t\t\t\t<i class=\"fas fa-stopwatch\"></i> <span class=\"boxtimer lead small\">00:00</span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t\t  \t<div class=\"col-auto yourkeys\">\r\t\t\t\t\t\t\t<i class=\"fas fa-key\"></i> <!-- <span class=\"lead small\" if={$this.gracePeriod}>&asymp;</span> --> <span class=\"lead small keycount\">0000</span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t\t  \t<div class=\"col-auto airdrop\">\r\t\t\t\t\t  \t\t<i class=\"fas fa-parachute-box\"></i> <span class=\"airdropcounter lead small\">{JUST.Cache.airdropTracker}% ({JUST.Cache.airdropPot} ETH)</span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t\t  \t<div class=\"col-auto mr-auto afflink\">\r\t\t\t\t\t\t\t<i class=\"fas fa-link\"></i> <span class=\"lead small\"><a href=\"javascript:void(0)\" class=\"buyceo glow\">购买推广链接</a></span>\r\t\t\t\t\t  \t</div>\r\t\t\t\t  \t</ul>\r\t\t\t\t</li>\r\t\t\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t\t  \t<a class=\"nav-link nav-link-gold\" target=\"_new\" href=\"http://scan.oasiseth.org/account/0x24955d0a001872f97093aeb60e9488e6849b4dfc#code\">合约 </a>\r\t\t\t\t</li>\r\t\t\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t</ul>\r\t\t\t\r\r\t\t\r\t\t  \t<div class=\"d-flex only-mobile\">\r\t\t  \t\t<div class=\"p-2 afflink\">\r\t\t\t\t\t<i class=\"fas fa-link\"></i> <span class=\"lead small ceoshort\"><a href=\"javascript:void(0)\" class=\"buyceo glow\">购买推广链接</a></span>\r\t\t\t\t</div>\r\t\t  \t</div>\r\r\t\t</div>\r\t</div>\r\t<div class=\"container\">\r\t\t<div class=\"d-flex only-mobile\">\r\t\t\t<div class=\"p-2 ticktock\">\r\t\t\t\t<i class=\"fas fa-stopwatch\"></i> <span class=\"boxtimer lead small\">00:00</span>\r\t\t\t</div>\r\t\t\t<div class=\"p-2 yourkeys\">\r\t\t\t\t<i class=\"fas fa-key\"></i> <!-- <span class=\"lead small\" if={$this.gracePeriod}>&asymp;</span> --> <span class=\"lead small keycount\">0000</span>\r\t\t\t</div>\r\t\t\t<div class=\"p-2 airdrop\">\r\t\t\t\t<i class=\"fas fa-parachute-box\"></i> <span class=\"airdropcounter lead small\">{JUST.Cache.airdropTracker}% ({JUST.Cache.airdropPot} ETH)</span>\r\t\t\t </div>\r\t\t</div>\r\t</div>\r</nav>\r</state-navbar>\r\r<state-p3dnav>\r\t<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark jumboshade\">\r\t\t<div class=\"container\">\r\t\t\t<a class=\"navbar-brand nav-link nav-link-gren-shadow\" style=\"font-size:1.5rem\" href=\"/shakedown\">\r\t\t\tPoWH3D\r\t\t\t</a>\r\t\t\t<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\t\t\t  <span class=\"navbar-toggler-icon\"></span>\r\t\t\t</button>\r\t\t\t<!-- NOTE: Adjust \"active\" state accordingly -->\r\t\t\t<div class=\"collapse navbar-collapse flex-column\" id=\"navbarNav\">\r\t\t  <ul class=\"nav nav-pills w-100\">\r\r\t\t\t\t<li class=\"nav-item mr-auto\">\r\t\t\t\t  <a class=\"nav-link-gold-on nav-link nav-link-gold\" href=\"/play\">F3D: Long Con</a>\r\t\t\t\t</li>\r\t\t\t\t<li class=\"nav-item\">\r\t\t\t\t  <a class=\"nav-link nav-link-gren\" target=\"_new\" href=\"https://discord.gg/DbapvnH\">Community</a>\r\t\t\t\t</li>\r\t\t\r\t\t\t\t<li class=\"dropdown nav-item\">\r\t\t\t\t\t<a class=\"dropdown-toggle nav-link nav-link-gren\" data-toggle=\"dropdown\" href=\"#\">Misc\r\t\t\t\t\t<span class=\"caret\"></span></a>\r\t\t\t\t\t<div class=\"dropdown-menu\">\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" target=\"_new\" href=\"https://powh3d.hostedwiki.co/\">Wiki</a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" target=\"_new\" href=\"https://etherscan.io/address/0xb3775fb83f7d12a36e0475abdd1fca35c091efbe#code\">Contract PoWH3D<br></a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" target=\"_new\" href=\"https://powh3d.eu/\">Powh3d.Eu (Lots of Fun Stats)</a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" href=\"https://p3d-bot.github.io/FomoOS/256bit\">FOMO OS (256bit) Backup </a>\r\t\t\t\t\t  <a class=\"dropdown-item dropdown-item\" href=\"https://powh.io/shill-kit.html\">Shill-kit</a>\r\t\t\t\t\t</div>\r\t\t\t\t</li>\r\t\t\r\t\t\r\t\t\r\t\t</ul>\r\r\t\t\t\t\r\t\t\t\t\r\t\t\t\t\r\t\t\t  <!-- </ul> -->\r\t\t\t  <!-- <ul class=\"nav nav-tabs tabs-border-adjust w-100 text-light no-mobile\"> -->\r\t\t\t\t  <!-- <div class=\"col-auto\"> -->\r\t\t\t\t\t<!-- <i class=\"fas fa-wallet\"></i> <span class=\"boxtimer lead small\">{$this.myTokens} P3D</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t  <!-- <div class=\"col-auto mr-auto yourkeys\"> -->\r\t\t\t\t\t<!-- <i class=\"fab fa-ethereum\"></i> <span class=\"lead small keycount\">{$this.myDivs}</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t<!-- </ul>   -->\r\t\t\t\t  \r\t\t\t\t  \r\t\t\t\t  \r\t\t\t\t  \r\t\t\t\t  <!-- <div class=\"col-auto buyprice\"> -->\r\t\t\t\t  \t<!-- <i class=\"fas fa-shopping-cart\"></i> <span class=\"buyprice lead small\">0.0100 ETH</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t  <!-- <div class=\"col-auto sellprice\"> -->\r\t\t\t\t  \t<!-- <i class=\"fas fa-hand-holding-usd\"></i> <span class=\"sellprice lead small\">0.0082 ETH</span> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t  \r\t\t\t\t  <!-- <div class=\"col-auto\"> -->\r\t\t\t\t\t<!-- <span class=\"small\">Fancy Mode</span> -->\r\t\t\t\t\t<!-- <label class=\"switch\"> -->\r\t\t\t\t\t  <!-- <input id=\"fancyswitch\" onclick=\"graphicslow()\" type=\"checkbox\"> -->\r\t\t\t\t\t  <!-- <span class=\"slider round\"></span> -->\r\t\t\t\t\t<!-- </label> -->\r\t\t\t\t  <!-- </div> -->\r\t\t\t\t\t\r\t\t\t  \r\t\t\t\t  <!--\r\t\t\t\t  <div class=\"col-auto\">\r\t\t\t\t\t<span class=\"small\">Fancy Mode</span>\r\t\t\t\t\t<label class=\"switch\">\r\t\t\t\t\t  <input id=\"fancyswitch\" onclick=\"graphicslow()\" type=\"checkbox\">\r\t\t\t\t\t  <span class=\"slider round\"></span>\r\t\t\t\t\t</label>\r\t\t\t\t  </div>\r\t\t\t\t\t-->\r\t\t\t</div>\r\t\t</div>\r\t\t<!-- <div class=\"container\"> -->\r\t\t\t<!-- <div class=\"d-flex only-mobile\"> -->\r\t\t\t\t<!-- <div class=\"p-2 ticktock\"> -->\r\t\t\t\t\t<!-- <i class=\"fas fa-wallet\"></i> <span class=\"boxtimer lead small\">2700.23 P3D</span> -->\r\t\t\t\t<!-- </div> -->\r\t\t\t\t<!-- <div class=\"p-2 yourkeys\"> -->\r\t\t\t\t\t<!-- <i class=\"fab fa-ethereum\"></i> <span class=\"lead small keycount\">22.3842</span> -->\r\t\t\t\t<!-- </div> -->\r\t\t\t<!-- </div> -->\r\t\t<!-- </div> -->\r\t</nav>\r</state-p3dnav>\r\r<!-- <state-shakedownnav> -->\r\t<!-- <nav style=\"background-color:#220622;height:60px;\" class=\"\"> -->\r\t\t\t\t\r\t<!-- </nav> -->\r<!-- </state-shakedownnav> -->\r\r\r<state-modal>\r  <div if={this.playerWon}>\r    <!-- modal popup -->\r      <div class=\"modal fade\" id=\"winner\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gameoverTitle\" aria-hidden=\"true\">\r        <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r          <div class=\"modal-content bg-dark text-light\">\r            <div class=\"modal-header\">\r              <h5 class=\"modal-title\" id=\"gameoverTitle\">A Winrar is you!</h5>\r              <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r                <span aria-hidden=\"true\">&times;</span>\r              </button>\r            </div>\r            <div class=\"modal-body\">\r              <div class=\"row\">\r                <div class=\"col\">\r                  <p>Congratulations! You exit scammed with <span class=\"ethAmount\">ETH</span>.</p>\r                  <p>Buy a ticket to start a new round or withdraw your winnings.</p>\r                </div>\r              </div>\r              <div class=\"row\">\r                <div class=\"col\">\r                  <button class=\"btn btn-block btn-outline-gold\" id=\"withdrawEarnings\">Withdraw Winnings</button>\r                </div>\r                <div class=\"col\">\r                  <button class=\"btn btn-block btn-gold\">Buy New Tickets</button>\r                </div>\r              </div>\r            </div>\r          </div>\r        </div>\r      </div>\r      <!-- /modal popup -->\r  </div>\r  <div if={this.playerLost}>\r    <!-- modal popup -->\r    <div class=\"modal fade\" id=\"winner\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gameoverTitle\" aria-hidden=\"true\">\r      <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r        <div class=\"modal-content bg-dark text-light\">\r          <div class=\"modal-header\">\r            <h5 class=\"modal-title\" id=\"gameoverTitle\">\r              <img src=\"/img/f3d-white.png\" alt=\"\" class=\"modal-logo\">\r            </h5>\r            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r              <span aria-hidden=\"true\">&times;</span>\r            </button>\r          </div>\r          <div class=\"modal-body\">\r            <div class=\"row\">\r              <div class=\"col\">\r                <p>You lose!</p>\r                <p>Someone managed to exit scam with <span class=\"ethAmount\">NaN</span> in total ETH.</p>\r                <p>But don't worry, you got your fair share too.</p>\r                <p><span class=\"ethLoss\">NaN</span> ETH have been accredited to your vault.</p>\r              </div>\r            </div>\r            <div class=\"row\">\r              <div class=\"col\">\r                <button class=\"btn btn-block btn-outline-gold\">Withdraw Personal Exit Scam</button>\r              </div>\r              <div class=\"col\">\r                <button class=\"btn btn-block btn-gold\">Fomo Into Next Round</button>\r              </div>\r            </div>\r          </div>\r        </div>\r      </div>\r    </div>\r    <!-- /modal popup -->\r  </div>\r</state-modal>\r\r<state-bash>\r\t<div id=\"terminal\" style=\"visibility: hidden;\">\r\t<ul id=\"commandLine\">\r\t\t<li class=\"intro\">=================================</li>\r\t\t<li class=\"intro\">Access to this machine is logged.</li>\r\t\t<li class=\"intro\">Misuse is reported.</li>\r\t\t<li class=\"intro\">=================================</li>\r\t\t<li class=\"prompt\"> \r\t\t\t<span class=\"ps1\">player@jekyllisland ~ $</span> \r\t\t\t<input type=\"text\" class=\"commandInput active\">\r\t\t</li>\r\t</ul>\r</div>\r</state-bash>")
     riot.compile("<state-play>\r<script>\r\t\t\r\t\tsetTimeout(function() {\r\t\t$('.tutorialArrow').fadeOut('fast');\r\t\t}, 20000); // <-- time in milliseconds\r</script>\r\r\t<!-- fomo\t-->\r\t<!-- NOTE: Displays the current pot size in ETH as well as time left in current round -->\r\t<div class=\"blurryboy\" if={!$this.gracePeriod}></div>\r\t<div class=\"blurryboydark\" if={$this.gracePeriod}></div>\r\r\t<div class=\"jumbotron rounded-0 text-center text-light teaser-cover\" if={!$this.roundHasPassed}>\r\t\t<!--\r\t\t<div class=\"grid-container\" if={!$this.gracePeriod}>\r\t\t\t<div id=\"hdgraphics\" class=\"grid-top\"></div>\r\t\t</div> -->\r\t\t<div class=\"container\">\r\t\t\t<h4 class=\"display-4 scammed\" style=\"font-style: italic;\" if={!$this.playerIsLeader && JUST.Cache.currentRound[8] && JUST.Cache.currentRound[8] !=  \"0x0000000000000000000000000000000000000000000000000000000000000000\"}>\r\t\t\t{JUST.Bridges.Browser.web3.utils.toAscii(JUST.Cache.currentRound[8])} 又梭哈了</h4>\r\t\t\t<h4 class=\"display-4 scammed\" style=\"font-style: italic;\" if={!$this.playerIsLeader && JUST.Cache.currentRound[8] && JUST.Cache.currentRound[8] ==  \"0x0000000000000000000000000000000000000000000000000000000000000000\"}>\r\t\t\t已经有人比你先梭哈了</h4>\r\t\t\t<h1 class=\"display-1 scammed\" if={!$this.playerIsLeader && !$this.gracePeriod}>目前超级奖池为</h1>\r\t\t\t<h1 class=\"display-1 scammed\" if={$this.playerIsLeader && !$this.gracePeriod}>恭喜你暂时领先了</h1>\r\t\t\t<h1 class=\"display-1 scammed\" if={!$this.playerIsLeader && $this.gracePeriod}>新的一轮游戏尚未开始</h1>\r\t\t\t<h1 class=\"display-1 scammed\" if={$this.playerIsLeader && $this.gracePeriod}>你开启了游戏</h1>\r\t\t\t<h2 class=\"display-3\" if={$this.gracePeriod}><span class=\"ethglitch titleglow\">{BN(JUST.Cache.currentRound[0]).plus(JUST.Cache.currentRound[5]).div(1e18).toFixed(4)} <i class=\"fab fa-ethereum ethglow\"></i></span></h2>\r\t\t\t<h2 class=\"display-3\" if={!$this.gracePeriod}><span class=\"ethglitch titleglow\">{BN(JUST.Cache.currentRound[0]).plus(JUST.Cache.currentRound[5]).div(1e18).toFixed(4)} <i class=\"fab fa-ethereum ethglow\"></i></span> <span class=\"headtimer\">--</span></h2>\r\t\t \t<h3 if={$this.gracePeriod} class=\"display-5\" style=\"margin-top:50px;\">新的一轮游戏<span class=\"headtimer\" style=\"display:inline;font-size:inherit;\">--</span></h3>\r\r\t\t\t<h5 class=\"display-5\" if={$this.playerIsLeader  && !$this.gracePeriod}>如果没有人买钥匙，你就可以卷走所有奖金！</h5>\r\t\t  \t<h4 if={$this.gracePeriod} class=\"lead\">等待阶段: 一个小时后新一轮游戏开始. 现在发送ETH将会被拒绝; 等待回合开始可以买到<a class=\"titlepopoutrightmini\">最便宜的</a>钥匙</b> </h4>\r\r\t\t\t\r\t\t\t\t<!-- Button Handling for Buy 1x More;  -->\r\t\t\t\t<!-- This button appears when the player in the lead has a vanity name  -->\r\t\t\t\t<a href=\"javascript:void(0)\" if={!$this.playerIsLeader && !$this.gracePeriod && JUST.Cache.currentRound[8] !=  \"0x0000000000000000000000000000000000000000000000000000000000000000\"} class=\"buyOneTicket btn btn-lg btn-block btn-gold pulse marginb\">\r\t\t\t\t\t<div class=row>\r\t\t\t\t\t\t<div class=\"col-sm-1.5 no-mobile\" style=\"padding-left: 10px\">\r\t\t\t\t\t\t 1x <i class=\"fas fa-key\"></i>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<div class=col-sm-11>\r\t\t\t\t\t\t<span style=\"margin-right: 1rem;margin-left: -1rem\" class=\"only-mobile mobile-text\">1x <i class=\"fas fa-key\"></i></span>\r\t\t\t\t\t\t立即梭哈\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t</a>\r\t\t\t\t\r\t\t\t\t<!-- This button appears when the player in the lead does not have a vanity name  -->\r\t\t\t\t<a href=\"javascript:void(0)\" if={!$this.playerIsLeader && !$this.gracePeriod && JUST.Cache.currentRound[8] ==  \"0x0000000000000000000000000000000000000000000000000000000000000000\"} class=\"buyOneTicket btn btn-lg btn-block btn-gold pulse marginb\">\r\t\t\t\t<div class=row>\r\t\t\t\t\t<div class=\"col-sm-1.5 no-mobile\" style=\"padding-left: 10px\">\r\t\t\t\t\t 1x <i class=\"fas fa-key\"></i>\r\t\t\t\t\t</div>\r\t\t\t\t\t<div class=col-sm-11>\r\t\t\t\t\t<span style=\"margin-right: 1rem;margin-left: -1rem\" class=\"only-mobile mobile-text\">1x <i class=\"fas fa-key\"></i></span>\r\t\t\t\t\t立即梭哈\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t\t</a>\r\t\t\t\t\r\t\t</div>\r\t\t<!--\r\t\t<div class=\"grid-container\">\r\t\t\t<div class=\"grid-bottom\"></div>\t\r\t\t</div>\r\t\t-->\r\t</div>\r\t\r\t\r\t<!-- So and So has EXIT SCAMMED -->\r\t<div class=\"jumbotron rounded-0 text-center text-light teaser-cover marginb\" if={$this.roundHasPassed}>\r\t<div class=\"container\">\r\t\r\t\r\t<!-- Grouped up into elements w/ conditionals per winner or not winning case -->\r\t\t<h1 class=\"display-1 scammed\" if={$this.playerIsLeader}>你卷走了超级大奖</h1>\r\t\t<h1 class=\"display-1 scammed\" if={!$this.playerIsLeader}>上一局游戏结束</h1>\r\t\t\r\t\t\r\t\t<!-- Eth Amount -->\r\t\t<h2 class=\"display-3\"><span class=\"ethglitch titleglow\">{BN(JUST.Cache.currentRound[5]).div(1e18).toFixed(4)} <i class=\"fab fa-ethereum ethglow\"></i></span> <span class=\"headtimer\" if={!$this.playerIsLeader}>被<a href=\"javascript:void(0)\">{(JUST.Cache.currentRound[8] && JUST.Cache.currentRound[8] !=  \"0x0000000000000000000000000000000000000000000000000000000000000000\" ? JUST.Bridges.Browser.web3.utils.toAscii(JUST.Cache.currentRound[8]) : JUST.Cache.currentRound[7].substr(0, 10).concat(\"...\"))}</a>卷走！</span></h2>\r\t\r\t\t<!-- Custom RNG winner text -->\r\t\t<h6 class=\"display-5 scammed\" if={!$this.gracePeriod && $this.playerIsLeader}>你卷走了一半奖池，剩余奖池团队共享</h6>\r\t\t<h6 class=\"display-5 scammed\" if={$this.gracePeriod && $this.playerIsLeader}>你将卷走一半奖池，剩余奖池团队共享/h6>\r\t\t<h6 class=\"display-5 scammed titlepopoutrightmini\" if={$this.playerIsLeader}><i>再次梭哈</i></h6>\r\t  \r\t\t<div style=\"position: relative;\">\r\t\t  \t<h3 class=\"display-5\" style=\"margin-top:50px;\">购买至少一个钥匙来开启新一轮游戏</h3>\r\t\t  \r\t\t \t<!-- This button appears when an exit scam has finished, and a new ICO phase needs to start -->\r\t\t\t<a href=\"javascript:void(0)\" class=\" buyOneTicket btn btn-lg btn-block btn-gold pulse marginb\">\r\t\t\t\t<div class=row>\r\t\t\t\t\t<div class=col-sm-1.5 style=\"padding-left: 10px\">\r\t\t\t\t\t 1x <i class=\"fas fa-key\"></i>\r\t\t\t\t\t</div>\r\t\t\t\t\t<div class=col-sm-11>\r\t\t\t\t\t立即梭哈\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t</a>\r\t\t</div>\r\t  </div>\r\t</div>\r\t</div>\r\t<!-- /fomo -->\r\t<div class=\"container\" style=\"margin-top:-1rem;\">\r\t\t<div class=\"row cta-ticket\" style=\"margin-top:-5rem;\">\r\t\t\t<div class=\"col\">\r\t\t\t\t<div class=\"alert alert-gold pulse text-center text-light\" role=\"alert\">购买钥匙开启新一轮游戏</div>\r\t\t\t</div>\r\t\t</div>\r\t\t<div class=\"row\" if={$this.gracePeriod}>\r\t\t\t<div class=\"col-md-3 no-mobile\">\r\t\t\t\t\r\t\t\t</div>\r\t\t\t<!-- biddings & vault -->\r\t\t\t<div class=\"col-sm\">\r\r\t\t\t\t<ul class=\"nav nav-tabs tabs-border-adjust\" id=\"buyTabs\" role=\"tablist\">\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link active\" id=\"purchaseTab\" data-toggle=\"tab\" href=\"#purchaseArea\" role=\"tab\" aria-controls=\"purchaseArea\" aria-selected=\"true\">购买</a>\r\t\t\t\t  </li>\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link\" id=\"vaultTab\" data-toggle=\"tab\" href=\"#vaultArea\" role=\"tab\" aria-controls=\"vaultArea\" aria-selected=\"false\">金库</a>\r\t\t\t\t  </li>\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link\" id=\"refTab\" data-toggle=\"tab\" href=\"#refArea\" role=\"tab\" aria-controls=\"refArea\" aria-selected=\"false\">推荐奖励</a>\r\t\t\t\t  </li>\r\t\t\t\t</ul>\r\t\t\t\t<div class=\"tab-content\" id=\"buyArea\">\r\t\t\t\t<!-- biddings -->\r\t\t\t\t<div class=\"tab-pane fade show active\" id=\"purchaseArea\" role=\"tabpanel\" aria-labelledby=\"purchaseArea\">\r\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">新一轮游戏</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<!-- ICO Purchase -->\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t<div class=\"col text-center\">\r\t\t\t\t\t\t\t\t<p class=\"small\">你想要更多人来梭哈，对吗？</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t<div id=\"purchase\" class=\"tab-pane fade show active\" role=\"tabpanel\">\r\t\t\t\t\t\t\t<div class=\"row\" id=\"purchase\">\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<div class=\"input-group mb-3\">\r\t\t\t\t\t\t\t\t  <div class=\"input-group-prepend\">\r\t\t\t\t\t\t\t\t\t<span class=\"input-group-text\">\r\t\t\t\t\t\t\t\t\t  <i class=\"fab fa-ethereum\"></i>\r\t\t\t\t\t\t\t\t\t</span>\r\t\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t\t  <input type=\"text\" id=\"ethToSpend\" class=\"form-control text-center\" value=\"0.01 ETH\">\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" style=\"position: relative;\">\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<button type=\"button\" id=\"ethSpend\" class=\"btn btn-block btn-gold btn-lg ticketProcess\"><i class=\"fab fa-ethereum\"></i> 发送 ETH</button>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<button type=\"button\" id=\"ethReinvest\" class=\"btn btn-block btn-outline-gold btn-lg ticketProcess\"><i class=\"fas fa-piggy-bank\"></i> 使用金库</button>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">选择一個团队</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\t\t\t\r\t\t\t\t\t\t<div class=\"row marginb distribution\">\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"2\" id=\"teamsnek\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/tsnek.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>蛇</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p>涓涓细流</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<div>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">++ 更多红利</p>\r\t\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"0\" id=\"teamwhale\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/twhale.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>鲸</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p> 以他人的贪婪为食</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">++ 更多ETH进入奖池</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"3\" id=\"teambull\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/tbull.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>牛</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p>向上突破，永不停滞。</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">+ 均衡分配</p>\r\t\t\t\t\t\t\t\t\t\t\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"1\" id=\"teambear\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/tbear.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>熊</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p>独自站立，独自战斗。</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">++ 最大化的ETH进入当前游戏</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t\t<div class=\"chart\"></div>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\t\t\t\t\t\t\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t\t<!-- /biddings -->\t\r\t\t\t\t<!-- vault -->\r\t\t\t\t<div class=\"tab-pane fade\" id=\"vaultArea\" role=\"tabpanel\" aria-labelledby=\"vaultArea\">\r\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t<p class=\"lead nomarginb\">金库</p>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust teamscore\">\r\t\t\t\t\t\t<!--  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">赢得奖池(未使用)</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[0]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div> -->\r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">钥匙分红</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[0]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">推荐佣金</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t  <hr>\r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">暂时总收入</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right glow\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[0]).plus(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t  <p class=\"text-right\">&#8793; {BN(JUST.Cache.currentPlayer.Vaults[0]).plus(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).multipliedBy(JUST.Cache.fiatRatios.USD).toFixed(5)} USDT</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<p class=\"text-right nomarginb\"><button href=\"\" class=\"btn btn-outline-gold btn-block\" id=\"withdrawEarnings\"><i class=\"fas fa-hand-holding-heart\"></i>提现</button></p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t\t<!-- /vault -->\r\r\t\t\t\t<!-- vanity -->\r\t\t\t\t<div class=\"tab-pane fade\" id=\"refArea\" role=\"tabpanel\" aria-labelledby=\"refArea\">\r\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t<p class=\"lead nomarginb\">让更多人参与梭哈</p>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust teamscore\">\r\t\t\t\t\t\t\t<div class=\"row\" if={!$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<p>购买一个代号来生成推广链接，并直接分享高达20%的佣金</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" if={!$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<button href=\"\" class=\"btn btn-gold btn-block buyceo\"><i class=\"fas fa-check\"></i>注册一个专属的推广代号</button>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t<div class=\"row\" if={$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<p class=\"font-weight-light\">通过你的邀请链接进入的用户，每次购买钥匙花费的ETH，你将获得其中的20%作为奖励。</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" if={$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col text-center\">\r\t\t\t\t\t\t\t\t\t<p>\r\t\t\t\t\t\t\t\t\t\t<span>链接1</span><br>\r\t\t\t\t\t\t\t\t\t\t<span class=\"small\" id=\"ceolink\">{$this.myLink}</span><br>\r\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-outline-gold\" id=\"copyCeoLink\" data-clipboard-target=\"#ceolink\"}>\r\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-paste\"></i> 复制</button>\r\t\t\t\t\t\t\t\t\t</p>\r\t\t\t\t\t\t\t\t\t<p>\r\t\t\t\t\t\t\t\t\t\t<span>链接2</span><br>\r\t\t\t\t\t\t\t\t\t\t<span class=\"small\" id=\"ceolinkid\">2{$this.myLinkid}</span><br>\r\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-outline-gold\" id=\"copyCeoLink\" data-clipboard-target=\"#ceolinkid\"}>\r\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-paste\"></i> 复制</button>\r\r\t\t\t\t\t\t\t\t\t</p>\r\t\t\t\t\t\t\t\t\t<p>\r\t\t\t\t\t\t\t\t\t\t<span>链接3</span><br>\r\t\t\t\t\t\t\t\t\t\t<span class=\"small\" id=\"ceolinkvanity\">{$this.myLinkName}</span><br>\r\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-outline-gold\" id=\"copyCeoLink\" data-clipboard-target=\"#ceolinkvanity\"}>\r\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-paste\"></i> 复制</button>\r\t\t\t\t\t\t\t\t\t</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" if={$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<button href=\"\" class=\"btn btn-outline-gold btn-block buyceo\"><i class=\"fas fa-check\"></i>换一个新用户名</button>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t</div>\r\t\t</div>\r\t\t\t<!-- /vanity -->\r\t\t<div class=\"col-md-3 no-mobile\">\r\t\t\t\t\r\t\t</div>\t\r\t\t</div>\r\t\t<div class=\"row\" if={!$this.gracePeriod}>\r\t\t\t<!-- biddings & vault -->\r\t\t\t<div class=\"col-sm\">\r\r\t\t\t\t<ul class=\"nav nav-tabs tabs-border-adjust\" id=\"buyTabs\" role=\"tablist\">\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link active\" id=\"purchaseTab\" data-toggle=\"tab\" href=\"#purchaseArea\" role=\"tab\" aria-controls=\"purchaseArea\" aria-selected=\"true\">购买</a>\r\t\t\t\t  </li>\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link\" id=\"vaultTab\" data-toggle=\"tab\" href=\"#vaultArea\" role=\"tab\" aria-controls=\"vaultArea\" aria-selected=\"false\">金库</a>\r\t\t\t\t  </li>\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link\" id=\"refTab\" data-toggle=\"tab\" href=\"#refArea\" role=\"tab\" aria-controls=\"refArea\" aria-selected=\"false\">推荐奖励</a>\r\t\t\t\t  </li>\r\t\t\t\t</ul>\r\t\t\t\t<div class=\"tab-content\" id=\"buyArea\">\r\t\t\t\t<!-- biddings -->\r\t\t\t\t<div class=\"tab-pane fade show active\" id=\"purchaseArea\" role=\"tabpanel\" aria-labelledby=\"purchaseArea\">\r\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col\" if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">钥匙</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\" if={$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">新一轮游戏</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t<div id=\"purchase\" class=\"tab-pane fade show active\" role=\"tabpanel\">\r\t\t\t\t\t\t\t\t<p class=\"font-weight-light small\" if={!$this.roundHasPassed} id =\"airdrop_chance\">购买0.1 ETH或更多，有 {JUST.Cache.airdropTracker}% 的机会立即获得{JUST.Cache.airdropPot} ETH空投彩票！</p>\r\t\t\t\t\t\t\t<p class=\"text-center\" if={$this.roundHasPassed}> 至少支付0.01 ETH来开启一轮游戏</p>\r\t\t\t\t\t\t\t<div class=\"row\" id=\"purchase\" if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<div class=\"input-group mb-3\">\r\t\t\t\t\t\t\t\t  <div class=\"input-group-prepend\">\r\t\t\t\t\t\t\t\t\t<span class=\"input-group-text\">\r\t\t\t\t\t\t\t\t\t  <i class=\"fas fa-key\"></i>\r\t\t\t\t\t\t\t\t\t</span>\r\t\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t\t  <input type=\"text\" id=\"tixToBuy\" class=\"form-control text-center\" value=\"1\">\r\t\t\t\t\t\t\t\t  <div class=\"input-group-append\">\r\t\t\t\t\t\t\t\t\t<span class=\"input-group-text\" id=\"tixQuotation\">\r\t\t\t\t\t\t\t\t\t  @ {BN(JUST.Cache.currentRound[3]).div(1e18).toFixed(8)} ETH\r\t\t\t\t\t\t\t\t\t</span>\r\t\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" if={$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<div id=\"purchase\" class=\"tab-pane fade show active\" role=\"tabpanel\">\r\t\t\t\t\t\t\t\t\t\t<div class=\"row\" id=\"purchase\">\r\t\t\t\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t\t\t\t<div class=\"input-group mb-3\">\r\t\t\t\t\t\t\t\t\t\t\t  <div class=\"input-group-prepend\">\r\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"input-group-text\">\r\t\t\t\t\t\t\t\t\t\t\t\t  <i class=\"fab fa-ethereum\"></i>\r\t\t\t\t\t\t\t\t\t\t\t\t</span>\r\t\t\t\t\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t\t\t\t\t  <input type=\"text\" id=\"ethToSpend\" class=\"form-control text-center\" value=\"0.01 ETH\">\r\t\t\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row marginb\" if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<div class=\"btn-group d-flex\" role=\"group\">\r\t\t\t\t\t\t\t\t  <button id=\"addOne\" class=\"btn btn-outline-yel w-100 increment\">+ 1 钥匙</button>\r\t\t\t\t\t\t\t\t  <button id=\"addTwo\" class=\"btn btn-outline-yel w-100 increment\">+ 2 钥匙</button>\r\t\t\t\t\t\t\t\t  <button id=\"addFive\" class=\"btn btn-outline-yel w-40 increment\">+ 5</button>\r\t\t\t\t\t\t\t\t  <button id=\"addTen\" class=\"btn btn-outline-yel w-30 increment\">+ 10</button>\r\t\t\t\t\t\t\t\t  <button id=\"addHundred\" class=\"btn btn-outline-yel w-30 increment\">+ 100</button>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" style=\"position: relative;\"  if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<button type=\"button\" id=\"tixBuy\" class=\"btn btn-block btn-gold btn-lg ticketProcess\"><i class=\"fab fa-ethereum\"></i> 发送 ETH</button>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<button type=\"button\" id=\"tixReinvest\" class=\"btn btn-block btn-outline-gold btn-lg ticketProcess\"><i class=\"fas fa-piggy-bank\"></i> 使用金库</button>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" style=\"position: relative;\"  if={$this.roundHasPassed}>\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<button type=\"button\" id=\"ethSpend\" class=\"btn btn-block btn-gold btn-lg ticketProcess\"><i class=\"fab fa-ethereum\"></i> 发送 ETH</button>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<button type=\"button\" id=\"ethReinvest\" class=\"btn btn-block btn-outline-gold btn-lg ticketProcess\"><i class=\"fas fa-piggy-bank\"></i> 使用金库</button>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<p class=\"small text-center\" if={!$this.gracePeriod}>发送ETH，或使用您的金库中的收入！</p>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<!-- Team Selector -->\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">选择一个团队</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\t\t\t\r\t\t\t\t\t\t<div class=\"row marginb distribution\">\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"2\" id=\"teamsnek\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/tsnek.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>蛇</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p>涓涓细流</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<div>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">++ 更多红利</p>\r\t\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"0\" id=\"teamwhale\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/twhale.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>鲸</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p> 以他人的贪婪为食</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">++ 更多ETH进入奖池</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"3\" id=\"teambull\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/tbull.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>牛</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p>向上突破，永不停滞。</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">+ 均衡分配</p>\r\t\t\t\t\t\t\t\t\t\t\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col-3 team\">\r\t\t\t\t\t\t\t\t\t\t<label class=\"teamselector\">\r\t\t\t\t\t\t\t\t\t\t\t<input class=\"form-check-input form-radio teamsave\" type=\"radio\" autocomplete=\"off\" name=\"teamselect\" value=\"1\" id=\"teambear\">\r\t\t\t\t\t\t\t\t\t\t\t<img src=\"/img/tbear.png\" alt=\"\">\r\t\t\t\t\t\t\t\t\t\t\t<h5>熊</h5>\r\t\t\t\t\t\t\t\t\t\t\t<p>独自站立，独自战斗。</p>\r\t\t\t\t\t\t\t\t\t\t</label>\r\t\t\t\t\t\t\t\t\t\t<p style=\"color:#2ecc71\">++ 最大化的ETH进入当前游戏</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t\t<div class=\"chart\"></div>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<!-- /Team Selector -->\t\t\t\t\t\t\t\t\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t\t<!-- /biddings -->\t\r\t\t\t\t<!-- vault -->\r\t\t\t\t<div class=\"tab-pane fade\" id=\"vaultArea\" role=\"tabpanel\" aria-labelledby=\"vaultArea\">\r\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t<p class=\"lead nomarginb\">金库</p>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust teamscore\">\r\t\t\t\t\t\t<!--  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">赢得奖池(未使用)</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[0]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div> -->\r\t\t\t\t\t\t  \r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">锁定部分</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t<!--\r\t\t\t\t\t\t\t  <p class=\"h6 text-right\" style=\"font-size: .9rem\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn) ? ((BN(JUST.Cache.currentPlayer.Round[2]).div(1e18).toFixed(1) : BN(0).toFixed(4)).div(BN(JUST.Cache.currentRound[2]).div(1e18).toFixed(0))).mul((BN(JUST.Cache.currentRound[5]).div(1e18).toFixed(4).div(100)).mul(30))}</p>\r\t\t\t\t\t\t\t  -->\r\t\t\t\t\t\t\t  <p class=\"h3 text-right\" label=poteth>{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn) ? (((BN(JUST.Cache.currentRound[5]).div(100).multipliedBy(30)).div(BN(JUST.Cache.currentRound[2]))).multipliedBy(BN(JUST.Cache.currentPlayer.Round[2])).div(1e18).toFixed(4)) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">钥匙分红</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[0]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t  \r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">推荐奖励</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t  \r\t\t\t\t\t\t  <hr>\r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t  <p class=\"lead\">暂时总收入</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t  <p class=\"h3 text-right glow\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Vaults) ? BN(JUST.Cache.currentPlayer.Vaults[0]).plus(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).toFixed(4) : BN(0).toFixed(4)} ETH</p>\r\t\t\t\t\t\t\t  <p class=\"text-right\">&#8793; {BN(JUST.Cache.currentPlayer.Vaults[0]).plus(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).multipliedBy(JUST.Cache.fiatRatios.USD).toFixed(5)} USDT</p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r  \r\t\t\t\t\t\t  <div class=\"row\">\r\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<p class=\"text-right nomarginb\"><button href=\"\" class=\"btn btn-outline-gold btn-block\" id=\"withdrawEarnings\"><i class=\"fas fa-hand-holding-heart\"></i>提现</button></p>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t\t<!-- /vault -->\r\r\t\t\t\t<!-- vanity -->\r\t\t\t\t<div class=\"tab-pane fade\" id=\"refArea\" role=\"tabpanel\" aria-labelledby=\"refArea\">\r\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t<p class=\"lead nomarginb\">让更多人参与梭哈</p>\r\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust teamscore\">\r\t\t\t\t\t\t\t<div class=\"row\" if={!$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t<p>购买一个代号来生成推广链接，并直接分享高达20%的佣金</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" if={!$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<button href=\"\" class=\"btn btn-gold btn-block buyceo\"><i class=\"fas fa-check\"></i>注册一个专属的推广代号</button>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t<div class=\"row\" if={$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<p class=\"font-weight-light\">通过你的邀请链接进入的用户，每次购买钥匙花费的ETH，你将获得其中的20%作为奖励。</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" if={$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col text-center\">\r\t\t\t\t\t\t\t\t\t<p>\r\t\t\t\t\t\t\t\t\t\t<span>链接1</span><br>\r\t\t\t\t\t\t\t\t\t\t<span class=\"small\" id=\"ceolink\">{$this.myLink}</span><br>\r\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-outline-gold\" id=\"copyCeoLink\" data-clipboard-target=\"#ceolink\"}>\r\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-paste\"></i> 复制</button>\r\t\t\t\t\t\t\t\t\t</p>\r\t\t\t\t\t\t\t\t\t<p>\r\t\t\t\t\t\t\t\t\t\t<span>链接2</span><br>\r\t\t\t\t\t\t\t\t\t\t<span class=\"small\" id=\"ceolinkid\">{$this.myLinkid}</span><br>\r\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-outline-gold\" id=\"copyCeoLink\" data-clipboard-target=\"#ceolinkid\"}>\r\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-paste\"></i> 复制</button>\r\r\t\t\t\t\t\t\t\t\t</p>\r\t\t\t\t\t\t\t\t\t<p>\r\t\t\t\t\t\t\t\t\t\t<span>链接3</span><br>\r\t\t\t\t\t\t\t\t\t\t<span class=\"small\" id=\"ceolinkvanity\">{$this.myLinkName}</span><br>\r\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-outline-gold\" id=\"copyCeoLink\" data-clipboard-target=\"#ceolinkvanity\"}>\r\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-paste\"></i> 复制</button>\r\t\t\t\t\t\t\t\t\t</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\" if={$this.isCEO}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<button href=\"\" class=\"btn btn-outline-gold btn-block buyceo\"><i class=\"fas fa-check\"></i> 换一个新用户名</button>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t\t<!-- /vanity -->\r\t\t\t\t</div>\t\t\r\t\t\t</div>\r\r\t\t\t<!-- stat tabs -->\r\t\t\t<div class=\"col-sm\">\r\t\t\t\t<!-- tabs -->\r\t\t\t\t<ul class=\"nav nav-tabs tabs-border-adjust\" id=\"statTabs\" role=\"tablist\">\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link active\" id=\"potTab\" data-toggle=\"tab\" href=\"#potArea\" role=\"tab\" aria-controls=\"potArea\" aria-selected=\"true\">回合</a>\r\t\t\t\t  </li>\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link\" id=\"teamTab\" data-toggle=\"tab\" href=\"#teamArea\" role=\"tab\" aria-controls=\"teamArea\" aria-selected=\"false\">团队</a>\r\t\t\t\t  </li>\r\t\t\t\t  <li class=\"nav-item tab-item\">\r\t\t\t\t\t<a class=\"nav-link tab-link\" id=\"statsTab\" data-toggle=\"tab\" href=\"#statsArea\" role=\"tab\" aria-controls=\"statsArea\" aria-selected=\"false\">统计</a>\r\t\t\t\t  </li>\r\t\t\t\t</ul>\r\r\t\t\t\t<!-- tabbable areas -->\r\t\t\t\t<div class=\"tab-content\" id=\"statArea\">\r\t\t\t\t\t<!-- current pot -->\r\t\t\t\t\t<div class=\"tab-pane fade show active\" id=\"potArea\" role=\"tabpanel\" aria-labelledby=\"potArea\">\r\r\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">回合 #{JUST.Cache.currentRound[1]}</p>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t\t<div class=\"row nomarginb margin-top\" if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<!-- NOTE: Time limit counter -->\r\t\t\t\t\t\t\t\t\t<p class=\"h2 text-center\" if={this.playerIsLeader}>你有机会获得超级大奖了<br><span class=\"glow boxtimer\"></span></p>\r\t\t\t\t\t\t\t\t\t<p class=\"h2 text-center\" if={!this.playerIsLeader}>距离游戏结束还有<br><span class=\"glow boxtimer\"></span></p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row nomarginb margin-top\" if={$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t<div class=\"col\" style=\"position: relative;\">\r\t\t\t\t\t\t\t\t\t<!-- NOTE: Time limit counter -->\r\t\t\t\t\t\t\t\t\t<p class=\"h6 text-center\">奖池中有这么多ETH，<a class=\"titlepopoutrightmini\">你</a> 还在等什么？</p>\r\t\t\t\t\t\t\t\t\t  <a style=\"margin-bottom:40px;\" href=\"javascript:void(0)\" class=\"buyOneTicket btn btn-lg btn-block btn-gold pulse\"> 梭哈一个钥匙 <i class=\"fas fa-key\"></i> 赢走亿万财富</a>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row marginb\" if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<div class=\"progress\">\r\t\t\t\t\t\t\t\t\t\t<div class=\"progress-bar boxglow\" role=\"progressbar\" style=\"width: 0%;\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust teamscore\">\r\t\t\t\t\t\t\t\t<div class=\"row nomarginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"h4\" if={!$this.roundHasPassed}>超级奖池</p>\r\t\t\t\t\t\t\t\t\t\t<p class=\"h4\" if={$this.roundHasPassed}>总奖池</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t\t<!-- NOTE: Display of current pot size as well as converted USDT value -->\r\t\t\t\t\t\t\t\t\t\t<p class=\"h2 text-right glow ethglitch\" if={!$this.roundHasPassed}>{BN(JUST.Cache.currentRound[5]).div(1e18).toFormat(2)} <i class=\"fab fa-ethereum ethglow\"></i></p>\r\t\t\t\t\t\t\t\t\t\t<p class=\"h2 text-right glow ethglitch\" if={$this.roundHasPassed}>{BN(JUST.Cache.currentRound[5]).div(1e19).toFormat(5)} <i class=\"fab fa-ethereum ethglow\"></i></p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col text-right\"  if={!$this.roundHasPassed}>&#8793; {BN(JUST.Cache.currentRound[5]).div(1e18).multipliedBy(JUST.Cache.fiatRatios.USD).toFormat(5)} USDT</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col text-right\"  if={$this.roundHasPassed}>&#8793; {BN(JUST.Cache.currentRound[5]).div(1e19).multipliedBy(JUST.Cache.fiatRatios.USD).toFormat(5)} USDT</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row nomarginb\"  if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t\t\t  <p class=\"h4\">你的钥匙</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t  <p class=\"h2 text-right glow ethglitch\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn) ? BN(JUST.Cache.currentPlayer.Round[2]).div(1e18).toFormat(1) : BN(0).toFormat(4)} <i class=\"fas fa-key\"></i></p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t  \t<div class=\"row marginb\" if={!$this.roundHasPassed}>\r\t\t\t\t\t\t\t\t\t<div class=\"col text-right\">总共 {BN(JUST.Cache.currentRound[2]).div(1e18).toFormat(0)} Keys</div>\r\t\t\t\t\t\t\t  \t</div>\r\t\t\t\t\t\t\t  \t<div class=\"row nomarginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t\t\t  <p class=\"h4\">你的收入</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t  <p class=\"h2 text-right glow ethglitch\">{(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn) ? BN(JUST.Cache.currentPlayer.Vaults[0]).plus(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).toFormat(4) : BN(0).toFormat(5)} <i class=\"fab fa-ethereum\"></i></p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col text-right\">\r\t\t\t\t\t\t\t\t\t\t&#8793; {BN(JUST.Cache.currentPlayer.Vaults[0]).plus(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[2]).div(1e18).multipliedBy(JUST.Cache.fiatRatios.USD).toFormat(5)} USDT\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t  \t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t\t<!-- /current pot -->\r\t\t\t\t\t\r\t\t\t\t\t<!-- teams -->\r\t\t\t\t\t<div class=\"tab-pane fade\" id=\"teamArea\" role=\"tabpanel\" aria-labelledby=\"teamArea\">\r\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t  \t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">团队</p>\r\t\t\t\t  \t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-center teamscore\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"lead\">鲸</p>\r\t\t\t\t\t\t\t\t\t\t<img src=\"../img/twhale.png\" width=\"25%\"</img>\r\t\t\t\t\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t\t\t\t\t<p class=\"glow-yel\">{BN(JUST.Cache.currentRound[9]).div(1e18).toFormat(4)} ETH</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-center\tteamscore\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"lead\">熊</p>\r\t\t\t\t\t\t\t\t\t\t<img src=\"../img/tbear.png\" width=\"25%\"</img>\r\t\t\t\t\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t\t\t\t\t<p class=\"glow-yel\">{BN(JUST.Cache.currentRound[10]).div(1e18).toFormat(4)} ETH</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-center\tteamscore\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"lead\">牛</p>\r\t\t\t\t\t\t\t\t\t\t<img src=\"../img/tbull.png\" width=\"25%\"</img>\r\t\t\t\t\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t\t\t\t\t<p class=\"glow-yel\">{BN(JUST.Cache.currentRound[12]).div(1e18).toFormat(4)} ETH </p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-center\tteamscore\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"lead\">蛇</p>\r\t\t\t\t\t\t\t\t\t\t<img src=\"../img/tsnek.png\" width=\"25%\"</img>\r\t\t\t\t\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t\t\t\t\t<p class=\"glow-yel\">{BN(JUST.Cache.currentRound[11]).div(1e18).toFormat(4)} ETH </p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\t\r\t\t\t\t\t<!-- /teams -->\r\t\t\t\t\t\r\t\t\t\t\t\r\t\t\t\t\t<!-- Stats page -->\r\t\t\t\t\t<!-- Stats page -->\r\t\t\t\t\t\r\t\t\t\t\t<div class=\"tab-pane fade\" id=\"statsArea\" role=\"tabpanel\" aria-labelledby=\"statsArea\">\r\r\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust text-light bg-dark jumboshade tab-rounded\">\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t  <div class=\"col\">\r\t\t\t\t\t\t\t\t<p class=\"lead nomarginb\">回合统计 #{JUST.Cache.currentRound[1]} (当前)</p>\r\t\t\t\t\t\t\t  </div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<hr>\r\t\t\t\t\t\t\t<div class=\"jumbotron jumbotron-adjust teamscore\">\r\t\t\t\t\t\t\t\r\t\t\t\t\t\t\t\t<div class=\"row nomarginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"h4\" >梭哈总额</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"h2 text-right glow ethglitch\">{((BN(JUST.Cache.currentRound[9])).plus(BN(JUST.Cache.currentRound[10])).plus(BN(JUST.Cache.currentRound[11])).plus(BN(JUST.Cache.currentRound[12]))).div(1e18).toFormat(3)} <i class=\"fab fa-ethereum ethglow\"></i></p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col text-right\">&#8793; {(((BN(JUST.Cache.currentRound[9])).plus(BN(JUST.Cache.currentRound[10])).plus(BN(JUST.Cache.currentRound[11])).plus(BN(JUST.Cache.currentRound[12])))).div(1e18).multipliedBy(JUST.Cache.fiatRatios.USD).toFormat(2)} USDT</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\r\t\t\t\t\t\t\t\t<div class=\"row nomarginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"h4\" >分配总额</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"h2 text-right glow ethglitch\">{((BN(JUST.Cache.currentRound[9])).plus(BN(JUST.Cache.currentRound[10])).plus(BN(JUST.Cache.currentRound[11])).plus(BN(JUST.Cache.currentRound[12])).minus(BN(JUST.Cache.currentRound[5]))).div(1e18).toFormat(3)} <i class=\"fab fa-ethereum ethglow\"></i></p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col text-right\">&#8793;{((BN(JUST.Cache.currentRound[9])).plus(BN(JUST.Cache.currentRound[10])).plus(BN(JUST.Cache.currentRound[11])).plus(BN(JUST.Cache.currentRound[12])).minus(BN(JUST.Cache.currentRound[5]))).multipliedBy(JUST.Cache.fiatRatios.USD).div(1e18).toFormat(2)} USDT </div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\r\t\t\t\t\t\t\t\t\r\t\t\t\t\t\t\t\t<div class=\"row nomarginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"h4\" >购买时间</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t\t<p class=\"h2 text-right glow ethglitch\">{((BN(JUST.Cache.currentRound[2])).div(1e18).multipliedBy(30000)).div(31536000000).toFixed(2)} 年</p>\r\t\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t\t<div class=\"row marginb\">\r\t\t\t\t\t\t\t\t\t<div class=\"col text-right\"> {((BN(JUST.Cache.currentRound[2])).div(1e18).multipliedBy(30)).toFormat(0)} 秒</div>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t\t\r\t\t\t\t\t\r\t\t\t\t\t\r\r\t\t\t\t</div>\r\t\t\t\t<!-- /tabbable area -->\r\t\t\t</div>\r\t\t\t<!-- /stat tabs -->\r\r\t\t</div>\r\t\t</div>\r\t</div>\r\t<!-- modal popup -->\r\t<div class=\"modal fade\" id=\"gameover\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"gameoverTitle\" aria-hidden=\"true\">\r\t\t<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\t\t\t<div class=\"modal-content bg-dark text-light\">\r\t\t\t\t<div class=\"modal-header\">\r\t\t\t\t\t<h5 class=\"modal-title\" id=\"gameoverTitle\">Modal Title</h5>\r\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\r\t\t\t\t\t</button>\r\t\t\t\t</div>\r\t\t\t\t<div class=\"modal-body\">\r\t\t\t\t\tModal Content\r\t\t\t\t</div>\r\t\t\t</div>\r\t\t</div>\r\t</div>\r\t<!-- /modal popup -->\r\t<!-- airdrop custom modal popup \r\tcleanup\r\t<div class=\"container\" id=\"airdrop\" style=\"z-index: 999;\">\r\t\t<div class=\"row\">\r\t\t\t<div class=\"col-6\" style=\"position: fixed; bottom:0; left:25%;\">\r\t\t\t\t<div class=\"jumbotron jumbotron-adjust jumboshade bg-dark text-light\">\r\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<p class=\"lead\">空投：您的购买力倍增了！</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<p class=\"font-weight-light string\">您上次购买时至少获得了2倍的收获！</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t<i class=\"fas fa-parachute-box airdropicon ethglow-its-okay-justo\"></i>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t</div>\r\t\t</div>\r\t</div>\r\t/airdrop custom modal popup -->\r\t\r\t<!-- If something breaks delet this script justo made; -->\r\t<script>\r\n\t// Contain the popover within the body NOT the element it was called in.\r\n\t\t$('[data-toggle=\"popover\"]').popover({\r\n\t\t\tcontainer: 'body'\r\n\t\t});\r\n\r\n\t\t$this = this\r\n\t\t$this.refresher = _.debounce(async () => {\r\n\t\t\tJUST.Cache.currentRound = await JUST.Bridges.Browser.contracts.Fomo3D.read(\"getCurrentRoundInfo\")\r\n\t\t\tclearInterval(window.globalTimerObject)\r\n\t\t\t$this.update()\r\n\t\t}, 500)\r\n\r\n\t\tasync function assemble() {\r\n\t\t\tif(JUST.Cache.Timer) JUST.Cache.Timer.Destroy()\r\n\t\t\t$this.roundHasPassed = Math.floor( JUST.date().getTime() / 1000) > JUST.Cache.currentRound[3]\r\n\t\t\t$this.playerIsLeader = JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && Math.floor(parseInt(JUST.Cache.currentRound[6]/10)) == parseInt(JUST.Cache.currentPlayer.PID)\r\n\t\t\t$this.playerHasWon = $this.roundHasPassed && $this.playerIsLeader\r\n\t\t\t$this.isCEO = JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn && JUST.Cache.currentPlayer && JUST.Cache.currentPlayer.Round && JUST.Cache.currentPlayer.Round[1] !== \"0x0000000000000000000000000000000000000000000000000000000000000000\"\r\n\t\t\t$this.myLink = $this.isCEO ? `${window.location.origin}/${JUST.Bridges.Metamask.web3.eth.defaultAccount}` : `#`\r\n\t\t\t$this.gracePeriod = false\r\n\t\t\t// $this.gracePeriod = true\r\n\t\t\t$this.myLinkid = $this.isCEO ? `${window.location.origin}/${JUST.Cache.currentPlayer.PID.toFixed()}` : `#`\r\n\t\t\t$this.myLinkName = $this.isCEO ? `${window.location.origin}/${JUST.Bridges.Browser.web3.utils.toAscii(JUST.Cache.currentPlayer.Round[1])}` : `#`\r\n\t\t\t$this.myLinkName = $this.myLinkName.replace(/ /g,'%20')\r\n\t\t}\r\n\r\n\t\tasync function rewire() {\r\n\r\n\t\t\tif($this.isCEO) jQuery(\".afflink span\").text($this.myLinkName)\r\n\r\n\t\t\t // open vanity from ceo box\r\n\t\t\tjQuery(\".buyceo\").click(async e => {\r\n\t\t\t\tlet correctNetwork  = await JUST.checkNetwork()\r\n\t\t\t\tif(!correctNetwork) return alertify.alert(\"You are not in the correct network. Please navigate to <a style='color: #1e10f8;text-decoration: underline;' href='https://testnet.teamjust.io'>the testnet portal</a> and follow the instructions.\")\r\n\t\t\t\tjQuery('#vanity').modal()\r\n\t\t\t})\r\n\r\n\t\t\t/* Check for graphics quality switch settings\r\n\t\t\tlet sd_mode = localStorage.getItem('fancy')\r\n\t\t\tif(sd_mode && sd_mode == \"true\"){\r\n\t\t\t\tjQuery(\"#fancyswitch\").prop(\"checked\", false);\r\n\t\t\t\tjQuery('#hdgraphics').toggle();\r\n\t\t\t} else{\r\n\t\t\t\tjQuery(\"#fancyswitch\").prop(\"checked\", true);\r\n\t\t\t}*/\r\n\r\n\t\t\t// Check for tutorial switch settings\r\n\t\t\tif(tutorial_mode != \"true\"){\r\n\t\t\t\tjQuery('.tutorial').css({\"display\": \"none\"});\r\n\t\t\t\tjQuery(\"#tutorialswitch\").prop(\"checked\", false);\r\n\t\t\t}\r\n\r\n\t\t\t // Teamselect localstorage thingy\r\n\t\t\tlet saved_team = localStorage.getItem(\"team\")\r\n\t\t  \tif(saved_team){\r\n\t\t  \t\tif(saved_team == \"0\"){\r\n\t\t\t\t\tjQuery(\"#teamsnek\").prop(\"checked\", true);\r\n\t\t\t\t}\r\n\t\t\t\tif(saved_team == \"1\"){\r\n\t\t\t\t\tjQuery(\"#teamwhale\").prop(\"checked\", true);\r\n\t\t\t\t}\r\n\t\t\t\tif(saved_team == \"2\"){\r\n\t\t\t\t\tjQuery(\"#teambull\").prop(\"checked\", true);\r\n\t\t\t\t}\r\n\t\t\t\tif(saved_team == \"3\"){\r\n\t\t\t\t\tjQuery(\"#teambear\").prop(\"checked\", true);\r\n\t\t\t\t}\r\n\t\t  \t} else {\r\n\t\t  \t\tjQuery(\"#teamsnek\").prop(\"checked\", true);\r\n\t\t  \t}\r\n\t\t\t\r\n\t\t\tif(!$this.roundHasPassed) {\r\n\t\t\t\t/* WIP\r\n\t\t\t\t// add airdrop text to html\r\n\t\t\t\tlet priceQuotation = await JUST.Bridges.Browser.contracts.Fomo3D.read('iWantXKeys', count)\r\n\t\t\t\tlet purchase_amount = BN(priceQuotation).plus(100).div(1e18).toFixed(2)\r\n\t\t\t\tswitch(purchase_amount){\r\n\t\t\t\t\tcase >10:\r\n\t\t\t\t\t\t$('#airdrop_chance').text({JUST.Cache.airdropTracker} + \"% chance to receive a 4x Key Airdrop with your next purchase with at least 10 ETH!\");\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase >1:\r\n\t\t\t\t\t\t$('#airdrop_chance').text({JUST.Cache.airdropTracker} + \"% chance to receive a 3x Key Airdrop with your next purchase with at least 1 ETH!\");\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tdefault:\r\n\t\t\t\t\t\t$('#airdrop_chance').text({JUST.Cache.airdropTracker} + \"% chance to receive a 2x Key Airdrop with your next purchase with at least .1 ETH!\");\r\n\t\t\t\t}\r\n\t\t\t\t*/\r\n\t\t\t\tjQuery(\"#quotes\").addClass(\"active\")\r\n\t\t\t\tif(JUST.Bridges.Metamask && JUST.Bridges.Metamask.signedIn){\r\n\t\t\t\t\tjQuery(\".keycount\").text(BN(JUST.Cache.currentPlayer.Round[2]).div(1e18).toFixed(4))\r\n\t\t\t\t} else {\r\n\t\t\t\t\tjQuery(\".keycount\").text(\"0\")\r\n\r\n\t\t\t\t}\r\n\t\t\t\tif(JUST.Cache.Timer) JUST.Cache.Timer.Destroy()\r\n\t\t\t\tJUST.Cache.Timer = new Countdown(JUST.Cache.currentRound[3], async (data, expired) => {\r\n\t\t\t\t\tnow = (JUST.date().getTime() / 1000)\r\n\r\n\t\t\t\t\t// console.log({\r\n\t\t\t\t\t// \tcurrentTime: new Date(now * 1000), \r\n\t\t\t\t\t// \troundEnd: new Date(parseInt(JUST.Cache.currentRound[3]) * 1000),\r\n\t\t\t\t\t// \troundOver:  now < parseInt(JUST.Cache.currentRound[3]),\r\n\t\t\t\t\t// \troundID: JUST.Cache.currentRound[1],\r\n\t\t\t\t\t// \tpot: JUST.Cache.currentRound[5]\r\n\r\n\t\t\t\t\t// })\r\n\t\t\t\t\t\r\n\t\t\t\t\tif(Math.floor( JUST.date().getTime() / 1000) > (parseInt(JUST.Cache.currentRound[3]) - 90) && $this.gracePeriod) {\r\n\r\n\t\t\t\t\t\t$this.gracePeriod = false\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t// pepe\r\n\t\t\t\t\t\tfunction pepe(){\r\n\t\t\t\t\t\t$(\".animation\").animate({bottom: \"-30px\"}, \"slow\");\r\n\t\t\t\t\t\t    $(\".animation\").animate({left: \"100%\"}, \"slow\", function () {\r\n\t\t\t\t\t\t      $(this).removeAttr('style');  \r\n\t\t\t\t\t\t    });\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tpepe()\r\n\r\n\t\t\t\t\t\t// clear timer from stack\r\n\t\t\t\t\t\tclearInterval(window.globalTimerObject)\r\n\r\n\t\t\t\t\t\t$this.refresher()\r\n\t\t\t\t\t}\r\n\r\n\t\t\t\t\tif(!expired){\r\n\t\t\t\t\t\tif($this.gracePeriod){\r\n\t\t\t\t\t\t\tlet actualTime = parseDifference(new Date(parseInt(JUST.Cache.currentRound[3]) - 90), JUST.date())\r\n\t\t\t\t\t\t\tjQuery(\".headtimer\").text(`${(actualTime.hours == \"00\" ? \"\" : actualTime.hours + \":\") }${actualTime.minutes}:${actualTime.seconds}`)\r\n\t\t\t\t\t\t} else {\r\n\t\t\t\t\t\t\tjQuery(\".headtimer\").text(`${(data.hours == \"00\" ? \"\" : data.hours + \":\") }${data.minutes}:${data.seconds}`)\r\n\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\tjQuery(\".boxtimer\").text(`${(data.hours == \"00\" ? \"\" : data.hours + \":\") }${data.minutes}:${data.seconds}`)\r\n\r\n\t\t\t\t\t\tvar timeTotal = parseInt(parseInt(JUST.Cache.currentRound[4]) - parseInt(JUST.Cache.currentRound[4])) + 3600\r\n\t\t\t\t\t\tvar timeRemaining = parseInt(JUST.Cache.currentRound[3]) - now \r\n\t\t\t\t\t\tvar timePercentage = 100 - timeRemaining / (timeTotal / 100)\r\n\r\n\t\t\t\t\t\t//console.log(timeTotal, timeRemaining, Math.floor(timePercentage))\r\n\r\n\t\t\t\t\t\tjQuery(\".progress-bar.boxglow\").css('width', `${Math.floor(timePercentage)}%`)\r\n\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\tjQuery(\"#quotes\").removeClass(\"active\")\r\n\t\t\t\t\t\t// refresh dom\r\n\t\t\t\t\t\t$this.refresher()\r\n\t\t\t\t\t}\r\n\t\t\t\t})\r\n\t\t\t}\r\n\t\t\tif($this.gracePeriod && !this.graceTimer) {\r\n\r\n\t\t\t\tconsole.log(\"execute\", parseInt(JUST.Cache.currentRound[3]) + 300)\r\n\t\t\t\tnew Countdown(parseInt(JUST.Cache.currentRound[3]) + 300, async (data, expired) => {\r\n\t\t\t\t\t$this.graceTimer = true\r\n\t\t\t\t\tnow = (JUST.date().getTime() / 1000)\r\n\r\n\r\n\t\t\t\t\tif(now < (parseInt(JUST.Cache.currentRound[3]) + 300) ){\r\n\t\t\t\t\t\tjQuery(\".graceTimer\").text(`${(data.hours == \"00\" ? \"\" : data.hours + \":\") }${data.minutes}:${data.seconds}`)\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\t$this.gracePeriod = false\r\n\t\t\t\t\t\t// clear timer from stack\r\n\t\t\t\t\t\t$this.graceTimer = false\r\n\t\t\t\t\t\t// refresh dom\r\n\t\t\t\t\t\t$this.refresher()\r\n\t\t\t\t\t}\r\n\t\t\t\t})\r\n\t\t\t}\r\n\r\n\t\t\tawait jQuery( \".buyOneTicket\" ).unbind()\r\n\t\t\tawait jQuery( \"#tixBuy\" ).unbind()\r\n\t\t\tawait jQuery( \"#tixReinvest\" ).unbind()\r\n\t\t\tawait jQuery( \"#withdrawEarnings\" ).unbind()\r\n\t\t\tawait jQuery( \"#ethSpend\" ).unbind()\r\n\t\t\tawait jQuery( \"#ethReinvest\" ).unbind()\r\n\r\n\t\t\tjQuery(\".buyOneTicket\").click(async e  => {\r\n\t\t\t\tif(!JUST.Bridges.Metamask || !JUST.Bridges.Metamask.signedIn) return alertify.alert(\"You are not signed into metamask.\")\r\n\t\t\t\tlet correctNetwork  = await JUST.checkNetwork()\r\n\t\t\t\tif(!correctNetwork) return alertify.alert(\"You are not in the correct network. Please navigate to <a style='color: #1e10f8;text-decoration: underline;' href='https://testnet.teamjust.io'>the testnet portal</a> and follow the instructions.\")\r\n\t\t\t\tvar masternode = window.localStorage.getItem(\"masternode\") ? window.localStorage.getItem(\"masternode\") : \"0x0\" \r\n\r\n\t\t\t\ttry {\r\n\t\t\t\t\tlet priceQuotation = await JUST.Bridges.Browser.contracts.Fomo3D.read('iWantXKeys', [BN(1050000000000000000)])\r\n\t\t\t\t\tjQuery('#loading').modal({backdrop: 'static', keyboard: false})\r\n\t\t\t\t\tlet team = $(\"input[name='teamselect']:checked\").val()\r\n\t\t\t\t\tif(!team) team = 0\r\n\t\t\t\t\tlet receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.purchaseKeys(priceQuotation, team)\r\n\t\t\t\t\t//let receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.write(\"buy\", [masternode, 1], {value: priceQuotation})\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\t\t\t\t\talertify.log(`Your key purchasing request has been submitted to the blockchain!`)\r\n\t\t\t\t\tconsole.log(receipt)\r\n\t\t\t\t} catch (e) {\r\n\t\t\t\t\tconsole.log(e)\r\n\t\t\t\t\talertify.log(`Buy order has been cancelled.`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\t\t\t\t}\r\n\t\t\t\t\r\n\t\t\t})\r\n\r\n\t\t\t/**\r\n\t\t\t * Whenever the input of tixToBuy changes..\r\n\t\t\t */\r\n\t\t\tjQuery(\"#tixToBuy\").bind('input', getQuote)\r\n\r\n\t\t\t/**\r\n\t\t\t * When the purchase button is clicked.\r\n\t\t\t */\r\n\t\t\tjQuery(\"#tixBuy\").click( async e => {\r\n\t\t\t\tif(!JUST.Bridges.Metamask || !JUST.Bridges.Metamask.signedIn) return alertify.alert(\"You are not signed into metamask.\")\r\n\t\t\t\tlet correctNetwork  = await JUST.checkNetwork()\r\n\t\t\t\tif(!correctNetwork) return alertify.alert(\"You are not in the correct network. Please navigate to <a style='color: #1e10f8;text-decoration: underline;' href='https://testnet.teamjust.io'>the testnet portal</a> and follow the instructions.\")\r\n\t\t\t\tlet count = String(jQuery(\"#tixToBuy\").val()).replace(\"keys\", \"\").replace(\"key\", \"\").replace(\"Keys\", \"\").replace(\"Key\", \"\")\r\n\t\t\t\tif(!Number.isInteger(parseInt(count))) return\r\n\t\t\t\tvar masternode = window.localStorage.getItem(\"masternode\") ? window.localStorage.getItem(\"masternode\") : \"0x0\" \r\n\t\t\t\tcount = BN((parseInt(count)) * 1e18)\r\n\r\n\t\t\t\ttry {\r\n\t\t\t\t\tlet priceQuotation = await JUST.Bridges.Browser.contracts.Fomo3D.read('iWantXKeys', count)\r\n\t\t\t\t\tjQuery('#loading').modal({backdrop: 'static', keyboard: false})\r\n\t\t\t\t\tlet team = $(\"input[name='teamselect']:checked\").val()\r\n\t\t\t\t\tif(!team) team = 0\r\n\t\t\t\t\tlet receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.purchaseKeys(BN(priceQuotation).plus(100).toString(), team)\r\n\t\t\t\t\talertify.log(`Your ticket purchasing request has been submitted to the blockchain!`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\r\n\t\t\t\t\tconsole.log(receipt)\r\n\t\t\t\t} catch (e) {\r\n\t\t\t\t\talertify.log(`Buy order has been cancelled.`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\r\n\t\t\t\t}\r\n\t\t\t\t\r\n\t\t\t})\r\n\r\n\t\t\t/**\r\n\t\t\t * When the reinvest button is clicked.\r\n\t\t\t */\r\n\t\t\tjQuery(\"#tixReinvest\").click( async e => {\r\n\t\t\t\tif(!JUST.Bridges.Metamask || !JUST.Bridges.Metamask.signedIn) return alertify.alert(\"You are not signed into metamask.\")\r\n\t\t\t\tlet correctNetwork  = await JUST.checkNetwork()\r\n\t\t\t\tif(!correctNetwork) return alertify.alert(\"You are not in the correct network. Please navigate to <a style='color: #1e10f8;text-decoration: underline;' href='https://testnet.teamjust.io'>the testnet portal</a> and follow the instructions.\")\r\n\t\t\t\tlet vaultEarnings = BN(JUST.Cache.currentPlayer.Vaults[0]).plus(JUST.Cache.currentPlayer.Vaults[1]).plus(JUST.Cache.currentPlayer.Vaults[2])\r\n\t\t\t\tlet count = String(jQuery(\"#tixToBuy\").val()).replace(\"keys\", \"\").replace(\"key\", \"\").replace(\"Keys\", \"\").replace(\"Key\", \"\")\r\n\t\t\t\tvar masternode = window.localStorage.getItem(\"masternode\") ? window.localStorage.getItem(\"masternode\") : \"0x0\" \r\n\t\t\t\tif(!Number.isInteger(parseInt(count))) return\r\n\t\t\t\tcount = BN((parseInt(count) ) * 1e18)\r\n\r\n\t\t\t\ttry {\r\n\t\t\t\t\tlet priceQuotation = await JUST.Bridges.Browser.contracts.Fomo3D.read('iWantXKeys', [BN(count)])\r\n\t\t\t\t\tif(vaultEarnings.isLessThan(BN(priceQuotation))) return alertify.alert(`You don't have ${BN(priceQuotation).div(1e18).toFixed(4)} ETH in your vault to pay for ${count.div(1e18).toFixed(4)} keys. You only have ${vaultEarnings.div(1e18).toFixed(4)} ETH in your vault.`)\r\n\t\t\t\t\tjQuery('#loading').modal({backdrop: 'static', keyboard: false})\r\n\t\t\t\t\tlet team = $(\"input[name='teamselect']:checked\").val()\r\n\t\t\t\t\tif(!team) team = 0\r\n\t\t\t\t\tlet receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.purchaseKeys(BN(priceQuotation).plus(100).toString(), team, true)\r\n\t\t\t\t\talertify.log(`Your ticket purchasing request has been submitted to the blockchain!`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\r\n\t\t\t\t\tconsole.log(receipt)\r\n\t\t\t\t} catch (e) {\r\n\t\t\t\t\tconsole.error(e)\r\n\t\t\t\t\talertify.log(`Buy order has been cancelled.`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\r\n\t\t\t\t}\r\n\t\t\t})\r\n\r\n\t\t\t/**\r\n\t\t\t * When the ICO invest button is pressed\r\n\t\t\t */\r\n\t\t\tjQuery(\"#ethSpend\").click( async e => {\r\n\t\t\t\tif(!JUST.Bridges.Metamask || !JUST.Bridges.Metamask.signedIn) return alertify.alert(\"You are not signed into metamask.\")\r\n\t\t\t\tlet correctNetwork  = await JUST.checkNetwork()\r\n\t\t\t\tif(!correctNetwork) return alertify.alert(\"You are not in the correct network. Please navigate to <a style='color: #1e10f8;text-decoration: underline;' href='https://testnet.teamjust.io'>the testnet portal</a> and follow the instructions.\")\r\n\t\t\t\tlet count = String(jQuery(\"#ethToSpend\").val()).replace(\"ethereum\", \"\").replace(\"Ethereum\", \"\").replace(\"eth\", \"\").replace(\"ETH\", \"\")\r\n\t\t\t\tif(!Number.isInteger(parseInt(count))) return\r\n\t\t\t\tcount = BN(count).multipliedBy(1e18)\r\n\r\n\t\t\t\ttry {\r\n\t\t\t\t\tlet team = $(\"input[name='teamselect']:checked\").val()\r\n\t\t\t\t\tif(!team) team = 1\r\n\t\t\t\t\tjQuery('#loading').modal({backdrop: 'static', keyboard: false})\r\n\t\t\t\t\tlet receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.purchaseKeys(count.toString(), team)\r\n\t\t\t\t\talertify.log(`Your ICO funding request has been submitted to the blockchain!`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\t\t\t\t\tconsole.log(receipt)\r\n\t\t\t\t} catch (e) {\r\n\t\t\t\t\talertify.log(`Funding request been cancelled.`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\r\n\t\t\t\t}\r\n\t\t\t})\r\n\r\n\t\t\t/**\r\n\t\t\t * When the ICO invest button is pressed\r\n\t\t\t */\r\n\t\t\tjQuery(\"#ethReinvest\").click( async e => {\r\n\t\t\t\tif(!JUST.Bridges.Metamask || !JUST.Bridges.Metamask.signedIn) return alertify.alert(\"You are not signed into metamask.\")\r\n\t\t\t\tlet correctNetwork  = await JUST.checkNetwork()\r\n\t\t\t\tif(!correctNetwork) return alertify.alert(\"You are not in the correct network. Please navigate to <a style='color: #1e10f8;text-decoration: underline;' href='https://testnet.teamjust.io'>the testnet portal</a> and follow the instructions.\")\r\n\t\t\t\tlet count = String(jQuery(\"#ethToSpend\").val()).replace(\"ethereum\", \"\").replace(\"Ethereum\", \"\").replace(\"eth\", \"\").replace(\"ETH\", \"\")\r\n\t\t\t\tif(!Number.isInteger(parseInt(count))) return\r\n\t\t\t\tcount = BN(count).multipliedBy(1e18)\r\n\r\n\t\t\t\ttry {\r\n\t\t\t\t\tlet team = $(\"input[name='teamselect']:checked\").val()\r\n\t\t\t\t\tif(!team) team = 1\r\n\t\t\t\t\tlet receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.purchaseKeys(count.toString(), team, true)\r\n\t\t\t\t\talertify.log(`Your ICO funding request has been submitted to the blockchain!`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\t\t\t\t\tconsole.log(receipt)\r\n\t\t\t\t} catch (e) {\r\n\t\t\t\t\talertify.log(`Funding request been cancelled.`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\r\n\t\t\t\t}\r\n\t\t\t})\r\n\r\n\t\t\tjQuery(\"#withdrawEarnings\").click(async e => {\r\n\t\t\t\tlet correctNetwork  = await JUST.checkNetwork()\r\n\t\t\t\tif(!correctNetwork) return alertify.alert(\"You are not in the correct network. Please navigate to <a style='color: #1e10f8;text-decoration: underline;' href='https://testnet.teamjust.io'>the testnet portal</a> and follow the instructions.\")\r\n\t\t\t\tif(!JUST.Bridges.Metamask || !JUST.Bridges.Metamask.signedIn) return alertify.alert(\"You are not signed into metamask.\")\r\n\t\t\t\tjQuery('#loading').modal({backdrop: 'static', keyboard: false})\r\n\t\t\t\ttry {\r\n\t\t\t\t\tlet receipt = await JUST.Bridges.Metamask.contracts.Fomo3D.write(\"withdraw\")\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\t\t\t\t\talertify.log(`Your withdrawal request has been submitted to the blockchain!`)\r\n\t\t\t\t\tconsole.log(receipt)\r\n\r\n\t\t\t\t} catch(e) {\r\n\t\t\t\t\talertify.log(`Withdrawal has been cancelled.`)\r\n\t\t\t\t\tjQuery('#loading').modal('hide')\r\n\t\t\t\t}\r\n\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t})\r\n\r\n\r\n\t\t\tgetQuote()\t\t\r\n\t\t}\r\n\r\n\t\tasync function getQuote(){\r\n\t\t\tlet count = String(jQuery(\"#tixToBuy\").val()).replace(\"key\", \"\").replace(\"keys\", \"\").replace(\"Key\", \"\").replace(\"Keys\", \"\")\r\n\t\t\tif(!Number.isInteger(parseInt(count))) return\r\n\t\t\tcount = BN(parseInt(count) * 1e18)\r\n\t\t\t\r\n\t\t\tlet priceQuotation = await JUST.Bridges.Browser.contracts.Fomo3D.read('iWantXKeys', count)\r\n\r\n\t\t\tjQuery(\"#tixQuotation\").text(`@ ${BN(priceQuotation).plus(100).div(1e18).toFixed(8)} ETH`)\r\n\r\n\t\t\tconsole.log(priceQuotation)\r\n\t\t}\r\n\r\n\r\n\t\t$this.on('update', assemble)\r\n\t\t$this.on('updated', rewire)\r\n\t\t$this.on('before-mount', assemble)\r\n\t\tthis.on('unmount', fn => {\r\n\t\t\tif(window.globalTimerObject && typeof window.globalTimerObject !== \"undefined\") clearInterval(window.globalTimerObject)\r\n\t\t})\r\n\t\t\r\n\r\n\t\tJUST.UI.on('ui.refresh', () => {\r\n\t\t\tconsole.log('refreshing ui')\r\n\t\t\t$this.refresher()\r\n\t\t} )\r\n\r\n\t\t\t\r\n\t\t$this.on('mount', function(){\r\n\t\t\t\r\n\t\t\t// wire listeners\r\n\t\t\trewire()\r\n\r\n\t\t\tnew ClipboardJS('.btn');\r\n\r\n\t\t  // Teamselection to var\r\n\t\t  jQuery('.ticketProcess').click(function(){\r\n\t\t\tvar team = $(\"input[name='teamselect']:checked\").val()\r\n\t\t\t//console.log(team)\r\n\t\t  });\r\n\t\t\t\t\r\n\t\t  // Increase ticket amount to buy with buttons\r\n\t\t  jQuery('.increment').click(function(){\r\n\t\t\tlet id = this.id\r\n\t\t\t\r\n\t\t\tif(id == 'addOne'){ \r\n\t\t\t  var increment = 1\r\n\t\t\t}\r\n\t\t\tif(id == 'addTwo'){ \r\n\t\t\t  var increment = 2\r\n\t\t\t}\r\n\t\t\tif(id == 'addFive'){\r\n\t\t\t  var increment = 5\r\n\t\t\t}\r\n\t\t\tif(id == 'addTen'){\r\n\t\t\t  var increment = 10\r\n\t\t\t}\r\n\r\n\t\t\tif(id == 'addHundred'){\r\n\t\t\t  var increment = 100\r\n\t\t\t}\r\n\t\t\tif(jQuery('#tixToBuy').val()){\r\n\t\t\t\t///replace(\"key\", \"\").replace(\"keys\", \"\").replace(\"Key\", \"\").replace(\"Keys\", \"\")\r\n\t\t\t\tvar iVal = parseInt(String(jQuery(\"#tixToBuy\").val()).replace(\"keys\", \"\").replace(\"key\", \"\").replace(\"Keys\", \"\").replace(\"Key\", \"\"))\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tvar iVal = 1\r\n\t\t\t}\r\n\r\n\t\t\tlet nVal = iVal + increment\r\n\r\n\t\t\tjQuery(\"#tixToBuy\").val(nVal.toString())\r\n\r\n\t\t\tgetQuote()\r\n\r\n\t\t  });\r\n\r\n\t\t  // Quote script\r\n\t\t  //jQuery(\".qTarget\").text(memes.global.quoteRoulette[Math.floor(Math.random()*memes.global.quoteRoulette.length)]);\r\n\r\n\t\t  // Enable popovers\r\n\t\t  jQuery(\".qbtn\").click(function(){\r\n\t\t\tjQuery('[data-toggle=\"popover\"').popover()\r\n\t\t  })\r\n\t\t  \r\n\t\t \r\n\r\n\t\t \r\n\t\t\t\t\r\n\t\t\t// save team\r\n\t\t\tjQuery('.teamselector input').click(function(){\r\n\t\t\t\tlet thisteam = $(this).attr('id')\r\n\t\t\t\tif(thisteam == \"teamsnek\"){\r\n\t\t\t\t\tlocalStorage.setItem('team', '0');\r\n\t\t\t\t}\r\n\t\t\t\tif(thisteam == \"teamwhale\"){\r\n\t\t\t\t\tlocalStorage.setItem('team', '1');\r\n\t\t\t\t}\r\n\t\t\t\tif(thisteam == \"teambull\"){\r\n\t\t\t\t\tlocalStorage.setItem('team', '2');\r\n\t\t\t\t}\r\n\t\t\t\tif(thisteam == \"teambear\"){\r\n\t\t\t\t\tlocalStorage.setItem('team', '3');\r\n\t\t\t\t}\r\n\t\t\t})\r\n\r\n\t\t\t// airdrop modal animation\r\n\t\t\t\r\n\t\t\tairdrop_animate = function(){\r\n\t\t\t\t$(\"#airdrop row col-6\").animate({bottom: \"-30px\"}, \"fast\", function(){\r\n\t\t\t\t\t$(this).removeAttr('style');\r\n\t\t\t\t});\r\n\t\t\t}\r\n\t\t\t\r\n\t\t// bash\r\n\t\t$(\"#terminal\").click(function(){\r\n\t\t\t$(\".commandInput\").focus();\r\n\t\t})\r\n\t\t$(\"#commandLine li input\").val('');\r\n\t\t$(\"#commandLine\").on(\"keypress\", \".commandInput\", function(e){\r\n\t\t\tif(e.which == 13){\r\n\t\t\t\tvar command = $(\"input.active\").val().toLowerCase();\r\n\t\t\t\tif(/^[a-zA-Z0-9- ?.=/]*$/.test(command) == false){\r\n\t\t\t\t\tcommand = \"syntax_error\"\r\n\t\t\t\t}\r\n\t\t\t\t$(\"#commandLine li input\").each(function(){\r\n\t\t\t\t\t$(this).removeClass(\"active\");\r\n\t\t\t\t\t$(this).attr(\"disabled\", true);\r\n\t\t\t\t});\r\n\t\t\t\tswitch(command){\t\t\t\t\t\t\r\n\t\t\t\t\t// include more cases for custom commands here\r\n\t\t\t\t\tcase \"\":\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase \"help\":\r\n\t\t\t\t\tcase \"?\":\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect good\">&rarr; List of available commands</span>');\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect good\">help, ?: display this message</span>');\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect good\">clear, cls: clear lines</span>');\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect good\">uname: show kernel information</span>');\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect good\">exit: quit this application</span>');\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\t\r\n\t\t\t\t\tcase \"syntax_error\":\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect error\">&rarr; syntax error</span>');\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\r\n\t\t\t\t\tcase \"uname\":\r\n\t\t\t\t\tcase \"uname -a\":\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect good\">&rarr; FomoOS jekyllisland 2.3.2-180708 #232-TeamJUST x86_256 GAHNOO/Fomo</span>');\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase \"uptime\":\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect good\">&rarr; TIME up DIFFERENCE TO LAUNCH, USERS users, load average: 0,89, 0,92, 0,90</span>');\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase \"clear\":\r\n\t\t\t\t\tcase \"cls\":\r\n\t\t\t\t\t\t$(\".prompt\").each(function(){\r\n\t\t\t\t\t\t\t$(this).remove();\r\n\t\t\t\t\t\t});\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\t\r\n\t\t\t\t\tcase \"exit\":\r\n\t\t\t\t\tcase \"quit\":\r\n\t\t\t\t\t\t$(\"#commandLine li input\").val('');\r\n\t\t\t\t\t\t$(\".prompt\").each(function(){\r\n\t\t\t\t\t\t\t$(this).remove();\r\n\t\t\t\t\t\t});\r\n\t\t\t\t\t\t$(\"#terminal\").css({\r\n\t\t\t\t\t\t\tvisibility: \"hidden\",\r\n\t\t\t\t\t\t})\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\t\r\n\t\t\t\t\tdefault:  // defaults to not found\r\n\t\t\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect error\">&rarr; \"' + command + '\" command not found</span>');\r\n\t\t\t\t}\r\n\t\t\t\t$(\"#commandLine\").append('<li class=\"prompt\"><span class=\"ps1 noselect\">player@jekyllisland ~ $ <input type=\"text\" class=\"commandInput active\"></li>'); \r\n\t\t\t\t$(\".commandInput.active\").focus();\r\n\t\t\t\treturn false;\r\n\t\t\t}\r\n\t\t});\r\n\r\n\t  })\r\n\t</script>\r</state-play>\r<state-airdrop>\r\t<!-- airdrop custom modal popup -->\r\t<div class=\"container\" id=\"airdrop\" style=\"z-index: 999; display:none;\">\r\t\t<div class=\"row\">\r\t\t\t<div class=\"col-6\" style=\"position: fixed; bottom:0; left:25%;\">\r\t\t\t\t<div class=\"jumbotron jumbotron-adjust jumboshade bg-dark text-light\">\r\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<p class=\"lead\">空投：你中大奖啦！</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t<div class=\"row\">\r\t\t\t\t\t\t\t\t<div class=\"col\">\r\t\t\t\t\t\t\t\t\t<p class=\"font-weight-light string\">你已经卷走了至少25％的空投奖池</p>\r\t\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t\t</div>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t\t<div class=\"col-auto\">\r\t\t\t\t\t\t\t<i class=\"fas fa-parachute-box airdropicon ethglow-its-okay-justo\"></i>\r\t\t\t\t\t\t</div>\r\t\t\t\t\t</div>\r\t\t\t\t</div>\r\t\t\t</div>\r\t\t</div>\r\t</div>\r\t<!-- /airdrop custom modal popup -->\r\t<script>\r\t\t$this = this\r\t\t$this.on('mount', e => {\r\t\t\tconsole.log('mounted')\r\t\t})\r\t</script>\r</state-airdrop>")
     riot.compile("<state-shakedown>\r\r<html>\r<head>\r    <!-- <meta charset=\"utf-8\" /> -->\r\t<!-- <title>梭哈么 | 这是你的梭哈游戏</title> -->\r\t<!-- <meta property=\"og:title\" content=\"suoha.me: 这是你的梭哈游戏\" /> -->\r\t<!-- <meta name=\"description\" content=\"Fear Of Missing Out 3D (Fomo3D) is a psychological social experiment in greed, fill your wallets with the greed of others.\"> -->\r\t<!-- <meta property=\"og:description\" content=\"Fear Of Missing Out 3D (Fomo3D) is a psychological social experiment in greed, fill your wallets with the greed of others.\" />  -->\r\t<!-- <meta name=\"keywords\" content=\"Fomo,Fomo3D,Fear of Missing Out 3D,Ethereum,Cryptocurrency,Bitcoin,Invest,Fear of Missing Out,Blockchain,Solidity\"> -->\r    <!-- <meta name=\"author\" content=\"Team JUST\"> -->\r\t<!-- <meta property=\"og:type\" content=\"website\" /> -->\r\t<!-- <meta property=\"og:url\" content=\"https://suoha.me\"/> -->\r\t<!-- <meta property=\"og:image\" content=\"https://p3d-bot.github.io/img/portfolio/gif1.gif\" /> -->\r\t<!-- <meta property=\"og:image:width\" content=\"400\" /> -->\r\t<!-- <meta property=\"og:image:height\" content=\"400\" /> -->\r\t<!-- <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> -->\r\t\r\t\r\t\r\t\r\t<link href=\"https://fonts.useso.com/css?family=Roboto:100,300\" rel=\"stylesheet\">\r\t<link href=\"https://fonts.useso.com/css?family=Poppins:100,200,400\" rel=\"stylesheet\">\r\t<link rel=\"stylesheet\" href=\"/css/shakedown/bootstrap.min.css\">\r\t<link rel=\"stylesheet\" href=\"/css/shakedown/glitch.css\">\r\t<link rel=\"stylesheet\" href=\"/css/shakedown/nfitem.css\">\r\t<link rel=\"stylesheet\" href=\"/css/shakedown/suoha.css\">\r\r</head>\r<body>\r<div style=\"background-color:#24262E\" class=\"container-fluid\">\r\r<section id=Tagline>\r<div class=\"d-flex\" style=\"margin-top:10vh;height:100vh\">\r\t<div class=\"container text-center\">\r\t\t<div class=\"domo col-md-12 col-align-self-center\" align=\"center\">\r\t\t\t<p class=\"header\"> 来自<br>梭哈的<span class=\"glitch\" data-text=\"恐惧\">快感</span> <BR>\r\t\t\t<BR>\r\t\t\t在这里 <span class=\"h1s\" style=\"font-weight:400\">你</span>有机会<br>拿走巨额以太坊\r\t\t\t</p>\r\t\t\t<br>\r\t\t\t<a href=\"/play\">\r\t\t\t\t<div class=\"poppins pulse header btn btn-gold col-md-6\" style=\"margin: .1rem; padding-bottom: .5rem; padding-top: 1.5rem;font-size: 4.5rem;line-height: .3;letter-spacing: .15rem;\" align=\"center\">\r\t\t\t\t\t<p>立即梭哈</SPAN></p>\r\t\t\t\t</div>\r\t\t\t</a>\r\t\t</div>\r\t</div>\r</div>\r</section>\r\r\r\r\r<section id=memes>\r\t<div class=\"container-fluid\">\r\r\t\t<div class =\"row\">\r\t\t\t<div class=\"col-md-3 col-sm-1\" align=\"left\">\r\t\t\t\t\t<img style=\"width:25%\" src=\"img/gif-gold1.gif\"/>\r\t\t\t</div>\r\t\t<div class=\"col-md-6 jumbotron4 jumbotron-adjust jumboshade\" style=\"color:#d1c0d1\" align=\"center\">\r\t\t\t<span class=memetext> \r\t\t\t<h1 style=\"color:white\">\"suoha.me\"是什么？</h1>\r\t\t\t<h3>这是能帮你实现<span class=\"h1s\" style=\"font-weight:400\">财富自由</span>的游戏！</h3>\r\t\t\t<span class=\"glitch\" style=\"font-size:1.5rem\" data-text=\"别怕错过\"><span style=\"opacity:0\">xxxxxxxxxxxxxxx</span></span>\r\t\t\t<BR><BR>\r\t\t\t欢迎来到由区块链的打造的公平世界<BR>\r\t\t\tICO已经过时了，<BR>\r\t\t\t这里没有炒作和欺诈<BR>\r\t\t\t<b>只要你拿到<span class=\"h1s-light\">最后的钥匙</span>，就可以带走上亿财富</b> <br>\r\t\t\t\r\t\t\t<br>\r\t\t\t<br>\r\t\t\t你<i>会</i>获得亿万财富<br>\r\t\t\t你<i>会</i>得到你想要的一切<br>\r\t\t\t就像购买最后一把钥匙一样简单。<br>\r\t\t\t<b style=color:#e6ae49>当炒作结束的时候，最后一位玩家将终止合约，带走所有</b>\r\t\t\t<br>\r\t\t\t<a href=\"/play\" class=\"poppins col-md-4 btn btnpad btn-outline-gold\"><span style=\"color:white; font-size: 2rem;\"><span class=\"h1s-light\" style=\"font-weight:400\">这个玩家一定是你</span></span></a>\r\t\t\t\r\t\t\t</span>\r\t\t</div>\r\t\t\t<div class=\"col-md-3 col-sm-1\" align=\"right\">\r\t\t\t\t\t<img style=\"width:25%\" src=\"img/gif-gold2.gif\"/>\r\t\t\t</div>\t\t\r\t\t</div>\r</section>\t\r</div>\r\r\r\t\r<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\r<script src=\"/js/bootstrap.min.js\"></script>\r<script src=\"https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js\"></script>\r\r<script>\r$(function() {\r  $('#spacer').addClass('spacerhide');\r});\r</script>\r\r\r<section class=\"copyright\">\r        <p style=\"font-size:1rem\" align=center>\r            &copy; 2018 <a><b>SUOHA.ME</b></a>. All Rights Reserved.\r            <br />\r        </p>\r</section>\r\r</div>\r</body>\r</html>\r</state-shakedown>")
 	route.base('/')
@@ -74684,7 +74681,7 @@ jQuery(fn => { ( async function(){
 	*/
 })()})
 
-	
+
 
 /*============================================================================
 =            Utility functions that don't deserve their own files            =
@@ -74696,7 +74693,7 @@ window.parseDifference = function(start, end){
         // extract time units
         minutes = ((diff / 60) % 60 ) | 0;
         seconds = (diff % 60) | 0;
-        hours = (diff / 3600) | 0; 
+        hours = (diff / 3600) | 0;
 
         // prettify with a leading zero if less then ten per unit
         minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -74745,7 +74742,7 @@ else{
 	tutorial_mode = localStorage.getItem('tutorials')
 }
 
-	
+
 tutorials = function(){
 	jQuery('.tutorial').toggle();
 	tutorial_mode = !tutorial_mode
@@ -74869,7 +74866,7 @@ let nameMessagesSelf = [
 
 let exitScamWin = [
 	`You clever bastard, you actually did it`,
-	
+
 
 ]
 
@@ -75132,7 +75129,7 @@ var Private = {
      * @type {Array}
      */
     nouns: ["ninja", "truce", "harj", "finney", "szabo", "gwei", "laser", "justo", "satoshi", "mantso", "3D", "inventor", "theShocker", "aritz", "sumpunk", "cryptoknight", "randazz", "kadaz", "daok", "shenron", "notreally", "thecrypt", "stick figures", "mermaid eggs", "sea barnacles", "dragons", "jellybeans", "snakes", "dolls", "bushes", "cookies", "apples", "ice cream", "ukulele", "kazoo", "banjo", "opera singer", "circus", "trampoline", "carousel", "carnival", "locomotive", "hot air balloon", "praying mantis", "animator", "artisan", "artist", "colorist", "inker", "coppersmith", "director", "designer", "flatter", "stylist", "leadman", "limner", "make-up artist", "model", "musician", "penciller", "producer", "scenographer", "set decorator", "silversmith", "teacher", "auto mechanic", "beader", "bobbin boy", "clerk of the chapel", "filling station attendant", "foreman", "maintenance engineering", "mechanic", "miller", "moldmaker", "panel beater", "patternmaker", "plant operator", "plumber", "sawfiler", "shop foreman", "soaper", "stationary engineer", "wheelwright", "woodworkers"],
-   
+
     /**
     * Last string of a name
     * @type {Array}
@@ -75163,7 +75160,7 @@ var Public = {
         var noun        = Private.nouns[ Private.randomKey(Private.nouns) ]
         var adjective   = Private.adjectives[ Private.randomKey(Private.adjectives) ]
         return `${adjective} ${noun}`
-    }  
+    }
 }
 
 module.exports = Public
